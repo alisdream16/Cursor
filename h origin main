@@ -1,0 +1,122 @@
+warning: in the working copy of 'prisma/schema.prisma', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/prisma/schema.prisma b/prisma/schema.prisma[m
+[1mindex b89103f..df17db5 100644[m
+[1m--- a/prisma/schema.prisma[m
+[1m+++ b/prisma/schema.prisma[m
+[36m@@ -117,55 +117,54 @@[m [menum KYCStatus {[m
+ }[m
+ [m
+ model User {[m
+[31m-  id               String      @id @default(cuid())[m
+[31m-  email            String      @unique[m
+[31m-  name             String?[m
+[31m-  image            String?[m
+[31m-  emailVerified    DateTime?[m
+[31m-  accountType      AccountType[m
+[31m-  password         String?[m
+[31m-  twoFactorEnabled Boolean     @default(false)[m
+[31m-  twoFactorSecret  String?[m
+[31m-  twoFactorMethod  TwoFactorMethod?[m
+[31m-  createdAt        DateTime    @default(now())[m
+[31m-  updatedAt        DateTime    @updatedAt[m
+[31m-[m
+[31m-  accounts                    Account[][m
+[31m-  sessions                    Session[][m
+[31m-  twoFactorBackupCodes        TwoFactorBackupCode[][m
+[31m-  kycVerification             KYCVerification?[m
+[31m-  profile                     Profile?[m
+[31m-  companies                   CompanyMember[][m
+[31m-  companyJoinRequests         CompanyJoinRequest[][m
+[31m-  freelancerProfile           FreelancerProfile?[m
+[31m-  jobApplications             JobApplication[][m
+[31m-  ratings                     Rating[][m
+[31m-  badges                      UserBadge[][m
+[31m-  commissions                 Commission[]              @relation("FreelancerCommissions")[m
+[31m-  entrepreneurProfile         EntrepreneurProfile?[m
+[31m-  startups                    Startup[]                 @relation("EntrepreneurStartups")[m
+[31m-  startupMembers              StartupMember[][m
+[31m-  projects                    Project[]                 @relation("EntrepreneurProjects")[m
+[31m-  createdProjects             Project[]                 @relation("ProjectCreator")[m
+[31m-  aiChats                     AIChat[][m
+[31m-  workerProfile               WorkerProfile?[m
+[31m-  taskAssignments             TaskAssignment[][m
+[31m-  reportAccess                ReportAccess[][m
+[31m-  employerProfile             EmployerProfile?[m
+[31m-  jobPostings                 JobPosting[][m
+[31m-  ownedCompanies              Company[]                 @relation("CompanyOwner")[m
+[31m-  investorProfile             InvestorProfile?[m
+[31m-  investments                 Investment[][m
+[31m-  investmentRequests          InvestmentRequest[]       @relation("InvestorRequests")[m
+[31m-  integrations                Integration[][m
+[31m-  integrationRequests         IntegrationRequest[][m
+[31m-  approvedIntegrationRequests IntegrationRequest[]      @relation("IntegrationApprover")[m
+[31m-  permissions                 Permission[]              @relation("PermissionUser")[m
+[31m-  grantedPermissions          Permission[]              @relation("PermissionGranter")[m
+[31m-  sharedPermissions           PermissionShare[]         @relation("PermissionShareUser")[m
+[31m-  sharedPermissionsAsSharer   PermissionShare[]         @relation("PermissionShareSharer")[m
+[31m-  createdTasks                Task[]                    @relation("TaskCreator")[m
+[31m-  createdReports              Report[]                  @relation("ReportCreator")[m
+[32m+[m[32m  id                             String      @id @default(cuid())[m
+[32m+[m[32m  email                          String      @unique[m
+[32m+[m[32m  name                           String?[m
+[32m+[m[32m  image                          String?[m
+[32m+[m[32m  emailVerified                  DateTime?[m
+[32m+[m[32m  accountType                    AccountType[m
+[32m+[m[32m  password                       String?[m
+[32m+[m[32m  twoFactorEnabled               Boolean     @default(false)[m
+[32m+[m[32m  twoFactorSecret                String?[m
+[32m+[m[32m  twoFactorMethod                TwoFactorMethod?[m
+[32m+[m[32m  createdAt                      DateTime    @default(now())[m
+[32m+[m[32m  updatedAt                      DateTime    @updatedAt[m
+[32m+[m[32m  accounts                       Account[][m
+[32m+[m[32m  sessions                       Session[][m
+[32m+[m[32m  twoFactorBackupCodes           TwoFactorBackupCode[][m
+[32m+[m[32m  kycVerification                KYCVerification?[m
+[32m+[m[32m  profile                        Profile?[m
+[32m+[m[32m  companies                      CompanyMember[][m
+[32m+[m[32m  companyJoinRequests            CompanyJoinRequest[][m
+[32m+[m[32m  freelancerProfile              FreelancerProfile?[m
+[32m+[m[32m  jobApplications                JobApplication[][m
+[32m+[m[32m  ratings                        Rating[][m
+[32m+[m[32m  badges                         UserBadge[][m
+[32m+[m[32m  commissions                    Commission[]              @relation("FreelancerCommissions")[m
+[32m+[m[32m  entrepreneurProfile            EntrepreneurProfile?[m
+[32m+[m[32m  startups                       Startup[]                 @relation("EntrepreneurStartups")[m
+[32m+[m[32m  startupMembers                 StartupMember[][m
+[32m+[m[32m  projects                       Project[]                 @relation("EntrepreneurProjects")[m
+[32m+[m[32m  createdProjects                Project[]                 @relation("ProjectCreator")[m
+[32m+[m[32m  aiChats                        AIChat[][m
+[32m+[m[32m  workerProfile                  WorkerProfile?[m
+[32m+[m[32m  taskAssignments                TaskAssignment[][m
+[32m+[m[32m  reportAccess                   ReportAccess[][m
+[32m+[m[32m  employerProfile                EmployerProfile?[m
+[32m+[m[32m  jobPostings                    JobPosting[][m
+[32m+[m[32m  ownedCompanies                 Company[]                 @relation("CompanyOwner")[m
+[32m+[m[32m  investorProfile                InvestorProfile?[m
+[32m+[m[32m  investments                    Investment[][m
+[32m+[m[32m  investmentRequests             InvestmentRequest[]       @relation("InvestorRequests")[m
+[32m+[m[32m  integrations                   Integration[][m
+[32m+[m[32m  integrationRequests            IntegrationRequest[][m
+[32m+[m[32m  approvedIntegrationRequests    IntegrationRequest[]      @relation("IntegrationApprover")[m
+[32m+[m[32m  permissions                    Permission[]              @relation("PermissionUser")[m
+[32m+[m[32m  grantedPermissions             Permission[]              @relation("PermissionGranter")[m
+[32m+[m[32m  sharedPermissions              PermissionShare[]         @relation("PermissionShareUser")[m
+[32m+[m[32m  sharedPermissionsAsSharer      PermissionShare[]         @relation("PermissionShareSharer")[m
+[32m+[m[32m  createdTasks                   Task[]                    @relation("TaskCreator")[m
+[32m+[m[32m  createdReports                 Report[]                  @relation("ReportCreator")[m
+ }[m
+ [m
+ model Account {[m
+[36m@@ -500,10 +499,10 @@[m [mmodel Project {[m
+   endDate        DateTime?[m
+   createdAt      DateTime  @default(now())[m
+   updatedAt      DateTime  @updatedAt[m
+[31m-  [m
+[32m+[m
+   entrepreneurId String?[m
+   entrepreneur   User?    @relation("EntrepreneurProjects", fields: [entrepreneurId], references: [id], onDelete: SetNull)[m
+[31m-  [m
+[32m+[m
+   creatorId      String[m
+   creator        User     @relation("ProjectCreator", fields: [creatorId], references: [id], onDelete: Cascade)[m
+ [m
