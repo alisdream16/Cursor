@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
+import { Project } from "@prisma/client" // ← BU SATIRI EKLEYİN
 
 // Project tipi: ilişkili verilerle birlikte
 interface ProjectWithRelations extends Project {
