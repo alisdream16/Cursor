@@ -123,7 +123,7 @@ model User {
   name                           String?
   image                          String?
   emailVerified                  DateTime?
-  accountType                    AccountType
+  accountType                    AccountType?
   password                       String?
   twoFactorEnabled               Boolean     @default(false)
   twoFactorSecret                String?
