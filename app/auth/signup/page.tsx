@@ -62,8 +62,9 @@ export default function SignUpPage() {
       })
 
       if (result?.ok) {
-        router.push("/auth/account-type")
-        router.refresh()
+        // Wait for session to be fully created
+        await new Promise(resolve => setTimeout(resolve, 500))
+        window.location.href = "/auth/account-type"
       } else if (result?.error) {
         // If login fails, show error but user is created
         setError(`Account created but login failed: ${result.error}. Please sign in manually.`)

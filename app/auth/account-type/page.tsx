@@ -82,10 +82,13 @@ export default function AccountTypePage() {
       })
 
       if (response.ok) {
-        // Refresh session to get updated accountType
+        // Wait a bit for database update
+        await new Promise(resolve => setTimeout(resolve, 500))
+        // Hard redirect to refresh session
         window.location.href = "/dashboard"
       } else {
-        alert("Failed to set account type. Please try again.")
+        const errorData = await response.json().catch(() => ({}))
+        alert(errorData.error || "Failed to set account type. Please try again.")
       }
     } catch (error) {
       console.error("Error setting account type:", error)

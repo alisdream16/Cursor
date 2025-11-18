@@ -34,16 +34,23 @@ export default function SignInContent() {
       if (result?.error) {
         setError(result.error === "CredentialsSignin" ? "Invalid email or password" : result.error)
       } else if (result?.ok) {
-        // Check if user has account type, if not redirect to account-type page
-        const sessionResponse = await fetch("/api/auth/session")
-        const sessionData = await sessionResponse.json()
+        // Wait a bit for session to be created
+        await new Promise(resolve => setTimeout(resolve, 500))
         
-        if (sessionData?.user && !sessionData.user.accountType) {
-          router.push("/auth/account-type")
-        } else {
-          router.push(callbackUrl)
+        // Check if user has account type, if not redirect to account-type page
+        try {
+          const sessionResponse = await fetch("/api/auth/session")
+          const sessionData = await sessionResponse.json()
+          
+          if (sessionData?.user && !sessionData.user.accountType) {
+            window.location.href = "/auth/account-type"
+          } else {
+            window.location.href = callbackUrl
+          }
+        } catch (err) {
+          // If session check fails, just redirect to callbackUrl
+          window.location.href = callbackUrl
         }
-        router.refresh()
       }
     } catch (err) {
       setError("An error occurred. Please try again.")

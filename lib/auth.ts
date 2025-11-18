@@ -116,46 +116,54 @@ export const authOptions: NextAuthOptions = {
       return session
     },
     async signIn({ user, account, profile }) {
-      // For OAuth providers, check if user exists
-      if (account?.provider === "google" || account?.provider === "facebook") {
-        const dbUser = await prisma.user.findUnique({
-          where: { email: user.email! },
-          include: { kycVerification: true },
-        })
+      try {
+        // For OAuth providers, check if user exists
+        if (account?.provider === "google" || account?.provider === "facebook") {
+          if (!user.email) {
+            return false
+          }
 
-        // If user doesn't exist, they will be created by PrismaAdapter
-        // If user exists but no accountType, redirect to account-type page
-        if (dbUser && !dbUser.accountType) {
-          return true // Allow sign in, will redirect to account-type via pages.newUser
+          const dbUser = await prisma.user.findUnique({
+            where: { email: user.email },
+            include: { kycVerification: true },
+          })
+
+          // If user doesn't exist, they will be created by PrismaAdapter
+          // If user exists but no accountType, redirect to account-type page
+          if (dbUser && !dbUser.accountType) {
+            return true // Allow sign in, will redirect to account-type via pages.newUser
+          }
+
+          // Allow sign in but KYC will be required for certain actions
+          return true
         }
-
-        // Allow sign in but KYC will be required for certain actions
         return true
+      } catch (error) {
+        console.error("SignIn callback error:", error)
+        return false
       }
-      return true
     },
     async redirect({ url, baseUrl }) {
       // Handle redirects properly
-      // If url is relative, make it absolute
-      if (url.startsWith("/")) {
-        // Check if user has account type when redirecting to dashboard
-        if (url === "/dashboard" || url.startsWith("/dashboard")) {
-          // This will be handled by the dashboard page itself
+      try {
+        // If url is relative, make it absolute
+        if (url.startsWith("/")) {
           return `${baseUrl}${url}`
         }
-        return `${baseUrl}${url}`
-      }
-      // If url is from same origin, allow it
-      try {
+        
+        // If url is from same origin, allow it
         const urlObj = new URL(url)
         if (urlObj.origin === baseUrl) {
           return url
         }
-      } catch {
+        
+        // External URL, redirect to baseUrl
+        return baseUrl
+      } catch (e) {
         // Invalid URL, use baseUrl
+        console.error("Invalid redirect URL:", url, e)
+        return baseUrl
       }
-      // Default to baseUrl
-      return baseUrl
     },
   },
   session: {
