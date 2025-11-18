@@ -1,10 +1,13 @@
 "use client"
 
 import { useSearchParams } from "next/navigation"
+import { Suspense } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Logo } from "@/components/ui/logo"
 import { Header } from "@/components/layout/header"
+
+export const dynamic = 'force-dynamic'
 
 const errorMessages: Record<string, string> = {
   Configuration: "There is a problem with the server configuration.",
@@ -16,14 +19,13 @@ const errorMessages: Record<string, string> = {
   OAuthCallback: "Error in handling the response from an OAuth provider.",
   OAuthCreateAccount: "Could not create OAuth account.",
   EmailCreateAccount: "Could not create email account.",
-  Callback: "An error occurred during the callback process.",
   OAuthAccountNotLinked: "This email is already associated with another account.",
   EmailSignin: "The e-mail could not be sent.",
   CredentialsSignin: "Invalid email or password.",
   SessionRequired: "Please sign in to access this page.",
 }
 
-export default function AuthErrorPage() {
+function ErrorContent() {
   const searchParams = useSearchParams()
   const error = searchParams.get("error") || "Default"
 
@@ -79,6 +81,18 @@ export default function AuthErrorPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function AuthErrorPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-xl">Loading...</div>
+      </div>
+    }>
+      <ErrorContent />
+    </Suspense>
   )
 }
 

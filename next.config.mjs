@@ -4,7 +4,6 @@ const nextConfig = {
     domains: ['lh3.googleusercontent.com', 'graph.facebook.com', 'www.hirenup.com', 'hirenup.com'],
   },
   experimental: {
-    dynamicIO: true,
     serverActions: {
       allowedOrigins: ["*"],
     },
