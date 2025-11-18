@@ -1,2 +1,19 @@
 node_modules/.prisma
 prisma/migrations
+
+
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1wZWR1dGZlbmlxcGhvb2tqd3ZiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI1NTAyMzksImV4cCI6MjA3ODEyNjIzOX0.E7epcBgNMk2ROOPASJQji4gFKq_Q7EOAjhbmgIwd_6o
+
+DATABASE_URL postgresql://postgres:2MuhittinSupabase@db.mpedutfeniqphookjwvb.supabase.co:5432/postgres
+Supabase panelinde Project Settings → Database → Connection string. Buradaki URI’yi kopyala. Migration için direct host (db.<ref>.supabase.co) kullan; production’da gerekiyorsa pooler URL’sini ikinci bir değişken olarak saklayabilirsin.
+NEXTAUTH_SECRET
+Rastgele 32+ karakterlik bir değer. https://generate-secret.vercel.app/32 adresinden üretebilir veya terminalde openssl rand -base64 32 çalıştırabilirsin. Bu değeri prod ve lokalde aynı olacak şekilde .env ve platform (Vercel/Render) environment’ına gir.
+NEXTAUTH_URL
+Uygulamanın dışarıdan erişilen URL’i. Production’da örneğin https://<proje>.vercel.app ya da özel domainin. Lokalde çalışırken http://localhost:3000 kullan.
+GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET
+Google Cloud Console → Credentials → OAuth 2.0 Client IDs. Web uygulaması oluştur; Authorized redirect URI olarak https://<domain>/api/auth/callback/google (ve test için http://localhost:3000/api/auth/callback/google). Kimlik bilgilerini kopyala.
+FACEBOOK_CLIENT_ID / FACEBOOK_CLIENT_SECRET
+Facebook Developers → My Apps → Create App (type: Consumer). Facebook Login ürününü ekle, Valid OAuth Redirect URI olarak https://<domain>/api/auth/callback/facebook (lokal için http://localhost:3000/api/auth/callback/facebook). Uygulama ID ve Secret’ı al.
+Tüm bu değerleri .env dosyanda ve deploy platformunun Environment Variables panelinde tanımladıktan sonra npm run build / vercel --prod adımlarını tekrar deneyebilirsin.
+postgresql://postgres:2MuhittinSupabase@db.mpedutfeniqphookjwvb.supabase.co:5432/postgres string
