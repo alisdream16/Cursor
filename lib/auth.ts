@@ -108,7 +108,7 @@ export const authOptions: NextAuthOptions = {
         
         if (dbUser) {
           session.user.id = dbUser.id
-          session.user.accountType = dbUser.accountType
+          session.user.accountType = dbUser.accountType || undefined
           session.user.twoFactorEnabled = dbUser.twoFactorEnabled
           session.user.kycStatus = dbUser.kycVerification?.status || "NOT_STARTED"
         }
