@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { AccountType } from "@prisma/client"
@@ -51,10 +51,24 @@ const accountTypes = [
 ]
 
 export default function AccountTypePage() {
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
   const router = useRouter()
   const [selectedType, setSelectedType] = useState<AccountType | null>(null)
   const [loading, setLoading] = useState(false)
+
+  // Redirect if not authenticated
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/auth/signin")
+    }
+  }, [status, router])
+
+  // Redirect to dashboard if account type already set
+  useEffect(() => {
+    if (session?.user?.accountType) {
+      router.push("/dashboard")
+    }
+  }, [session, router])
 
   const handleSubmit = async () => {
     if (!selectedType || !session?.user?.id) return
@@ -68,7 +82,10 @@ export default function AccountTypePage() {
       })
 
       if (response.ok) {
-        router.push("/dashboard")
+        // Refresh session to get updated accountType
+        window.location.href = "/dashboard"
+      } else {
+        alert("Failed to set account type. Please try again.")
       }
     } catch (error) {
       console.error("Error setting account type:", error)

@@ -117,8 +117,8 @@ export default function Home() {
                 icon: "💰"
               },
             ].map((type, i) => (
-              <Link key={i} href="/auth/signup">
-                <div className={`bg-white rounded-lg p-5 border-2 ${type.color} hover:shadow-md transition-all cursor-pointer text-center`}>
+              <Link key={i} href="/auth/signup" className="group">
+                <div className={`bg-white rounded-lg p-5 border-2 ${type.color} hover:shadow-md transition-all cursor-pointer text-center group-hover:scale-105`}>
                   <div className="text-3xl mb-3">{type.icon}</div>
                   <h3 className="font-semibold mb-1">{type.name}</h3>
                   <p className="text-sm opacity-80">{type.desc}</p>

@@ -1,12 +1,22 @@
 "use client"
 
+import { useEffect } from "react"
 import { useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
 import { DashboardLayout } from "@/components/dashboard/dashboard-layout"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
 export default function DashboardPage() {
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
+  const router = useRouter()
+
+  // Redirect to account-type if no account type
+  useEffect(() => {
+    if (status === "authenticated" && session?.user && !session.user.accountType) {
+      router.push("/auth/account-type")
+    }
+  }, [session, status, router])
 
   if (!session) return null
 
