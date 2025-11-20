@@ -9,6 +9,7 @@ import { Logo } from "@/components/ui/logo"
 import { Header } from "@/components/layout/header"
 
 export default function SignUpPage() {
+  // Kayıt sayfasını oluştur
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<"oauth" | "email">("oauth")
   const [name, setName] = useState("")

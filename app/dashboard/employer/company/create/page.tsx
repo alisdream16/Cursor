@@ -104,7 +104,7 @@ export default function CreateCompanyPage() {
               <p className="text-sm text-blue-800">
                 <strong>What happens next?</strong><br />
                 We will review your company documents and verify the information. This process usually takes 1-3 business days.
-                You'll receive an email notification once your company is verified.
+                You&apos;ll receive an email notification once your company is verified.
               </p>
             </div>
             <Button onClick={() => router.push("/dashboard")} className="bg-primary-500 hover:bg-primary-600">
@@ -280,7 +280,7 @@ export default function CreateCompanyPage() {
 
               <div className="mt-4 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
                 <p className="text-sm text-yellow-800">
-                  <strong>Required documents:</strong> Company registration certificate, Tax ID certificate, or similar official documents proving your company's legal status.
+                  <strong>Required documents:</strong> Company registration certificate, Tax ID certificate, or similar official documents proving your company&apos;s legal status.
                 </p>
               </div>
             </div>
@@ -308,4 +308,3 @@ export default function CreateCompanyPage() {
     </div>
   )
 }
-

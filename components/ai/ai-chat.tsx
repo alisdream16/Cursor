@@ -109,9 +109,9 @@ export function AIChat({ projectId, userId, initialMessages = [], context }: AIC
               Projeniz hakkında sorular sorun. Örneğin:
             </p>
             <ul className="text-sm mt-2 space-y-1 text-left max-w-md mx-auto">
-              <li>• "Bu proje için ne yapmalıyım?"</li>
-              <li>• "Bütçemi nasıl planlamalıyım?"</li>
-              <li>• "Hangi çalışanlara ihtiyacım var?"</li>
+              <li>• &quot;Bu proje için ne yapmalıyım?&quot;</li>
+              <li>• &quot;Bütçemi nasıl planlamalıyım?&quot;</li>
+              <li>• &quot;Hangi çalışanlara ihtiyacım var?&quot;</li>
             </ul>
           </div>
         )}
@@ -193,4 +193,3 @@ export function AIChat({ projectId, userId, initialMessages = [], context }: AIC
     </div>
   )
 }
-
