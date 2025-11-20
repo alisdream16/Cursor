@@ -139,7 +139,8 @@ model User {
   companyJoinRequests            CompanyJoinRequest[]
   freelancerProfile              FreelancerProfile?
   jobApplications                JobApplication[]
-  ratings                        Rating[]
+  ratings                        Rating[] @relation("ReceivedRatings")
+  givenRatings                   Rating[] @relation("GivenRatings")
   badges                         UserBadge[]
   commissions                    Commission[]              @relation("FreelancerCommissions")
   entrepreneurProfile            EntrepreneurProfile?
@@ -274,7 +275,6 @@ model Company {
   joinRequests        CompanyJoinRequest[]
   jobPostings         JobPosting[]
   integrations        CompanyIntegration[]
-  companyIntegrations Integration[]         @relation("CompanyIntegrations")
   subscription        CompanySubscription?
   advertisements      Advertisement[]
   projects            Project[]
@@ -325,7 +325,6 @@ model CompanyIntegration {
 model Integration {
   id           String            @id @default(cuid())
   userId       String
-  companyId    String?
   type         IntegrationType
   status       IntegrationStatus @default(PENDING_APPROVAL)
   accessToken  String?           @db.Text
@@ -335,11 +334,9 @@ model Integration {
   updatedAt    DateTime          @updatedAt
 
   user                User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
-  company             Company?             @relation("CompanyIntegrations", fields: [companyId], references: [id], onDelete: Cascade)
   companyIntegrations CompanyIntegration[]
 
   @@index([userId])
-  @@index([companyId])
 }
 
 model IntegrationRequest {
@@ -439,6 +436,7 @@ model Startup {
   reports             Report[]
   investmentRequests  InvestmentRequest[]
   projects            Project[]            @relation("StartupProjects")
+  investments         Investment[]
 }
 
 model StartupMember {
@@ -602,9 +600,11 @@ model Investment {
   startupId  String
   createdAt  DateTime @default(now())
 
-  investor User @relation(fields: [investorId], references: [id], onDelete: Cascade)
+  investor User    @relation(fields: [investorId], references: [id], onDelete: Cascade)
+  startup  Startup @relation(fields: [startupId], references: [id], onDelete: Cascade)
 
   @@index([investorId])
+  @@index([startupId])
 }
 
 model InvestmentRequest {
@@ -633,9 +633,11 @@ model Rating {
   ratedBy   String
   createdAt DateTime @default(now())
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User @relation("ReceivedRatings", fields: [userId], references: [id], onDelete: Cascade)
+  ratedByUser  User @relation("GivenRatings", fields: [ratedBy], references: [id], onDelete: Cascade)
 
   @@index([userId])
+  @@index([ratedBy])
 }
 
 model UserBadge {
