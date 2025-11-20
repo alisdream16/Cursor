@@ -11,7 +11,7 @@ export default function ContactPage() {
             <div>
               <h2 className="text-xl font-semibold mb-4 text-gray-900">Get in Touch</h2>
               <p className="text-gray-600 mb-4">
-                Have a question or need help? We're here to assist you.
+                Have a question or need help? We&apos;re here to assist you.
               </p>
               <div className="space-y-3">
                 <div>
@@ -38,4 +38,3 @@ export default function ContactPage() {
     </div>
   )
 }
-

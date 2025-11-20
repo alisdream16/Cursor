@@ -61,7 +61,7 @@ function ErrorContent() {
             <p className="text-gray-600 mb-4">{errorMessage}</p>
             {error === "Callback" && (
               <p className="text-sm text-gray-500 mb-4">
-                This usually happens when there's an issue with the OAuth callback. 
+                This usually happens when there&apos;s an issue with the OAuth callback.
                 Please try signing in again.
               </p>
             )}
@@ -95,4 +95,3 @@ export default function AuthErrorPage() {
     </Suspense>
   )
 }
-

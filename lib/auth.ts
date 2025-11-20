@@ -171,3 +171,4 @@ export const authOptions: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
 }
+// Tüm kimlik doğrulama sağlayıcılarını etkinleştir

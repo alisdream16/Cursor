@@ -9,6 +9,7 @@ import { Logo } from "@/components/ui/logo"
 import { Header } from "@/components/layout/header"
 
 export default function SignInContent() {
+  // Giriş sayfasını oluştur
   const searchParams = useSearchParams()
   const router = useRouter()
   const callbackUrl = searchParams.get("callbackUrl") || "/dashboard"
@@ -189,7 +190,7 @@ export default function SignInContent() {
 
           <div className="mt-6 text-center">
             <p className="text-gray-600">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link href="/auth/signup" className="text-primary-600 hover:text-primary-700 font-medium">
                 Sign Up
               </Link>
@@ -200,4 +201,3 @@ export default function SignInContent() {
     </div>
   )
 }
-
