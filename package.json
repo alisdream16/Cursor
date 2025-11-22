@@ -3,15 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "prisma generate && next build",
-    "start": "next start",
+    "dev": "DATABASE_URL=\"postgresql://postgres.mpedutfeniqphookjwvb:2MuhittinSupabase@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres\" DIRECT_URL=\"postgresql://postgres:2MuhittinSupabase@db.mpedutfeniqphookjwvb.supabase.co:5432/postgres\" next dev",
+    "build": "DATABASE_URL=\"postgresql://postgres.mpedutfeniqphookjwvb:2MuhittinSupabase@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres\" DIRECT_URL=\"postgresql://postgres:2MuhittinSupabase@db.mpedutfeniqphookjwvb.supabase.co:5432/postgres\" prisma generate && next build",
+    "start": "DATABASE_URL=\"postgresql://postgres.mpedutfeniqphookjwvb:2MuhittinSupabase@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres\" DIRECT_URL=\"postgresql://postgres:2MuhittinSupabase@db.mpedutfeniqphookjwvb.supabase.co:5432/postgres\" next start",
     "lint": "next lint",
-    "postinstall": "prisma generate",
-    "db:generate": "prisma generate",
-    "db:push": "prisma db push",
-    "db:migrate": "prisma migrate dev",
-    "db:studio": "prisma studio",
+    "postinstall": "DATABASE_URL=\"postgresql://postgres.mpedutfeniqphookjwvb:2MuhittinSupabase@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres\" DIRECT_URL=\"postgresql://postgres:2MuhittinSupabase@db.mpedutfeniqphookjwvb.supabase.co:5432/postgres\" prisma generate",
+    "db:generate": "DATABASE_URL=\"postgresql://postgres.mpedutfeniqphookjwvb:2MuhittinSupabase@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres\" DIRECT_URL=\"postgresql://postgres:2MuhittinSupabase@db.mpedutfeniqphookjwvb.supabase.co:5432/postgres\" prisma generate",
+    "db:push": "DATABASE_URL=\"postgresql://postgres.mpedutfeniqphookjwvb:2MuhittinSupabase@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres\" DIRECT_URL=\"postgresql://postgres:2MuhittinSupabase@db.mpedutfeniqphookjwvb.supabase.co:5432/postgres\" prisma db push",
+    "db:migrate": "DATABASE_URL=\"postgresql://postgres.mpedutfeniqphookjwvb:2MuhittinSupabase@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres\" DIRECT_URL=\"postgresql://postgres:2MuhittinSupabase@db.mpedutfeniqphookjwvb.supabase.co:5432/postgres\" prisma migrate dev",
+    "db:studio": "DATABASE_URL=\"postgresql://postgres.mpedutfeniqphookjwvb:2MuhittinSupabase@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres\" DIRECT_URL=\"postgresql://postgres:2MuhittinSupabase@db.mpedutfeniqphookjwvb.supabase.co:5432/postgres\" prisma studio",
     "prisma:clean": "rimraf node_modules/.prisma && rimraf node_modules/@prisma"
   },
   "engines": {
@@ -54,25 +54,6 @@
     "rimraf": "^6.0.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
-  },
-  "vercel": {
-    "cleanUrls": true,
-    "rewrites": [
-      {
-        "source": "/api/(.*)",
-        "destination": "/api/$1"
-      }
-    ],
-    "build": {
-      "env": {
-        "PRISMA_GENERATE_SKIP_AUTOINSTALL": "true"
-      }
-    },
-    "functions": {
-      "api/ai/chat/route.ts": {
-        "maxDuration": 60
-      }
-    }
   },
   "resolutions": {
     "@prisma/client": "6.19.0",
