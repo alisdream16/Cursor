@@ -35,19 +35,29 @@ export async function POST(request: Request) {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10)
 
-    // Create user
-    const user = await prisma.user.create({
-      data: {
-        name,
-        email,
-        password: hashedPassword,
-      },
-    })
+    // Create user and profile in a transaction
+    const user = await prisma.$transaction(async (tx) => {
+      const newUser = await tx.user.create({
+        data: {
+          name,
+          email,
+          password: hashedPassword,
+        },
+      });
+
+      await tx.profile.create({
+        data: {
+          userId: newUser.id,
+        },
+      });
+
+      return newUser;
+    });
 
     return NextResponse.json(
-      { message: "User created successfully", userId: user.id },
+      { message: "User and profile created successfully", userId: user.id },
       { status: 201 }
-    )
+    );
   } catch (error: any) {
     console.error("Registration error:", error)
     
