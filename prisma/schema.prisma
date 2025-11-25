@@ -118,18 +118,19 @@ enum KYCStatus {
 }
 
 model User {
-  id                             String      @id @default(cuid())
-  email                          String      @unique
+  id                             String           @id @default(cuid())
+  email                          String           @unique
   name                           String?
   image                          String?
   emailVerified                  DateTime?
   accountType                    AccountType?
+  role                           UserRole         @default(MEMBER)
   password                       String?
-  twoFactorEnabled               Boolean     @default(false)
+  twoFactorEnabled               Boolean          @default(false)
   twoFactorSecret                String?
   twoFactorMethod                TwoFactorMethod?
-  createdAt                      DateTime    @default(now())
-  updatedAt                      DateTime    @updatedAt
+  createdAt                      DateTime         @default(now())
+  updatedAt                      DateTime         @updatedAt
   accounts                       Account[]
   sessions                       Session[]
   twoFactorBackupCodes           TwoFactorBackupCode[]
