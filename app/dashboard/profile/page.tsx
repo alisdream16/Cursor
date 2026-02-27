@@ -4,59 +4,99 @@ import { DashboardLayout } from "@/components/dashboard/dashboard-layout"
 import { useSession } from "next-auth/react"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { User, Mail, Phone, MapPin, Globe, Briefcase, Check } from "lucide-react"
+import { User, Mail, Phone, MapPin, Globe, Check, Loader2 } from "lucide-react"
 
 export default function ProfilePage() {
   const { data: session } = useSession()
   const [isEditing, setIsEditing] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [saveSuccess, setSaveSuccess] = useState(false)
   const [saveError, setSaveError] = useState("")
   const [formData, setFormData] = useState({
-    name: session?.user?.name || "",
-    email: session?.user?.email || "",
+    name: "",
+    email: "",
     phone: "",
     location: "",
     website: "",
     bio: "",
   })
 
-  // Update form data when session loads
+  // API'den profil bilgilerini çek
   useEffect(() => {
-    if (session?.user) {
-      setFormData(prev => ({
-        ...prev,
-        name: session.user?.name || "",
-        email: session.user?.email || "",
-      }))
+    const fetchProfile = async () => {
+      if (!session?.user?.email) return
+      
+      try {
+        const response = await fetch("/api/profile")
+        if (response.ok) {
+          const data = await response.json()
+          setFormData({
+            name: data.name || session.user?.name || "",
+            email: data.email || session.user?.email || "",
+            phone: data.phone || "",
+            location: data.location || "",
+            website: data.website || "",
+            bio: data.bio || "",
+          })
+        } else {
+          // API'den veri gelmezse session'dan al
+          setFormData(prev => ({
+            ...prev,
+            name: session.user?.name || "",
+            email: session.user?.email || "",
+          }))
+        }
+      } catch (error) {
+        console.error("Failed to fetch profile:", error)
+        setFormData(prev => ({
+          ...prev,
+          name: session.user?.name || "",
+          email: session.user?.email || "",
+        }))
+      } finally {
+        setIsLoading(false)
+      }
     }
+
+    fetchProfile()
   }, [session])
 
   if (!session) return null
 
+  if (isLoading) {
+    return (
+      <DashboardLayout>
+        <div className="flex items-center justify-center h-64">
+          <Loader2 className="w-8 h-8 animate-spin text-primary-500" />
+        </div>
+      </DashboardLayout>
+    )
+  }
+
   return (
     <DashboardLayout>
       <div className="max-w-4xl">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">Profile Management</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-6">Profil Yönetimi</h1>
         
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-4">
               <div className="w-20 h-20 rounded-full bg-gradient-to-br from-turquoise-400 to-primary-500 flex items-center justify-center text-white text-2xl font-bold">
-                {(session.user.name || session.user.email || "U")[0].toUpperCase()}
+                {(formData.name || formData.email || "U")[0].toUpperCase()}
               </div>
               <div>
                 <h2 className="text-2xl font-semibold text-gray-900">
-                  {session.user.name || "User"}
+                  {formData.name || "Kullanıcı"}
                 </h2>
-                <p className="text-gray-600">{session.user.email}</p>
+                <p className="text-gray-600">{formData.email}</p>
               </div>
             </div>
             <Button
               onClick={() => setIsEditing(!isEditing)}
               className="bg-primary-500 hover:bg-primary-600 text-white"
             >
-              {isEditing ? "Cancel" : "Edit Profile"}
+              {isEditing ? "İptal" : "Profili Düzenle"}
             </Button>
           </div>
 
@@ -64,7 +104,7 @@ export default function ProfilePage() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <User className="w-4 h-4 inline mr-2" />
-                Full Name
+                Ad Soyad
               </label>
               {isEditing ? (
                 <input
@@ -74,14 +114,14 @@ export default function ProfilePage() {
                   className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
                 />
               ) : (
-                <p className="text-gray-900">{formData.name || "Not set"}</p>
+                <p className="text-gray-900">{formData.name || "Belirtilmemiş"}</p>
               )}
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <Mail className="w-4 h-4 inline mr-2" />
-                Email
+                E-posta
               </label>
               <p className="text-gray-900">{formData.email}</p>
             </div>
@@ -89,7 +129,7 @@ export default function ProfilePage() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <Phone className="w-4 h-4 inline mr-2" />
-                Phone
+                Telefon
               </label>
               {isEditing ? (
                 <input
@@ -97,16 +137,17 @@ export default function ProfilePage() {
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  placeholder="+90 555 123 4567"
                 />
               ) : (
-                <p className="text-gray-900">{formData.phone || "Not set"}</p>
+                <p className="text-gray-900">{formData.phone || "Belirtilmemiş"}</p>
               )}
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <MapPin className="w-4 h-4 inline mr-2" />
-                Location
+                Konum
               </label>
               {isEditing ? (
                 <input
@@ -114,9 +155,10 @@ export default function ProfilePage() {
                   value={formData.location}
                   onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                   className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  placeholder="İstanbul, Türkiye"
                 />
               ) : (
-                <p className="text-gray-900">{formData.location || "Not set"}</p>
+                <p className="text-gray-900">{formData.location || "Belirtilmemiş"}</p>
               )}
             </div>
 
@@ -131,15 +173,16 @@ export default function ProfilePage() {
                   value={formData.website}
                   onChange={(e) => setFormData({ ...formData, website: e.target.value })}
                   className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  placeholder="https://example.com"
                 />
               ) : (
-                <p className="text-gray-900">{formData.website || "Not set"}</p>
+                <p className="text-gray-900">{formData.website || "Belirtilmemiş"}</p>
               )}
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Bio
+                Hakkımda
               </label>
               {isEditing ? (
                 <textarea
@@ -147,9 +190,10 @@ export default function ProfilePage() {
                   onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
                   className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
                   rows={4}
+                  placeholder="Kendinizi tanıtın..."
                 />
               ) : (
-                <p className="text-gray-900">{formData.bio || "No bio set"}</p>
+                <p className="text-gray-900">{formData.bio || "Henüz bir açıklama eklenmemiş"}</p>
               )}
             </div>
 
@@ -158,7 +202,7 @@ export default function ProfilePage() {
                 {saveSuccess && (
                   <div className="flex items-center gap-2 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
                     <Check className="w-5 h-5" />
-                    Profile saved successfully!
+                    Profil başarıyla kaydedildi!
                   </div>
                 )}
                 {saveError && (
@@ -176,7 +220,7 @@ export default function ProfilePage() {
                     }}
                     disabled={isSaving}
                   >
-                    Cancel
+                    İptal
                   </Button>
                   <Button
                     onClick={async () => {
@@ -199,10 +243,10 @@ export default function ProfilePage() {
                           }, 1500)
                         } else {
                           const data = await response.json().catch(() => ({}))
-                          setSaveError(data.error || "Failed to save profile. Please try again.")
+                          setSaveError(data.error || "Profil kaydedilemedi. Lütfen tekrar deneyin.")
                         }
                       } catch (error) {
-                        setSaveError("An error occurred. Please try again.")
+                        setSaveError("Bir hata oluştu. Lütfen tekrar deneyin.")
                       } finally {
                         setIsSaving(false)
                       }
@@ -210,7 +254,7 @@ export default function ProfilePage() {
                     className="bg-primary-500 hover:bg-primary-600 text-white"
                     disabled={isSaving}
                   >
-                    {isSaving ? "Saving..." : "Save Changes"}
+                    {isSaving ? "Kaydediliyor..." : "Değişiklikleri Kaydet"}
                   </Button>
                 </div>
               </div>
@@ -221,4 +265,3 @@ export default function ProfilePage() {
     </DashboardLayout>
   )
 }
-

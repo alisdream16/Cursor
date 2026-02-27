@@ -203,11 +203,11 @@ export default function SubscriptionPage() {
         </div>
 
         {/* Plans Grid */}
-        <div className={`grid gap-6 ${plans.length === 3 ? "md:grid-cols-3" : "md:grid-cols-4"}`}>
+        <div className={`grid gap-6 ${plans.length === 3 ? "grid-cols-1 md:grid-cols-3" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"}`}>
           {plans.map((plan) => (
             <div
               key={plan.id}
-              className={`bg-white rounded-xl border-2 p-6 relative ${
+              className={`bg-white rounded-xl border-2 p-6 relative flex flex-col h-full ${
                 plan.recommended
                   ? "border-primary-500 shadow-lg"
                   : "border-gray-200 hover:border-gray-300"
@@ -243,7 +243,7 @@ export default function SubscriptionPage() {
                 )}
               </div>
 
-              <ul className="space-y-3 mb-6">
+              <ul className="space-y-3 mb-6 flex-grow">
                 {plan.features.map((feature, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
                     <Check className="w-5 h-5 text-green-500 flex-shrink-0" />

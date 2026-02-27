@@ -84,51 +84,43 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Account Types - More Refined */}
+        {/* Account Types - MVP: Only 3 active types */}
         <div className="mb-16">
-          <h2 className="text-2xl font-bold text-center mb-8 text-gray-900">Choose Your Path</h2>
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+          <h2 className="text-2xl font-bold text-center mb-8 text-gray-900">Yolunuzu Seçin</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {[
               { 
                 name: "Freelancer", 
-                desc: "Work independently",
-                color: "bg-blue-50 border-blue-200 text-blue-700",
-                icon: "💼"
+                desc: "Bağımsız çalışın, projeler alın, kariyer oluşturun",
+                color: "bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100",
+                icon: "💼",
+                active: true
               },
               { 
-                name: "Entrepreneur", 
-                desc: "Build your startup",
-                color: "bg-purple-50 border-purple-200 text-purple-700",
-                icon: "🚀"
+                name: "Şirket", 
+                desc: "Ekibinizi yönetin, yetenekleri bulun, büyüyün",
+                color: "bg-orange-50 border-orange-200 text-orange-700 hover:bg-orange-100",
+                icon: "🏢",
+                active: true
               },
               { 
-                name: "Worker", 
-                desc: "Join a team",
-                color: "bg-green-50 border-green-200 text-green-700",
-                icon: "👷"
-              },
-              { 
-                name: "Employer", 
-                desc: "Hire and manage",
-                color: "bg-orange-50 border-orange-200 text-orange-700",
-                icon: "🏢"
-              },
-              { 
-                name: "Investor", 
-                desc: "Find opportunities",
-                color: "bg-red-50 border-red-200 text-red-700",
-                icon: "💰"
+                name: "Şirket Çalışanı", 
+                desc: "Bir ekibe katılın, görevleri tamamlayın",
+                color: "bg-green-50 border-green-200 text-green-700 hover:bg-green-100",
+                icon: "👷",
+                active: true
               },
             ].map((type, i) => (
               <Link key={i} href="/auth/signup" className="group">
-                <div className={`bg-white rounded-lg p-5 border-2 ${type.color} hover:shadow-md transition-all cursor-pointer text-center group-hover:scale-105`}>
-                  <div className="text-3xl mb-3">{type.icon}</div>
-                  <h3 className="font-semibold mb-1">{type.name}</h3>
+                <div className={`bg-white rounded-xl p-6 border-2 ${type.color} transition-all cursor-pointer text-center group-hover:scale-105 group-hover:shadow-lg`}>
+                  <div className="text-4xl mb-4">{type.icon}</div>
+                  <h3 className="font-bold text-lg mb-2">{type.name}</h3>
                   <p className="text-sm opacity-80">{type.desc}</p>
                 </div>
               </Link>
             ))}
           </div>
+          
         </div>
 
         {/* Stats Section */}
