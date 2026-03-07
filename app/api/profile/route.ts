@@ -1,7 +1,27 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
-import { getUserProfile, updateUserProfile, ProfileUpdateData } from "@/lib/auth-store"
+import { getUserProfile, updateUserProfile, ProfileUpdateData, users, User } from "@/lib/auth-store"
+
+// OAuth kullanıcısını store'a ekle (yoksa)
+function ensureUserExists(email: string, name?: string | null): User {
+  let user = users.get(email)
+  
+  if (!user) {
+    // OAuth kullanıcısı için yeni kayıt oluştur
+    const userId = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    user = {
+      id: userId,
+      email: email,
+      name: name || "",
+      password: "", // OAuth kullanıcıları için boş
+      createdAt: new Date(),
+    }
+    users.set(email, user)
+  }
+  
+  return user
+}
 
 export async function GET(request: NextRequest) {
   try {
@@ -14,13 +34,22 @@ export async function GET(request: NextRequest) {
       )
     }
 
+    // Kullanıcı yoksa oluştur (OAuth kullanıcıları için)
+    ensureUserExists(session.user.email, session.user.name)
+    
     const profile = getUserProfile(session.user.email)
     
     if (!profile) {
-      return NextResponse.json(
-        { error: "User not found" },
-        { status: 404 }
-      )
+      // Yine bulunamazsa session'dan dön
+      return NextResponse.json({
+        id: session.user.id || "temp",
+        email: session.user.email,
+        name: session.user.name || "",
+        phone: "",
+        location: "",
+        website: "",
+        bio: ""
+      }, { status: 200 })
     }
     
     return NextResponse.json(profile, { status: 200 })
@@ -44,6 +73,9 @@ export async function PUT(request: NextRequest) {
       )
     }
 
+    // Kullanıcı yoksa oluştur (OAuth kullanıcıları için)
+    ensureUserExists(session.user.email, session.user.name)
+
     const body = await request.json()
     const { name, phone, location, website, bio } = body
 
@@ -58,14 +90,14 @@ export async function PUT(request: NextRequest) {
     
     if (!updatedUser) {
       return NextResponse.json(
-        { error: "User not found" },
-        { status: 404 }
+        { error: "Profil güncellenemedi. Lütfen tekrar deneyin." },
+        { status: 500 }
       )
     }
     
     return NextResponse.json(
       { 
-        message: "Profile updated successfully",
+        message: "Profil başarıyla güncellendi",
         user: updatedUser
       },
       { status: 200 }
@@ -73,7 +105,7 @@ export async function PUT(request: NextRequest) {
   } catch (error) {
     console.error("Update profile error:", error)
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Sunucu hatası. Lütfen tekrar deneyin." },
       { status: 500 }
     )
   }

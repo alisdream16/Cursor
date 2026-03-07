@@ -113,7 +113,10 @@ export function Header() {
           </nav>
           <div className="flex items-center space-x-4">
             {status === "loading" ? (
-              <div className="text-sm text-gray-500">Loading...</div>
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse"></div>
+                <div className="w-16 h-4 bg-gray-200 rounded animate-pulse hidden sm:block"></div>
+              </div>
             ) : session ? (
               <>
                 <Link href="/dashboard/notifications" className="text-gray-700 hover:text-primary-600 transition relative">
