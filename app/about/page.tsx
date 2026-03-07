@@ -111,8 +111,8 @@ export default function AboutPage() {
       </div>
 
       {/* CTA */}
-      <div className="bg-primary-600 py-16">
-        <div className="max-w-4xl mx-auto px-4 text-center">
+      <div className="bg-primary-600 py-12 md:py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Get Started Today</h2>
           <p className="text-primary-100 text-lg mb-8">
             Join thousands of professionals and discover opportunities.

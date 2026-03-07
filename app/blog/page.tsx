@@ -49,16 +49,16 @@ export default function BlogPage() {
       <Header />
       
       {/* Hero */}
-      <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-16">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold mb-4">Blog</h1>
+      <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12 md:py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">Blog</h1>
           <p className="text-primary-100 text-lg">
             The latest content about career, technology, and business
           </p>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         {/* Featured Post */}
         <div className="mb-12">
           <div className="bg-white rounded-2xl overflow-hidden shadow-lg">

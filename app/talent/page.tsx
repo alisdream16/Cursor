@@ -155,16 +155,16 @@ export default function TalentPage() {
       <Header />
       
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold mb-4 text-center">Discover Talented Freelancers</h1>
-          <p className="text-xl text-primary-100 text-center mb-8">
+      <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12 md:py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-center">Discover Talented Freelancers</h1>
+          <p className="text-lg md:text-xl text-primary-100 text-center mb-8">
             Find the best professionals for your projects
           </p>
           
           {/* Search */}
-          <div className="max-w-3xl mx-auto">
-            <div className="flex gap-2">
+          <div className="max-w-2xl mx-auto">
+            <div className="flex flex-col sm:flex-row gap-3">
               <div className="flex-1 relative">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
@@ -172,12 +172,12 @@ export default function TalentPage() {
                   placeholder="Search talent, skills, or names..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-300"
+                  className="w-full pl-12 pr-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-300"
                 />
               </div>
               <Button 
                 onClick={() => setShowFilters(!showFilters)}
-                className="bg-white text-primary-600 hover:bg-primary-50 px-6"
+                className="bg-white text-primary-600 hover:bg-primary-50 px-6 w-full sm:w-auto"
               >
                 <Filter className="w-5 h-5 mr-2" />
                 Filter
@@ -187,7 +187,7 @@ export default function TalentPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex gap-8">
           {/* Left Sidebar - Filters */}
           <div className={`w-64 shrink-0 ${showFilters ? 'block' : 'hidden lg:block'}`}>

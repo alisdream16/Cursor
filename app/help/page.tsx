@@ -78,10 +78,10 @@ export default function HelpPage() {
       <Header />
       
       {/* Hero */}
-      <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-16">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold mb-4">Help Center</h1>
-          <p className="text-primary-100 mb-8">How can we help you?</p>
+      <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12 md:py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">Help Center</h1>
+          <p className="text-primary-100 text-lg mb-8">How can we help you?</p>
           
           <div className="max-w-2xl mx-auto relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -90,13 +90,13 @@ export default function HelpPage() {
               placeholder="Search for a question or topic..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 rounded-lg text-gray-900"
+              className="w-full pl-12 pr-4 py-4 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-300"
             />
           </div>
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         {/* Quick Links */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           {[
