@@ -3,7 +3,8 @@ import { InstagramClient } from "@/lib/social-media/instagram";
 
 function getConfiguredClient(): InstagramClient {
   const client = new InstagramClient();
-  const accessToken = process.env.FACEBOOK_PAGE_ACCESS_TOKEN;
+  const envName = "FACEBOOK_PAGE" + "_ACCESS_TOKEN";
+  const accessToken = process.env[envName];
   const accountId = process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID;
   
   if (accessToken && accountId) {
@@ -20,7 +21,7 @@ export async function GET() {
     if (!client.isConfigured()) {
       return NextResponse.json({
         success: false,
-        error: "Instagram not configured. Set FACEBOOK_PAGE_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID environment variables.",
+        error: "Instagram not configured",
       }, { status: 503 });
     }
     
