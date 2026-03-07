@@ -14,7 +14,7 @@ export default function EmployerReportsPage() {
     activeEmployees: 15,
     totalHours: "2,450",
     revenue: "$125,000",
-    avgProjectTime: "45 gün"
+    avgProjectTime: "45 days"
   }
 
   return (
@@ -22,21 +22,21 @@ export default function EmployerReportsPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Raporlar</h1>
-            <p className="text-gray-600">Şirket performans raporları</p>
+            <h1 className="text-2xl font-bold text-gray-900">Reports</h1>
+            <p className="text-gray-600">Company performance reports</p>
           </div>
           <Button variant="outline" className="flex items-center gap-2">
             <Download className="w-4 h-4" />
-            Rapor İndir
+            Download Report
           </Button>
         </div>
 
         <div className="flex gap-2">
           {[
-            { id: "week", label: "Hafta" },
-            { id: "month", label: "Ay" },
-            { id: "quarter", label: "Çeyrek" },
-            { id: "year", label: "Yıl" }
+            { id: "week", label: "Week" },
+            { id: "month", label: "Month" },
+            { id: "quarter", label: "Quarter" },
+            { id: "year", label: "Year" }
           ].map((period) => (
             <button
               key={period.id}
@@ -54,12 +54,12 @@ export default function EmployerReportsPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {[
-            { label: "Toplam Proje", value: stats.totalProjects, icon: FolderKanban, color: "text-blue-600" },
-            { label: "Tamamlanan", value: stats.completedProjects, icon: FolderKanban, color: "text-green-600" },
-            { label: "Aktif Çalışan", value: stats.activeEmployees, icon: Users, color: "text-purple-600" },
-            { label: "Toplam Saat", value: stats.totalHours, icon: Clock, color: "text-orange-600" },
-            { label: "Gelir", value: stats.revenue, icon: DollarSign, color: "text-green-600" },
-            { label: "Ort. Proje Süresi", value: stats.avgProjectTime, icon: Clock, color: "text-blue-600" }
+            { label: "Total Projects", value: stats.totalProjects, icon: FolderKanban, color: "text-blue-600" },
+            { label: "Completed", value: stats.completedProjects, icon: FolderKanban, color: "text-green-600" },
+            { label: "Active Employees", value: stats.activeEmployees, icon: Users, color: "text-purple-600" },
+            { label: "Total Hours", value: stats.totalHours, icon: Clock, color: "text-orange-600" },
+            { label: "Revenue", value: stats.revenue, icon: DollarSign, color: "text-green-600" },
+            { label: "Avg. Project Time", value: stats.avgProjectTime, icon: Clock, color: "text-blue-600" }
           ].map((stat, i) => (
             <div key={i} className="bg-white rounded-xl p-4 border border-gray-200">
               <stat.icon className={`w-6 h-6 ${stat.color} mb-2`} />
@@ -71,13 +71,13 @@ export default function EmployerReportsPage() {
 
         {/* Project Progress Chart */}
         <div className="bg-white rounded-xl p-6 border border-gray-200">
-          <h3 className="font-semibold text-gray-900 mb-4">Proje İlerlemesi</h3>
+          <h3 className="font-semibold text-gray-900 mb-4">Project Progress</h3>
           <div className="space-y-4">
             {[
-              { name: "Yeni Web Sitesi", progress: 65, color: "bg-blue-500" },
-              { name: "Mobil Uygulama", progress: 40, color: "bg-purple-500" },
-              { name: "CRM Entegrasyonu", progress: 10, color: "bg-yellow-500" },
-              { name: "API Geliştirme", progress: 85, color: "bg-green-500" }
+              { name: "New Website", progress: 65, color: "bg-blue-500" },
+              { name: "Mobile App", progress: 40, color: "bg-purple-500" },
+              { name: "CRM Integration", progress: 10, color: "bg-yellow-500" },
+              { name: "API Development", progress: 85, color: "bg-green-500" }
             ].map((project, i) => (
               <div key={i}>
                 <div className="flex justify-between text-sm mb-1">
@@ -97,9 +97,9 @@ export default function EmployerReportsPage() {
 
         {/* Employee Performance */}
         <div className="bg-white rounded-xl p-6 border border-gray-200">
-          <h3 className="font-semibold text-gray-900 mb-4">Çalışan Performansı</h3>
+          <h3 className="font-semibold text-gray-900 mb-4">Employee Performance</h3>
           <div className="h-48 flex items-end justify-around gap-4">
-            {["Ahmet", "Ayşe", "Mehmet", "Fatma", "Ali"].map((name, i) => {
+            {["John", "Emily", "Michael", "Sarah", "David"].map((name, i) => {
               const scores = [92, 88, 95, 78, 85]
               return (
                 <div key={name} className="flex flex-col items-center gap-2">

@@ -23,21 +23,21 @@ export default function WorkerProjectsPage() {
     const mockProjects: Project[] = [
       {
         id: "1",
-        name: "Yeni Web Sitesi Projesi",
+        name: "New Website Project",
         company: "TechCorp",
         role: "Frontend Developer",
         status: "active",
         members: 5,
-        deadline: "15 Mart 2026"
+        deadline: "March 15, 2026"
       },
       {
         id: "2",
-        name: "Mobil Uygulama",
+        name: "Mobile Application",
         company: "TechCorp",
         role: "UI Designer",
         status: "active",
         members: 3,
-        deadline: "20 Nisan 2026"
+        deadline: "April 20, 2026"
       }
     ]
     
@@ -51,8 +51,8 @@ export default function WorkerProjectsPage() {
     <DashboardLayout>
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Projeler</h1>
-          <p className="text-gray-600">Dahil olduğunuz şirket projeleri</p>
+          <h1 className="text-2xl font-bold text-gray-900">Projects</h1>
+          <p className="text-gray-600">Company projects you're involved in</p>
         </div>
 
         {loading ? (
@@ -62,8 +62,8 @@ export default function WorkerProjectsPage() {
         ) : projects.length === 0 ? (
           <div className="bg-white rounded-xl p-12 border border-gray-200 text-center">
             <FolderKanban className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Henüz proje yok</h3>
-            <p className="text-gray-500">Bir projeye atandığınızda burada görünecek</p>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">No projects yet</h3>
+            <p className="text-gray-500">Projects will appear here when you're assigned</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -82,14 +82,14 @@ export default function WorkerProjectsPage() {
                       ? "bg-green-100 text-green-700" 
                       : "bg-gray-100 text-gray-700"
                   }`}>
-                    {project.status === "active" ? "Aktif" : "Tamamlandı"}
+                    {project.status === "active" ? "Active" : "Completed"}
                   </span>
                 </div>
                 <p className="text-sm text-primary-600 font-medium mb-3">{project.role}</p>
                 <div className="flex items-center gap-4 text-sm text-gray-500">
                   <span className="flex items-center gap-1">
                     <Users className="w-4 h-4" />
-                    {project.members} kişi
+                    {project.members} members
                   </span>
                   <span className="flex items-center gap-1">
                     <Clock className="w-4 h-4" />
@@ -97,7 +97,7 @@ export default function WorkerProjectsPage() {
                   </span>
                 </div>
                 <Button variant="outline" size="sm" className="w-full mt-4">
-                  Detaylar
+                  Details
                 </Button>
               </div>
             ))}

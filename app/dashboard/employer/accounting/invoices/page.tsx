@@ -27,8 +27,8 @@ export default function EmployerInvoicesPage() {
         client: "TechCorp Ltd",
         amount: 5000,
         status: "paid",
-        dueDate: "15 Şubat 2026",
-        createdAt: "1 Şubat 2026"
+        dueDate: "February 15, 2026",
+        createdAt: "February 1, 2026"
       },
       {
         id: "2",
@@ -36,8 +36,8 @@ export default function EmployerInvoicesPage() {
         client: "StartupABC",
         amount: 3500,
         status: "pending",
-        dueDate: "1 Mart 2026",
-        createdAt: "15 Şubat 2026"
+        dueDate: "March 1, 2026",
+        createdAt: "February 15, 2026"
       },
       {
         id: "3",
@@ -45,8 +45,8 @@ export default function EmployerInvoicesPage() {
         client: "DesignStudio",
         amount: 2000,
         status: "overdue",
-        dueDate: "20 Şubat 2026",
-        createdAt: "5 Şubat 2026"
+        dueDate: "February 20, 2026",
+        createdAt: "February 5, 2026"
       }
     ]
     
@@ -62,7 +62,7 @@ export default function EmployerInvoicesPage() {
       pending: "bg-yellow-100 text-yellow-700",
       overdue: "bg-red-100 text-red-700"
     }
-    const labels = { paid: "Ödendi", pending: "Bekliyor", overdue: "Gecikmiş" }
+    const labels = { paid: "Paid", pending: "Pending", overdue: "Overdue" }
     return (
       <span className={`px-2 py-1 text-xs font-medium rounded-full ${styles[status]}`}>
         {labels[status]}
@@ -75,12 +75,12 @@ export default function EmployerInvoicesPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Faturalar</h1>
-            <p className="text-gray-600">Fatura oluşturun ve takip edin</p>
+            <h1 className="text-2xl font-bold text-gray-900">Invoices</h1>
+            <p className="text-gray-600">Create and track invoices</p>
           </div>
           <Button className="bg-primary-500 hover:bg-primary-600 flex items-center gap-2">
             <Plus className="w-4 h-4" />
-            Yeni Fatura
+            New Invoice
           </Button>
         </div>
 
@@ -93,12 +93,12 @@ export default function EmployerInvoicesPage() {
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Fatura No</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Müşteri</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tutar</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Vade</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Durum</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">İşlemler</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Invoice No</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Client</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Amount</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Due Date</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">

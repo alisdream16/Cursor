@@ -51,7 +51,7 @@ export function AIChat({ projectId, userId, initialMessages = [], context }: AIC
           projectId,
           userId,
           context,
-          conversationHistory: messages.slice(-10), // Son 10 mesajı gönder
+          conversationHistory: messages.slice(-10), // Send the last 10 messages
         }),
       })
 
@@ -60,7 +60,7 @@ export function AIChat({ projectId, userId, initialMessages = [], context }: AIC
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: data.response || "Üzgünüm, bir hata oluştu.",
+        content: data.response || "Sorry, an error occurred.",
         timestamp: new Date(),
       }
 
@@ -70,7 +70,7 @@ export function AIChat({ projectId, userId, initialMessages = [], context }: AIC
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: "Bir hata oluştu. Lütfen tekrar deneyin.",
+        content: "An error occurred. Please try again.",
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, errorMessage])
@@ -92,10 +92,10 @@ export function AIChat({ projectId, userId, initialMessages = [], context }: AIC
       <div className="bg-gradient-to-r from-turquoise-500 to-primary-500 text-white p-4 rounded-t-lg">
         <div className="flex items-center gap-2">
           <Bot className="w-5 h-5" />
-          <h3 className="font-semibold">AI Proje Asistanı</h3>
+          <h3 className="font-semibold">AI Project Assistant</h3>
         </div>
         <p className="text-sm text-white/90 mt-1">
-          Projeniz hakkında sorular sorun, bütçe planlaması yapın ve çalışan önerileri alın
+          Ask questions about your project, plan your budget, and get employee recommendations
         </p>
       </div>
 
@@ -104,14 +104,14 @@ export function AIChat({ projectId, userId, initialMessages = [], context }: AIC
         {messages.length === 0 && (
           <div className="text-center text-gray-500 py-8">
             <Bot className="w-12 h-12 mx-auto mb-4 text-turquoise-400" />
-            <p className="text-lg font-semibold mb-2">AI Asistanınızla Sohbet Başlatın</p>
+            <p className="text-lg font-semibold mb-2">Start a Chat with Your AI Assistant</p>
             <p className="text-sm">
-              Projeniz hakkında sorular sorun. Örneğin:
+              Ask questions about your project. For example:
             </p>
             <ul className="text-sm mt-2 space-y-1 text-left max-w-md mx-auto">
-              <li>• "Bu proje için ne yapmalıyım?"</li>
-              <li>• "Bütçemi nasıl planlamalıyım?"</li>
-              <li>• "Hangi çalışanlara ihtiyacım var?"</li>
+              <li>• "What should I do for this project?"</li>
+              <li>• "How should I plan my budget?"</li>
+              <li>• "Which employees do I need?"</li>
             </ul>
           </div>
         )}
@@ -137,7 +137,7 @@ export function AIChat({ projectId, userId, initialMessages = [], context }: AIC
             >
               <p className="whitespace-pre-wrap">{message.content}</p>
               <span className="text-xs opacity-70 mt-1 block">
-                {message.timestamp.toLocaleTimeString("tr-TR", {
+                {message.timestamp.toLocaleTimeString("en-US", {
                   hour: "2-digit",
                   minute: "2-digit",
                 })}
@@ -176,7 +176,7 @@ export function AIChat({ projectId, userId, initialMessages = [], context }: AIC
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="Mesajınızı yazın..."
+            placeholder="Type your message..."
             className="flex-1 resize-none border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-turquoise-500"
             rows={2}
             disabled={loading}

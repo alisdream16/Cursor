@@ -26,10 +26,10 @@ export default function FreelancerReviewsPage() {
       {
         id: "1",
         client: "John Smith",
-        project: "E-Ticaret Web Sitesi",
+        project: "E-Commerce Website",
         rating: 5,
-        comment: "Harika bir çalışma! Zamanında teslim edildi ve beklentilerimizin üzerindeydi. Kesinlikle tekrar çalışırız.",
-        date: "20 Şubat 2026",
+        comment: "Great work! Delivered on time and exceeded our expectations. We will definitely work together again.",
+        date: "February 20, 2026",
         helpful: 12
       },
       {
@@ -37,17 +37,17 @@ export default function FreelancerReviewsPage() {
         client: "Sarah Johnson",
         project: "Dashboard Redesign",
         rating: 4,
-        comment: "İyi iş çıkardı, iletişim biraz daha iyi olabilirdi ama genel olarak memnunuz.",
-        date: "15 Şubat 2026",
+        comment: "Good job, communication could have been a bit better but overall we are satisfied.",
+        date: "February 15, 2026",
         helpful: 5
       },
       {
         id: "3",
         client: "Michael Chen",
-        project: "API Geliştirme",
+        project: "API Development",
         rating: 5,
-        comment: "Profesyonel yaklaşım, teknik bilgi mükemmel. Öneriyorum!",
-        date: "10 Şubat 2026",
+        comment: "Professional approach, excellent technical knowledge. Highly recommended!",
+        date: "February 10, 2026",
         helpful: 8
       }
     ]
@@ -82,8 +82,8 @@ export default function FreelancerReviewsPage() {
       <div className="space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Değerlendirmeler</h1>
-          <p className="text-gray-600">Müşterilerinizden aldığınız geri bildirimler</p>
+          <h1 className="text-2xl font-bold text-gray-900">Reviews</h1>
+          <p className="text-gray-600">Feedback from your clients</p>
         </div>
 
         {/* Stats */}
@@ -93,19 +93,19 @@ export default function FreelancerReviewsPage() {
               {renderStars(Math.round(parseFloat(averageRating)))}
             </div>
             <p className="text-3xl font-bold text-gray-900">{averageRating}</p>
-            <p className="text-sm text-gray-600">Ortalama Puan</p>
+            <p className="text-sm text-gray-600">Average Rating</p>
           </div>
           
           <div className="bg-white rounded-xl p-6 border border-gray-200 text-center">
             <p className="text-3xl font-bold text-gray-900">{reviews.length}</p>
-            <p className="text-sm text-gray-600">Toplam Değerlendirme</p>
+            <p className="text-sm text-gray-600">Total Reviews</p>
           </div>
           
           <div className="bg-white rounded-xl p-6 border border-gray-200 text-center">
             <p className="text-3xl font-bold text-green-600">
               {reviews.filter(r => r.rating >= 4).length}
             </p>
-            <p className="text-sm text-gray-600">Olumlu (4+ Yıldız)</p>
+            <p className="text-sm text-gray-600">Positive (4+ Stars)</p>
           </div>
         </div>
 
@@ -117,8 +117,8 @@ export default function FreelancerReviewsPage() {
         ) : reviews.length === 0 ? (
           <div className="bg-white rounded-xl p-12 border border-gray-200 text-center">
             <Star className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Henüz değerlendirme yok</h3>
-            <p className="text-gray-500">İlk projenizi tamamladığınızda değerlendirmeler burada görünecek</p>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">No reviews yet</h3>
+            <p className="text-gray-500">Reviews will appear here when you complete your first project</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -145,7 +145,7 @@ export default function FreelancerReviewsPage() {
                     <p className="text-gray-700 mb-3">{review.comment}</p>
                     <button className="flex items-center gap-1 text-sm text-gray-500 hover:text-primary-600 transition">
                       <ThumbsUp className="w-4 h-4" />
-                      Faydalı ({review.helpful})
+                      Helpful ({review.helpful})
                     </button>
                   </div>
                 </div>

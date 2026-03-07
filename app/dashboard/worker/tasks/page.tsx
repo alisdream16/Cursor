@@ -23,30 +23,30 @@ export default function WorkerTasksPage() {
     const mockTasks: Task[] = [
       {
         id: "1",
-        title: "Login sayfası geliştirme",
-        project: "Yeni Web Sitesi Projesi",
-        assignedBy: "Ahmet Yılmaz",
+        title: "Login page development",
+        project: "New Website Project",
+        assignedBy: "John Smith",
         status: "in_progress",
         priority: "high",
-        dueDate: "1 Mart 2026"
+        dueDate: "March 1, 2026"
       },
       {
         id: "2",
-        title: "Dashboard bileşenleri",
-        project: "Yeni Web Sitesi Projesi",
-        assignedBy: "Ahmet Yılmaz",
+        title: "Dashboard components",
+        project: "New Website Project",
+        assignedBy: "John Smith",
         status: "todo",
         priority: "medium",
-        dueDate: "5 Mart 2026"
+        dueDate: "March 5, 2026"
       },
       {
         id: "3",
-        title: "Unit testler yaz",
-        project: "Mobil Uygulama",
+        title: "Write unit tests",
+        project: "Mobile Application",
         assignedBy: "Mehmet Demir",
         status: "done",
         priority: "low",
-        dueDate: "25 Şubat 2026"
+        dueDate: "February 25, 2026"
       }
     ]
     
@@ -71,7 +71,7 @@ export default function WorkerTasksPage() {
       medium: "bg-yellow-100 text-yellow-700",
       low: "bg-green-100 text-green-700"
     }
-    const labels = { high: "Yüksek", medium: "Orta", low: "Düşük" }
+    const labels = { high: "High", medium: "Medium", low: "Low" }
     return (
       <span className={`px-2 py-0.5 text-xs font-medium rounded ${styles[priority]}`}>
         {labels[priority]}
@@ -83,16 +83,16 @@ export default function WorkerTasksPage() {
     <DashboardLayout>
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Görevlerim</h1>
-          <p className="text-gray-600">Size atanan görevleri takip edin</p>
+          <h1 className="text-2xl font-bold text-gray-900">My Tasks</h1>
+          <p className="text-gray-600">Track tasks assigned to you</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
           {[
-            { label: "Bekleyen", count: tasks.filter(t => t.status === "todo").length, color: "text-gray-600" },
-            { label: "Devam Eden", count: tasks.filter(t => t.status === "in_progress").length, color: "text-blue-600" },
-            { label: "Tamamlanan", count: tasks.filter(t => t.status === "done").length, color: "text-green-600" },
-            { label: "Geciken", count: tasks.filter(t => t.status === "overdue").length, color: "text-red-600" }
+            { label: "Pending", count: tasks.filter(t => t.status === "todo").length, color: "text-gray-600" },
+            { label: "In Progress", count: tasks.filter(t => t.status === "in_progress").length, color: "text-blue-600" },
+            { label: "Completed", count: tasks.filter(t => t.status === "done").length, color: "text-green-600" },
+            { label: "Overdue", count: tasks.filter(t => t.status === "overdue").length, color: "text-red-600" }
           ].map((stat, i) => (
             <div key={i} className="bg-white rounded-xl p-4 border border-gray-200 text-center">
               <p className={`text-2xl font-bold ${stat.color}`}>{stat.count}</p>
@@ -108,8 +108,8 @@ export default function WorkerTasksPage() {
         ) : tasks.length === 0 ? (
           <div className="bg-white rounded-xl p-12 border border-gray-200 text-center">
             <ClipboardList className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Görev yok</h3>
-            <p className="text-gray-500">Size atanan görevler burada görünecek</p>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">No tasks</h3>
+            <p className="text-gray-500">Tasks assigned to you will appear here</p>
           </div>
         ) : (
           <div className="space-y-3">
@@ -124,7 +124,7 @@ export default function WorkerTasksPage() {
                     <p className={`font-medium text-gray-900 ${task.status === "done" ? "line-through opacity-60" : ""}`}>
                       {task.title}
                     </p>
-                    <p className="text-sm text-gray-500">{task.project} • Atayan: {task.assignedBy}</p>
+                    <p className="text-sm text-gray-500">{task.project} • Assigned by: {task.assignedBy}</p>
                   </div>
                   <div className="flex items-center gap-3">
                     {getPriorityBadge(task.priority)}

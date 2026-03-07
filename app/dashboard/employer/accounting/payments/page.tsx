@@ -22,35 +22,35 @@ export default function EmployerPaymentsPage() {
     const mockPayments: Payment[] = [
       {
         id: "1",
-        description: "Proje Ödemesi - TechCorp",
+        description: "Project Payment - TechCorp",
         type: "income",
         amount: 5000,
-        category: "Proje Geliri",
-        date: "25 Şubat 2026"
+        category: "Project Revenue",
+        date: "February 25, 2026"
       },
       {
         id: "2",
-        description: "Freelancer Ödemesi - Ahmet Y.",
+        description: "Freelancer Payment - Ahmet Y.",
         type: "expense",
         amount: 1500,
-        category: "Personel Gideri",
-        date: "24 Şubat 2026"
+        category: "Personnel Expense",
+        date: "February 24, 2026"
       },
       {
         id: "3",
-        description: "Yazılım Lisansı",
+        description: "Software License",
         type: "expense",
         amount: 200,
-        category: "Operasyonel Gider",
-        date: "20 Şubat 2026"
+        category: "Operational Expense",
+        date: "February 20, 2026"
       },
       {
         id: "4",
-        description: "Danışmanlık Geliri",
+        description: "Consulting Revenue",
         type: "income",
         amount: 2500,
-        category: "Hizmet Geliri",
-        date: "18 Şubat 2026"
+        category: "Service Revenue",
+        date: "February 18, 2026"
       }
     ]
     
@@ -68,12 +68,12 @@ export default function EmployerPaymentsPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Ödemeler</h1>
-            <p className="text-gray-600">Gelir ve gider takibi</p>
+            <h1 className="text-2xl font-bold text-gray-900">Payments</h1>
+            <p className="text-gray-600">Income and expense tracking</p>
           </div>
           <Button className="bg-primary-500 hover:bg-primary-600 flex items-center gap-2">
             <Plus className="w-4 h-4" />
-            Yeni Ödeme
+            New Payment
           </Button>
         </div>
 
@@ -81,14 +81,14 @@ export default function EmployerPaymentsPage() {
           <div className="bg-green-50 rounded-xl p-6 border border-green-200">
             <div className="flex items-center gap-2 mb-2">
               <ArrowUpRight className="w-5 h-5 text-green-600" />
-              <span className="text-green-700 font-medium">Toplam Gelir</span>
+              <span className="text-green-700 font-medium">Total Income</span>
             </div>
             <p className="text-3xl font-bold text-green-700">${totalIncome.toLocaleString()}</p>
           </div>
           <div className="bg-red-50 rounded-xl p-6 border border-red-200">
             <div className="flex items-center gap-2 mb-2">
               <ArrowDownRight className="w-5 h-5 text-red-600" />
-              <span className="text-red-700 font-medium">Toplam Gider</span>
+              <span className="text-red-700 font-medium">Total Expenses</span>
             </div>
             <p className="text-3xl font-bold text-red-700">${totalExpense.toLocaleString()}</p>
           </div>
@@ -101,7 +101,7 @@ export default function EmployerPaymentsPage() {
         ) : (
           <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
             <div className="px-6 py-4 border-b border-gray-200">
-              <h3 className="font-semibold text-gray-900">Son İşlemler</h3>
+              <h3 className="font-semibold text-gray-900">Recent Transactions</h3>
             </div>
             <div className="divide-y divide-gray-200">
               {payments.map((payment) => (

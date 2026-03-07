@@ -20,8 +20,8 @@ interface Project {
 const mockProjects: Project[] = [
   {
     id: "1",
-    name: "HireNUp Website Geliştirme",
-    description: "Ana platform web sitesinin geliştirilmesi ve optimizasyonu",
+    name: "HireNUp Website Development",
+    description: "Development and optimization of the main platform website",
     status: "active",
     progress: 65,
     members: 4,
@@ -30,8 +30,8 @@ const mockProjects: Project[] = [
   },
   {
     id: "2",
-    name: "Mobil Uygulama MVP",
-    description: "iOS ve Android için mobil uygulama geliştirme",
+    name: "Mobile App MVP",
+    description: "Mobile app development for iOS and Android",
     status: "active",
     progress: 30,
     members: 3,
@@ -40,8 +40,8 @@ const mockProjects: Project[] = [
   },
   {
     id: "3",
-    name: "API Entegrasyonları",
-    description: "Üçüncü parti API entegrasyonlarının tamamlanması",
+    name: "API Integrations",
+    description: "Completion of third-party API integrations",
     status: "on_hold",
     progress: 80,
     members: 2,
@@ -59,11 +59,11 @@ export default function ProjectsPage() {
   const getStatusBadge = (status: Project["status"]) => {
     switch (status) {
       case "active":
-        return <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">Aktif</span>
+        return <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">Active</span>
       case "completed":
-        return <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">Tamamlandı</span>
+        return <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">Completed</span>
       case "on_hold":
-        return <span className="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-medium">Beklemede</span>
+        return <span className="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-medium">On Hold</span>
     }
   }
 
@@ -71,14 +71,14 @@ export default function ProjectsPage() {
     <DashboardLayout>
       <div className="max-w-6xl">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-3xl font-bold text-gray-900">Projelerim</h1>
+          <h1 className="text-3xl font-bold text-gray-900">My Projects</h1>
           <Button className="bg-primary-500 hover:bg-primary-600 text-white">
             <Plus className="w-4 h-4 mr-2" />
-            Yeni Proje
+            New Project
           </Button>
         </div>
 
-        {/* Proje Kartları */}
+        {/* Project Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map(project => (
             <div
@@ -100,10 +100,10 @@ export default function ProjectsPage() {
               <h3 className="text-lg font-semibold text-gray-900 mb-2">{project.name}</h3>
               <p className="text-sm text-gray-600 mb-4 line-clamp-2">{project.description}</p>
 
-              {/* İlerleme Çubuğu */}
+              {/* Progress Bar */}
               <div className="mb-4">
                 <div className="flex items-center justify-between text-sm mb-1">
-                  <span className="text-gray-600">İlerleme</span>
+                  <span className="text-gray-600">Progress</span>
                   <span className="font-medium text-gray-900">{project.progress}%</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
@@ -114,11 +114,11 @@ export default function ProjectsPage() {
                 </div>
               </div>
 
-              {/* Alt Bilgiler */}
+              {/* Footer Info */}
               <div className="flex items-center justify-between text-sm text-gray-500 pt-4 border-t border-gray-100">
                 <div className="flex items-center gap-1">
                   <Users className="w-4 h-4" />
-                  <span>{project.members} üye</span>
+                  <span>{project.members} members</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <CheckCircle2 className="w-4 h-4" />
@@ -126,18 +126,18 @@ export default function ProjectsPage() {
                 </div>
                 <div className="flex items-center gap-1">
                   <Calendar className="w-4 h-4" />
-                  <span>{new Date(project.dueDate).toLocaleDateString("tr-TR", { day: "numeric", month: "short" })}</span>
+                  <span>{new Date(project.dueDate).toLocaleDateString("en-US", { day: "numeric", month: "short" })}</span>
                 </div>
               </div>
             </div>
           ))}
 
-          {/* Yeni Proje Kartı */}
+          {/* New Project Card */}
           <div className="bg-gray-50 rounded-xl border-2 border-dashed border-gray-300 p-6 flex flex-col items-center justify-center min-h-[280px] hover:border-primary-400 hover:bg-primary-50 transition-all cursor-pointer">
             <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mb-3">
               <Plus className="w-6 h-6 text-gray-500" />
             </div>
-            <span className="text-gray-600 font-medium">Yeni Proje Oluştur</span>
+            <span className="text-gray-600 font-medium">Create New Project</span>
           </div>
         </div>
       </div>

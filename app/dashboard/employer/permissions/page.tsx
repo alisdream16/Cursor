@@ -18,14 +18,14 @@ export default function EmployerPermissionsPage() {
   const [loading, setLoading] = useState(true)
 
   const allPermissions = [
-    { id: "projects_view", label: "Projeleri Görüntüle" },
-    { id: "projects_edit", label: "Projeleri Düzenle" },
-    { id: "tasks_manage", label: "Görevleri Yönet" },
-    { id: "employees_view", label: "Çalışanları Görüntüle" },
-    { id: "employees_manage", label: "Çalışanları Yönet" },
-    { id: "accounting_view", label: "Muhasebeyi Görüntüle" },
-    { id: "accounting_manage", label: "Muhasebeyi Yönet" },
-    { id: "reports_view", label: "Raporları Görüntüle" }
+    { id: "projects_view", label: "View Projects" },
+    { id: "projects_edit", label: "Edit Projects" },
+    { id: "tasks_manage", label: "Manage Tasks" },
+    { id: "employees_view", label: "View Employees" },
+    { id: "employees_manage", label: "Manage Employees" },
+    { id: "accounting_view", label: "View Accounting" },
+    { id: "accounting_manage", label: "Manage Accounting" },
+    { id: "reports_view", label: "View Reports" }
   ]
 
   useEffect(() => {
@@ -33,21 +33,21 @@ export default function EmployerPermissionsPage() {
       {
         id: "1",
         name: "Admin",
-        description: "Tam erişim yetkisi",
+        description: "Full access permission",
         permissions: allPermissions.map(p => p.id),
         userCount: 2
       },
       {
         id: "2",
-        name: "Proje Yöneticisi",
-        description: "Proje ve görev yönetimi",
+        name: "Project Manager",
+        description: "Project and task management",
         permissions: ["projects_view", "projects_edit", "tasks_manage", "employees_view", "reports_view"],
         userCount: 3
       },
       {
         id: "3",
-        name: "Çalışan",
-        description: "Temel erişim",
+        name: "Employee",
+        description: "Basic access",
         permissions: ["projects_view", "tasks_manage"],
         userCount: 10
       }
@@ -64,11 +64,11 @@ export default function EmployerPermissionsPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Yetki Yönetimi</h1>
-            <p className="text-gray-600">Roller ve izinleri yönetin</p>
+            <h1 className="text-2xl font-bold text-gray-900">Permission Management</h1>
+            <p className="text-gray-600">Manage roles and permissions</p>
           </div>
           <Button className="bg-primary-500 hover:bg-primary-600">
-            Yeni Rol Oluştur
+            Create New Role
           </Button>
         </div>
 
@@ -97,15 +97,15 @@ export default function EmployerPermissionsPage() {
                     <div className="flex items-center gap-2">
                       <span className="flex items-center gap-1 text-sm text-gray-600">
                         <User className="w-4 h-4" />
-                        {role.userCount} kullanıcı
+                        {role.userCount} users
                       </span>
-                      <Button variant="outline" size="sm">Düzenle</Button>
+                      <Button variant="outline" size="sm">Edit</Button>
                     </div>
                   </div>
                 </div>
                 
                 <div className="p-6">
-                  <h4 className="text-sm font-medium text-gray-700 mb-3">İzinler</h4>
+                  <h4 className="text-sm font-medium text-gray-700 mb-3">Permissions</h4>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {allPermissions.map((perm) => {
                       const hasPermission = role.permissions.includes(perm.id)

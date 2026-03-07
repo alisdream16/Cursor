@@ -30,17 +30,17 @@ export default function EmployerJobsPage() {
         type: "Full-time",
         applicants: 45,
         status: "active",
-        postedAt: "20 Şubat 2026"
+        postedAt: "February 20, 2026"
       },
       {
         id: "2",
         title: "Product Designer",
         department: "Design",
-        location: "İstanbul",
+        location: "Istanbul",
         type: "Full-time",
         applicants: 28,
         status: "active",
-        postedAt: "15 Şubat 2026"
+        postedAt: "February 15, 2026"
       },
       {
         id: "3",
@@ -50,7 +50,7 @@ export default function EmployerJobsPage() {
         type: "Contract",
         applicants: 12,
         status: "paused",
-        postedAt: "10 Şubat 2026"
+        postedAt: "February 10, 2026"
       }
     ]
     
@@ -66,7 +66,7 @@ export default function EmployerJobsPage() {
       paused: "bg-yellow-100 text-yellow-700",
       closed: "bg-gray-100 text-gray-700"
     }
-    const labels = { active: "Aktif", paused: "Durduruldu", closed: "Kapatıldı" }
+    const labels = { active: "Active", paused: "Paused", closed: "Closed" }
     return (
       <span className={`px-2 py-1 text-xs font-medium rounded-full ${styles[status]}`}>
         {labels[status]}
@@ -79,31 +79,31 @@ export default function EmployerJobsPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">İş İlanları</h1>
-            <p className="text-gray-600">Açık pozisyonlarınızı yönetin</p>
+            <h1 className="text-2xl font-bold text-gray-900">Job Listings</h1>
+            <p className="text-gray-600">Manage your open positions</p>
           </div>
           <Button className="bg-primary-500 hover:bg-primary-600 flex items-center gap-2">
             <Plus className="w-4 h-4" />
-            Yeni İlan
+            New Listing
           </Button>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="bg-white rounded-xl p-4 border border-gray-200">
-            <p className="text-sm text-gray-600">Aktif İlanlar</p>
+            <p className="text-sm text-gray-600">Active Listings</p>
             <p className="text-2xl font-bold text-green-600">
               {jobs.filter(j => j.status === "active").length}
             </p>
           </div>
           <div className="bg-white rounded-xl p-4 border border-gray-200">
-            <p className="text-sm text-gray-600">Toplam Başvuru</p>
+            <p className="text-sm text-gray-600">Total Applications</p>
             <p className="text-2xl font-bold text-primary-600">
               {jobs.reduce((sum, j) => sum + j.applicants, 0)}
             </p>
           </div>
           <div className="bg-white rounded-xl p-4 border border-gray-200">
-            <p className="text-sm text-gray-600">Bu Hafta</p>
-            <p className="text-2xl font-bold text-gray-900">+24 başvuru</p>
+            <p className="text-sm text-gray-600">This Week</p>
+            <p className="text-2xl font-bold text-gray-900">+24 applications</p>
           </div>
         </div>
 
@@ -114,11 +114,11 @@ export default function EmployerJobsPage() {
         ) : jobs.length === 0 ? (
           <div className="bg-white rounded-xl p-12 border border-gray-200 text-center">
             <Briefcase className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">İş ilanı yok</h3>
-            <p className="text-gray-500 mb-4">İlk iş ilanınızı oluşturun</p>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">No job listings</h3>
+            <p className="text-gray-500 mb-4">Create your first job listing</p>
             <Button className="bg-primary-500 hover:bg-primary-600">
               <Plus className="w-4 h-4 mr-2" />
-              Yeni İlan Oluştur
+              Create New Listing
             </Button>
           </div>
         ) : (
@@ -126,12 +126,12 @@ export default function EmployerJobsPage() {
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Pozisyon</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Departman</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Lokasyon</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Başvuru</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Durum</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">İşlemler</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Position</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Department</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Location</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Applications</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">

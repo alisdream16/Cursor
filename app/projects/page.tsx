@@ -77,7 +77,7 @@ const categories = ["All", "Technology", "Design", "AI", "Web", "IoT", "Mobile"]
 
 export default function ProjectsPage() {
   const [searchTerm, setSearchTerm] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState("Tümü")
+  const [selectedCategory, setSelectedCategory] = useState("All")
 
   const filteredProjects = projects.filter(project => {
     const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||

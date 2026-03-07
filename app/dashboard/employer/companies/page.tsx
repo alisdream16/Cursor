@@ -25,18 +25,18 @@ export default function EmployerCompaniesPage() {
       {
         id: "1",
         name: "TechCorp Solutions",
-        industry: "Teknoloji",
+        industry: "Technology",
         employees: 15,
         projects: 8,
-        role: "Kurucu"
+        role: "Founder"
       },
       {
         id: "2",
         name: "Design Studio Pro",
-        industry: "Tasarım",
+        industry: "Design",
         employees: 5,
         projects: 3,
-        role: "Yönetici"
+        role: "Manager"
       }
     ]
     
@@ -51,13 +51,13 @@ export default function EmployerCompaniesPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Şirketlerim</h1>
-            <p className="text-gray-600">Şirketlerinizi yönetin</p>
+            <h1 className="text-2xl font-bold text-gray-900">My Companies</h1>
+            <p className="text-gray-600">Manage your companies</p>
           </div>
           <Link href="/dashboard/employer/company/create">
             <Button className="bg-primary-500 hover:bg-primary-600 flex items-center gap-2">
               <Plus className="w-4 h-4" />
-              Yeni Şirket
+              New Company
             </Button>
           </Link>
         </div>
@@ -69,11 +69,11 @@ export default function EmployerCompaniesPage() {
         ) : companies.length === 0 ? (
           <div className="bg-white rounded-xl p-12 border border-gray-200 text-center">
             <Building2 className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Henüz şirket yok</h3>
-            <p className="text-gray-500 mb-4">İlk şirketinizi oluşturun</p>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">No companies yet</h3>
+            <p className="text-gray-500 mb-4">Create your first company</p>
             <Link href="/dashboard/employer/company/create">
               <Button className="bg-primary-500 hover:bg-primary-600">
-                Şirket Oluştur
+                Create Company
               </Button>
             </Link>
           </div>
@@ -102,17 +102,17 @@ export default function EmployerCompaniesPage() {
                 <div className="grid grid-cols-2 gap-4 mb-4">
                   <div className="flex items-center gap-2 text-gray-600">
                     <Users className="w-4 h-4" />
-                    <span className="text-sm">{company.employees} çalışan</span>
+                    <span className="text-sm">{company.employees} employees</span>
                   </div>
                   <div className="flex items-center gap-2 text-gray-600">
                     <FolderKanban className="w-4 h-4" />
-                    <span className="text-sm">{company.projects} proje</span>
+                    <span className="text-sm">{company.projects} projects</span>
                   </div>
                 </div>
 
                 <div className="flex gap-2">
                   <Button variant="outline" className="flex-1">
-                    Detaylar
+                    Details
                   </Button>
                   <Button variant="ghost" size="sm">
                     <Settings className="w-4 h-4" />

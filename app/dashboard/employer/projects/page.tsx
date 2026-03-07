@@ -24,30 +24,30 @@ export default function EmployerProjectsPage() {
     const mockProjects: Project[] = [
       {
         id: "1",
-        name: "Yeni Web Sitesi",
-        description: "Şirket web sitesinin yeniden tasarımı",
+        name: "New Website",
+        description: "Company website redesign",
         status: "active",
         members: 5,
         progress: 65,
-        deadline: "15 Mart 2026"
+        deadline: "March 15, 2026"
       },
       {
         id: "2",
-        name: "Mobil Uygulama",
-        description: "iOS ve Android mobil uygulama geliştirme",
+        name: "Mobile App",
+        description: "iOS and Android mobile app development",
         status: "active",
         members: 3,
         progress: 40,
-        deadline: "20 Nisan 2026"
+        deadline: "April 20, 2026"
       },
       {
         id: "3",
-        name: "CRM Entegrasyonu",
-        description: "Salesforce CRM entegrasyonu",
+        name: "CRM Integration",
+        description: "Salesforce CRM integration",
         status: "planning",
         members: 2,
         progress: 10,
-        deadline: "1 Mayıs 2026"
+        deadline: "May 1, 2026"
       }
     ]
     
@@ -63,7 +63,7 @@ export default function EmployerProjectsPage() {
       completed: "bg-blue-100 text-blue-700",
       planning: "bg-yellow-100 text-yellow-700"
     }
-    const labels = { active: "Aktif", completed: "Tamamlandı", planning: "Planlama" }
+    const labels = { active: "Active", completed: "Completed", planning: "Planning" }
     return (
       <span className={`px-2 py-1 text-xs font-medium rounded-full ${styles[status]}`}>
         {labels[status]}
@@ -76,23 +76,23 @@ export default function EmployerProjectsPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Projeler</h1>
-            <p className="text-gray-600">Şirket projelerinizi yönetin</p>
+            <h1 className="text-2xl font-bold text-gray-900">Projects</h1>
+            <p className="text-gray-600">Manage your company projects</p>
           </div>
           <Link href="/dashboard/employer/projects/new">
             <Button className="bg-primary-500 hover:bg-primary-600 flex items-center gap-2">
-              <Plus className="w-4 h-4" />
-              Yeni Proje
+            <Plus className="w-4 h-4" />
+            New Project
             </Button>
           </Link>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
           {[
-            { label: "Toplam", value: projects.length, color: "text-gray-900" },
-            { label: "Aktif", value: projects.filter(p => p.status === "active").length, color: "text-green-600" },
-            { label: "Planlama", value: projects.filter(p => p.status === "planning").length, color: "text-yellow-600" },
-            { label: "Tamamlanan", value: projects.filter(p => p.status === "completed").length, color: "text-blue-600" }
+            { label: "Total", value: projects.length, color: "text-gray-900" },
+            { label: "Active", value: projects.filter(p => p.status === "active").length, color: "text-green-600" },
+            { label: "Planning", value: projects.filter(p => p.status === "planning").length, color: "text-yellow-600" },
+            { label: "Completed", value: projects.filter(p => p.status === "completed").length, color: "text-blue-600" }
           ].map((stat, i) => (
             <div key={i} className="bg-white rounded-xl p-4 border border-gray-200">
               <p className="text-sm text-gray-600">{stat.label}</p>
@@ -108,11 +108,11 @@ export default function EmployerProjectsPage() {
         ) : projects.length === 0 ? (
           <div className="bg-white rounded-xl p-12 border border-gray-200 text-center">
             <FolderKanban className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Proje yok</h3>
-            <p className="text-gray-500 mb-4">İlk projenizi oluşturun</p>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">No projects</h3>
+            <p className="text-gray-500 mb-4">Create your first project</p>
             <Link href="/dashboard/employer/projects/new">
               <Button className="bg-primary-500 hover:bg-primary-600">
-                Yeni Proje Oluştur
+                Create New Project
               </Button>
             </Link>
           </div>
@@ -133,7 +133,7 @@ export default function EmployerProjectsPage() {
 
                 <div className="mb-4">
                   <div className="flex items-center justify-between text-sm text-gray-600 mb-1">
-                    <span>İlerleme</span>
+                    <span>Progress</span>
                     <span>{project.progress}%</span>
                   </div>
                   <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
@@ -147,7 +147,7 @@ export default function EmployerProjectsPage() {
                 <div className="flex items-center justify-between text-sm text-gray-500">
                   <span className="flex items-center gap-1">
                     <Users className="w-4 h-4" />
-                    {project.members} kişi
+                    {project.members} people
                   </span>
                   <span className="flex items-center gap-1">
                     <Clock className="w-4 h-4" />
@@ -156,7 +156,7 @@ export default function EmployerProjectsPage() {
                 </div>
 
                 <Button variant="outline" className="w-full mt-4">
-                  Detaylar
+                  Details
                 </Button>
               </div>
             ))}

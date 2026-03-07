@@ -19,15 +19,15 @@ export default function EmployerAccountingPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Muhasebe</h1>
-            <p className="text-gray-600">Finansal durumunuzu takip edin</p>
+            <h1 className="text-2xl font-bold text-gray-900">Accounting</h1>
+            <p className="text-gray-600">Track your financial status</p>
           </div>
           <div className="flex gap-2">
             <Link href="/dashboard/employer/accounting/invoices">
-              <Button variant="outline">Faturalar</Button>
+              <Button variant="outline">Invoices</Button>
             </Link>
             <Link href="/dashboard/employer/accounting/payments">
-              <Button className="bg-primary-500 hover:bg-primary-600">Ödemeler</Button>
+              <Button className="bg-primary-500 hover:bg-primary-600">Payments</Button>
             </Link>
           </div>
         </div>
@@ -38,7 +38,7 @@ export default function EmployerAccountingPage() {
               <TrendingUp className="w-8 h-8 opacity-80" />
               <ArrowUpRight className="w-5 h-5" />
             </div>
-            <p className="text-green-100 text-sm">Toplam Gelir</p>
+            <p className="text-green-100 text-sm">Total Revenue</p>
             <p className="text-2xl font-bold">${stats.totalRevenue.toLocaleString()}</p>
           </div>
           
@@ -46,7 +46,7 @@ export default function EmployerAccountingPage() {
             <div className="flex items-center justify-between mb-4">
               <TrendingDown className="w-8 h-8 text-red-500" />
             </div>
-            <p className="text-gray-600 text-sm">Toplam Gider</p>
+            <p className="text-gray-600 text-sm">Total Expenses</p>
             <p className="text-2xl font-bold text-gray-900">${stats.totalExpenses.toLocaleString()}</p>
           </div>
           
@@ -54,7 +54,7 @@ export default function EmployerAccountingPage() {
             <div className="flex items-center justify-between mb-4">
               <DollarSign className="w-8 h-8 text-green-500" />
             </div>
-            <p className="text-gray-600 text-sm">Kâr</p>
+            <p className="text-gray-600 text-sm">Profit</p>
             <p className="text-2xl font-bold text-green-600">${stats.profit.toLocaleString()}</p>
           </div>
           
@@ -62,16 +62,16 @@ export default function EmployerAccountingPage() {
             <div className="flex items-center justify-between mb-4">
               <CreditCard className="w-8 h-8 text-yellow-500" />
             </div>
-            <p className="text-gray-600 text-sm">Bekleyen Ödeme</p>
+            <p className="text-gray-600 text-sm">Pending Payment</p>
             <p className="text-2xl font-bold text-yellow-600">${stats.pendingPayments.toLocaleString()}</p>
           </div>
         </div>
 
         {/* Chart Placeholder */}
         <div className="bg-white rounded-xl p-6 border border-gray-200">
-          <h3 className="font-semibold text-gray-900 mb-4">Aylık Gelir/Gider</h3>
+          <h3 className="font-semibold text-gray-900 mb-4">Monthly Revenue/Expenses</h3>
           <div className="h-64 flex items-end justify-around gap-4">
-            {["Oca", "Şub", "Mar", "Nis", "May", "Haz"].map((month, i) => {
+            {["Jan", "Feb", "Mar", "Apr", "May", "Jun"].map((month, i) => {
               const revenues = [80, 90, 75, 100, 85, 95]
               const expenses = [40, 35, 45, 50, 40, 45]
               return (
@@ -93,10 +93,10 @@ export default function EmployerAccountingPage() {
           </div>
           <div className="flex justify-center gap-6 mt-4 text-sm">
             <span className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-green-500 rounded" /> Gelir
+              <div className="w-3 h-3 bg-green-500 rounded" /> Revenue
             </span>
             <span className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-red-400 rounded" /> Gider
+              <div className="w-3 h-3 bg-red-400 rounded" /> Expenses
             </span>
           </div>
         </div>
@@ -106,15 +106,15 @@ export default function EmployerAccountingPage() {
           <Link href="/dashboard/employer/accounting/invoices">
             <div className="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-300 transition-all cursor-pointer">
               <FileText className="w-8 h-8 text-primary-500 mb-3" />
-              <h3 className="font-semibold text-gray-900">Faturalar</h3>
-              <p className="text-sm text-gray-500">Fatura oluştur ve yönet</p>
+              <h3 className="font-semibold text-gray-900">Invoices</h3>
+              <p className="text-sm text-gray-500">Create and manage invoices</p>
             </div>
           </Link>
           <Link href="/dashboard/employer/accounting/payments">
             <div className="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary-300 transition-all cursor-pointer">
               <CreditCard className="w-8 h-8 text-primary-500 mb-3" />
-              <h3 className="font-semibold text-gray-900">Ödemeler</h3>
-              <p className="text-sm text-gray-500">Ödeme geçmişi ve planla</p>
+              <h3 className="font-semibold text-gray-900">Payments</h3>
+              <p className="text-sm text-gray-500">Payment history and planning</p>
             </div>
           </Link>
         </div>

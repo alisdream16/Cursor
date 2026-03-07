@@ -9,7 +9,7 @@ export default function WorkerReportsPage() {
   const [selectedPeriod, setSelectedPeriod] = useState("week")
 
   const stats = {
-    totalHours: "156s",
+    totalHours: "156h",
     completedTasks: 24,
     activeProjects: 2,
     productivityScore: 92
@@ -20,22 +20,22 @@ export default function WorkerReportsPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Raporlar</h1>
-            <p className="text-gray-600">Performans ve çalışma raporlarınız</p>
+            <h1 className="text-2xl font-bold text-gray-900">Reports</h1>
+            <p className="text-gray-600">Your performance and work reports</p>
           </div>
           <Button variant="outline" className="flex items-center gap-2">
             <Download className="w-4 h-4" />
-            Rapor İndir
+            Download Report
           </Button>
         </div>
 
         {/* Period Selector */}
         <div className="flex gap-2">
           {[
-            { id: "week", label: "Bu Hafta" },
-            { id: "month", label: "Bu Ay" },
-            { id: "quarter", label: "Çeyrek" },
-            { id: "year", label: "Yıl" }
+            { id: "week", label: "This Week" },
+            { id: "month", label: "This Month" },
+            { id: "quarter", label: "Quarter" },
+            { id: "year", label: "Year" }
           ].map((period) => (
             <button
               key={period.id}
@@ -57,7 +57,7 @@ export default function WorkerReportsPage() {
             <div className="flex items-center justify-between mb-2">
               <BarChart3 className="w-8 h-8 text-blue-500" />
             </div>
-            <p className="text-sm text-gray-600">Toplam Çalışma</p>
+            <p className="text-sm text-gray-600">Total Work</p>
             <p className="text-2xl font-bold text-gray-900">{stats.totalHours}</p>
           </div>
           
@@ -65,7 +65,7 @@ export default function WorkerReportsPage() {
             <div className="flex items-center justify-between mb-2">
               <FileText className="w-8 h-8 text-green-500" />
             </div>
-            <p className="text-sm text-gray-600">Tamamlanan Görev</p>
+            <p className="text-sm text-gray-600">Completed Tasks</p>
             <p className="text-2xl font-bold text-gray-900">{stats.completedTasks}</p>
           </div>
           
@@ -73,7 +73,7 @@ export default function WorkerReportsPage() {
             <div className="flex items-center justify-between mb-2">
               <TrendingUp className="w-8 h-8 text-purple-500" />
             </div>
-            <p className="text-sm text-gray-600">Aktif Proje</p>
+            <p className="text-sm text-gray-600">Active Projects</p>
             <p className="text-2xl font-bold text-gray-900">{stats.activeProjects}</p>
           </div>
           
@@ -81,16 +81,16 @@ export default function WorkerReportsPage() {
             <div className="flex items-center justify-between mb-2">
               <TrendingUp className="w-8 h-8 opacity-80" />
             </div>
-            <p className="text-sm text-primary-100">Verimlilik Skoru</p>
-            <p className="text-2xl font-bold">%{stats.productivityScore}</p>
+            <p className="text-sm text-primary-100">Productivity Score</p>
+            <p className="text-2xl font-bold">{stats.productivityScore}%</p>
           </div>
         </div>
 
         {/* Chart Placeholder */}
         <div className="bg-white rounded-xl p-6 border border-gray-200">
-          <h3 className="font-semibold text-gray-900 mb-4">Haftalık Çalışma Grafiği</h3>
+          <h3 className="font-semibold text-gray-900 mb-4">Weekly Work Chart</h3>
           <div className="h-64 flex items-end justify-around gap-2">
-            {["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"].map((day, i) => {
+            {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, i) => {
               const heights = [70, 85, 60, 90, 75, 30, 0]
               return (
                 <div key={day} className="flex flex-col items-center gap-2">
@@ -107,9 +107,9 @@ export default function WorkerReportsPage() {
 
         {/* Performance Summary */}
         <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
-          <h3 className="font-semibold text-green-800 mb-2">🎉 Harika Performans!</h3>
+          <h3 className="font-semibold text-green-800 mb-2">Great Performance!</h3>
           <p className="text-green-700">
-            Bu hafta hedeflerinizin %92'sini tamamladınız. Böyle devam edin!
+            You completed 92% of your goals this week. Keep it up!
           </p>
         </div>
       </div>

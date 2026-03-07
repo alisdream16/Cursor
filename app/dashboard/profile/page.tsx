@@ -22,7 +22,6 @@ export default function ProfilePage() {
     bio: "",
   })
 
-  // API'den profil bilgilerini çek
   useEffect(() => {
     const fetchProfile = async () => {
       if (!session?.user?.email) return
@@ -40,7 +39,6 @@ export default function ProfilePage() {
             bio: data.bio || "",
           })
         } else {
-          // API'den veri gelmezse session'dan al
           setFormData(prev => ({
             ...prev,
             name: session.user?.name || "",
@@ -77,7 +75,7 @@ export default function ProfilePage() {
   return (
     <DashboardLayout>
       <div className="max-w-4xl">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">Profil Yönetimi</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-6">Profile Management</h1>
         
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <div className="flex items-center justify-between mb-6">
@@ -87,7 +85,7 @@ export default function ProfilePage() {
               </div>
               <div>
                 <h2 className="text-2xl font-semibold text-gray-900">
-                  {formData.name || "Kullanıcı"}
+                  {formData.name || "User"}
                 </h2>
                 <p className="text-gray-600">{formData.email}</p>
               </div>
@@ -96,7 +94,7 @@ export default function ProfilePage() {
               onClick={() => setIsEditing(!isEditing)}
               className="bg-primary-500 hover:bg-primary-600 text-white"
             >
-              {isEditing ? "İptal" : "Profili Düzenle"}
+              {isEditing ? "Cancel" : "Edit Profile"}
             </Button>
           </div>
 
@@ -104,7 +102,7 @@ export default function ProfilePage() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <User className="w-4 h-4 inline mr-2" />
-                Ad Soyad
+                Full Name
               </label>
               {isEditing ? (
                 <input
@@ -114,14 +112,14 @@ export default function ProfilePage() {
                   className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
                 />
               ) : (
-                <p className="text-gray-900">{formData.name || "Belirtilmemiş"}</p>
+                <p className="text-gray-900">{formData.name || "Not specified"}</p>
               )}
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <Mail className="w-4 h-4 inline mr-2" />
-                E-posta
+                Email
               </label>
               <p className="text-gray-900">{formData.email}</p>
             </div>
@@ -129,7 +127,7 @@ export default function ProfilePage() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <Phone className="w-4 h-4 inline mr-2" />
-                Telefon
+                Phone
               </label>
               {isEditing ? (
                 <input
@@ -137,17 +135,17 @@ export default function ProfilePage() {
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
-                  placeholder="+90 555 123 4567"
+                  placeholder="+1 555 123 4567"
                 />
               ) : (
-                <p className="text-gray-900">{formData.phone || "Belirtilmemiş"}</p>
+                <p className="text-gray-900">{formData.phone || "Not specified"}</p>
               )}
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <MapPin className="w-4 h-4 inline mr-2" />
-                Konum
+                Location
               </label>
               {isEditing ? (
                 <input
@@ -155,10 +153,10 @@ export default function ProfilePage() {
                   value={formData.location}
                   onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                   className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
-                  placeholder="İstanbul, Türkiye"
+                  placeholder="New York, USA"
                 />
               ) : (
-                <p className="text-gray-900">{formData.location || "Belirtilmemiş"}</p>
+                <p className="text-gray-900">{formData.location || "Not specified"}</p>
               )}
             </div>
 
@@ -176,13 +174,13 @@ export default function ProfilePage() {
                   placeholder="https://example.com"
                 />
               ) : (
-                <p className="text-gray-900">{formData.website || "Belirtilmemiş"}</p>
+                <p className="text-gray-900">{formData.website || "Not specified"}</p>
               )}
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Hakkımda
+                About Me
               </label>
               {isEditing ? (
                 <textarea
@@ -190,10 +188,10 @@ export default function ProfilePage() {
                   onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
                   className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
                   rows={4}
-                  placeholder="Kendinizi tanıtın..."
+                  placeholder="Tell us about yourself..."
                 />
               ) : (
-                <p className="text-gray-900">{formData.bio || "Henüz bir açıklama eklenmemiş"}</p>
+                <p className="text-gray-900">{formData.bio || "No description added yet"}</p>
               )}
             </div>
 
@@ -202,7 +200,7 @@ export default function ProfilePage() {
                 {saveSuccess && (
                   <div className="flex items-center gap-2 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
                     <Check className="w-5 h-5" />
-                    Profil başarıyla kaydedildi!
+                    Profile saved successfully!
                   </div>
                 )}
                 {saveError && (
@@ -220,7 +218,7 @@ export default function ProfilePage() {
                     }}
                     disabled={isSaving}
                   >
-                    İptal
+                    Cancel
                   </Button>
                   <Button
                     onClick={async () => {
@@ -243,10 +241,10 @@ export default function ProfilePage() {
                           }, 1500)
                         } else {
                           const data = await response.json().catch(() => ({}))
-                          setSaveError(data.error || "Profil kaydedilemedi. Lütfen tekrar deneyin.")
+                          setSaveError(data.error || "Failed to save profile. Please try again.")
                         }
                       } catch (error) {
-                        setSaveError("Bir hata oluştu. Lütfen tekrar deneyin.")
+                        setSaveError("An error occurred. Please try again.")
                       } finally {
                         setIsSaving(false)
                       }
@@ -254,7 +252,7 @@ export default function ProfilePage() {
                     className="bg-primary-500 hover:bg-primary-600 text-white"
                     disabled={isSaving}
                   >
-                    {isSaving ? "Kaydediliyor..." : "Değişiklikleri Kaydet"}
+                    {isSaving ? "Saving..." : "Save Changes"}
                   </Button>
                 </div>
               </div>

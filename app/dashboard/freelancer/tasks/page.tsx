@@ -25,35 +25,35 @@ export default function FreelancerTasksPage() {
     const mockTasks: Task[] = [
       {
         id: "1",
-        title: "Homepage tasarımını tamamla",
-        project: "E-Ticaret Web Sitesi",
+        title: "Complete homepage design",
+        project: "E-Commerce Website",
         status: "in_progress",
         priority: "high",
-        dueDate: "28 Şubat 2026"
+        dueDate: "February 28, 2026"
       },
       {
         id: "2",
-        title: "API entegrasyonu",
-        project: "E-Ticaret Web Sitesi",
+        title: "API integration",
+        project: "E-Commerce Website",
         status: "todo",
         priority: "medium",
-        dueDate: "5 Mart 2026"
+        dueDate: "March 5, 2026"
       },
       {
         id: "3",
-        title: "Login sayfası",
-        project: "Mobil Uygulama UI",
+        title: "Login page",
+        project: "Mobile App UI",
         status: "done",
         priority: "high",
-        dueDate: "25 Şubat 2026"
+        dueDate: "February 25, 2026"
       },
       {
         id: "4",
-        title: "Responsive düzenlemeler",
-        project: "E-Ticaret Web Sitesi",
+        title: "Responsive adjustments",
+        project: "E-Commerce Website",
         status: "overdue",
         priority: "high",
-        dueDate: "20 Şubat 2026"
+        dueDate: "February 20, 2026"
       }
     ]
     
@@ -79,9 +79,9 @@ export default function FreelancerTasksPage() {
       low: "bg-green-100 text-green-700"
     }
     const labels = {
-      high: "Yüksek",
-      medium: "Orta",
-      low: "Düşük"
+      high: "High",
+      medium: "Medium",
+      low: "Low"
     }
     return (
       <span className={`px-2 py-0.5 text-xs font-medium rounded ${styles[priority]}`}>
@@ -109,23 +109,23 @@ export default function FreelancerTasksPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Görevler</h1>
-            <p className="text-gray-600">Projelerinize ait görevleri takip edin</p>
+            <h1 className="text-2xl font-bold text-gray-900">Tasks</h1>
+            <p className="text-gray-600">Track tasks for your projects</p>
           </div>
           <Button className="bg-primary-500 hover:bg-primary-600 flex items-center gap-2">
             <Plus className="w-4 h-4" />
-            Yeni Görev
+            New Task
           </Button>
         </div>
 
         {/* Filter Tabs */}
         <div className="flex gap-2 border-b border-gray-200 pb-4">
           {[
-            { id: "all", label: "Tümü" },
-            { id: "todo", label: "Yapılacak" },
-            { id: "in_progress", label: "Devam Eden" },
-            { id: "done", label: "Tamamlanan" },
-            { id: "overdue", label: "Geciken" }
+            { id: "all", label: "All" },
+            { id: "todo", label: "To Do" },
+            { id: "in_progress", label: "In Progress" },
+            { id: "done", label: "Completed" },
+            { id: "overdue", label: "Overdue" }
           ].map((tab) => (
             <button
               key={tab.id}
@@ -154,8 +154,8 @@ export default function FreelancerTasksPage() {
         ) : filteredTasks.length === 0 ? (
           <div className="bg-white rounded-xl p-12 border border-gray-200 text-center">
             <ClipboardList className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Görev bulunamadı</h3>
-            <p className="text-gray-500">Bu kategoride görev yok</p>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">No tasks found</h3>
+            <p className="text-gray-500">No tasks in this category</p>
           </div>
         ) : (
           <div className="space-y-3">

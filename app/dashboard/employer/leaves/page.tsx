@@ -24,33 +24,33 @@ export default function EmployerLeavesPage() {
     const mockLeaves: LeaveRequest[] = [
       {
         id: "1",
-        employee: "Ahmet Yılmaz",
+        employee: "John Smith",
         type: "annual",
-        startDate: "10 Mart 2026",
-        endDate: "14 Mart 2026",
+        startDate: "March 10, 2026",
+        endDate: "March 14, 2026",
         days: 5,
         status: "pending",
-        reason: "Aile ziyareti"
+        reason: "Family visit"
       },
       {
         id: "2",
-        employee: "Ayşe Kaya",
+        employee: "Emily Chen",
         type: "sick",
-        startDate: "1 Mart 2026",
-        endDate: "2 Mart 2026",
+        startDate: "March 1, 2026",
+        endDate: "March 2, 2026",
         days: 2,
         status: "approved",
-        reason: "Hastalık"
+        reason: "Illness"
       },
       {
         id: "3",
         employee: "Mehmet Demir",
         type: "personal",
-        startDate: "15 Mart 2026",
-        endDate: "15 Mart 2026",
+        startDate: "March 15, 2026",
+        endDate: "March 15, 2026",
         days: 1,
         status: "pending",
-        reason: "Kişisel işler"
+        reason: "Personal matters"
       }
     ]
     
@@ -74,7 +74,7 @@ export default function EmployerLeavesPage() {
       sick: "bg-red-100 text-red-700",
       personal: "bg-purple-100 text-purple-700"
     }
-    const labels = { annual: "Yıllık", sick: "Hastalık", personal: "Kişisel" }
+    const labels = { annual: "Annual", sick: "Sick", personal: "Personal" }
     return (
       <span className={`px-2 py-1 text-xs font-medium rounded-full ${styles[type]}`}>
         {labels[type]}
@@ -85,11 +85,11 @@ export default function EmployerLeavesPage() {
   const getStatusBadge = (status: LeaveRequest["status"]) => {
     switch (status) {
       case "approved":
-        return <span className="flex items-center gap-1 text-green-600 text-sm font-medium"><CheckCircle className="w-4 h-4" /> Onaylandı</span>
+        return <span className="flex items-center gap-1 text-green-600 text-sm font-medium"><CheckCircle className="w-4 h-4" /> Approved</span>
       case "rejected":
-        return <span className="flex items-center gap-1 text-red-600 text-sm font-medium"><XCircle className="w-4 h-4" /> Reddedildi</span>
+        return <span className="flex items-center gap-1 text-red-600 text-sm font-medium"><XCircle className="w-4 h-4" /> Rejected</span>
       default:
-        return <span className="flex items-center gap-1 text-yellow-600 text-sm font-medium"><Clock className="w-4 h-4" /> Bekliyor</span>
+        return <span className="flex items-center gap-1 text-yellow-600 text-sm font-medium"><Clock className="w-4 h-4" /> Pending</span>
     }
   }
 
@@ -100,31 +100,31 @@ export default function EmployerLeavesPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">İzin Yönetimi</h1>
-            <p className="text-gray-600">Çalışan izin taleplerini yönetin</p>
+            <h1 className="text-2xl font-bold text-gray-900">Leave Management</h1>
+            <p className="text-gray-600">Manage employee leave requests</p>
           </div>
           {pendingCount > 0 && (
             <div className="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-lg text-sm font-medium">
-              {pendingCount} bekleyen talep
+              {pendingCount} pending requests
             </div>
           )}
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="bg-white rounded-xl p-4 border border-gray-200">
-            <p className="text-sm text-gray-600">Bekleyen</p>
+            <p className="text-sm text-gray-600">Pending</p>
             <p className="text-2xl font-bold text-yellow-600">{pendingCount}</p>
           </div>
           <div className="bg-white rounded-xl p-4 border border-gray-200">
-            <p className="text-sm text-gray-600">Onaylanan (Bu Ay)</p>
+            <p className="text-sm text-gray-600">Approved (This Month)</p>
             <p className="text-2xl font-bold text-green-600">
               {leaves.filter(l => l.status === "approved").length}
             </p>
           </div>
           <div className="bg-white rounded-xl p-4 border border-gray-200">
-            <p className="text-sm text-gray-600">Toplam İzin Günü</p>
+            <p className="text-sm text-gray-600">Total Leave Days</p>
             <p className="text-2xl font-bold text-gray-900">
-              {leaves.filter(l => l.status === "approved").reduce((sum, l) => sum + l.days, 0)} gün
+              {leaves.filter(l => l.status === "approved").reduce((sum, l) => sum + l.days, 0)} days
             </p>
           </div>
         </div>
@@ -136,8 +136,8 @@ export default function EmployerLeavesPage() {
         ) : leaves.length === 0 ? (
           <div className="bg-white rounded-xl p-12 border border-gray-200 text-center">
             <Calendar className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">İzin talebi yok</h3>
-            <p className="text-gray-500">Henüz izin talebi bulunmuyor</p>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">No leave requests</h3>
+            <p className="text-gray-500">No leave requests found yet</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -160,10 +160,10 @@ export default function EmployerLeavesPage() {
                       <div className="flex items-center gap-3 mt-1">
                         {getTypeBadge(leave.type)}
                         <span className="text-sm text-gray-500">
-                          {leave.startDate} - {leave.endDate} ({leave.days} gün)
+                          {leave.startDate} - {leave.endDate} ({leave.days} days)
                         </span>
                       </div>
-                      <p className="text-sm text-gray-600 mt-2">Sebep: {leave.reason}</p>
+                      <p className="text-sm text-gray-600 mt-2">Reason: {leave.reason}</p>
                     </div>
                   </div>
                   
@@ -176,7 +176,7 @@ export default function EmployerLeavesPage() {
                           size="sm"
                         >
                           <CheckCircle className="w-4 h-4 mr-1" />
-                          Onayla
+                          Approve
                         </Button>
                         <Button 
                           onClick={() => handleReject(leave.id)}
@@ -185,7 +185,7 @@ export default function EmployerLeavesPage() {
                           size="sm"
                         >
                           <XCircle className="w-4 h-4 mr-1" />
-                          Reddet
+                          Reject
                         </Button>
                       </>
                     ) : (

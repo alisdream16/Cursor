@@ -22,23 +22,22 @@ export default function FreelancerProjectsPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // TODO: Fetch real projects from API
     const mockProjects: Project[] = [
       {
         id: "1",
-        name: "E-Ticaret Web Sitesi",
+        name: "E-Commerce Website",
         client: "TechCorp",
         status: "active",
-        deadline: "15 Mart 2026",
+        deadline: "March 15, 2026",
         progress: 65,
         budget: "$3,500"
       },
       {
         id: "2",
-        name: "Mobil Uygulama UI",
+        name: "Mobile App UI",
         client: "StartupABC",
         status: "pending",
-        deadline: "20 Mart 2026",
+        deadline: "March 20, 2026",
         progress: 25,
         budget: "$2,000"
       },
@@ -47,7 +46,7 @@ export default function FreelancerProjectsPage() {
         name: "Dashboard Redesign",
         client: "DesignStudio",
         status: "completed",
-        deadline: "10 Şubat 2026",
+        deadline: "February 10, 2026",
         progress: 100,
         budget: "$1,500"
       }
@@ -67,10 +66,10 @@ export default function FreelancerProjectsPage() {
       pending: "bg-gray-100 text-gray-700"
     }
     const labels = {
-      active: "Aktif",
-      completed: "Tamamlandı",
-      paused: "Duraklatıldı",
-      pending: "Bekliyor"
+      active: "Active",
+      completed: "Completed",
+      paused: "Paused",
+      pending: "Pending"
     }
     const icons = {
       active: <PlayCircle className="w-3 h-3" />,
@@ -93,22 +92,22 @@ export default function FreelancerProjectsPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Projelerim</h1>
-            <p className="text-gray-600">Aktif ve geçmiş projelerinizi yönetin</p>
+            <h1 className="text-2xl font-bold text-gray-900">My Projects</h1>
+            <p className="text-gray-600">Manage your active and past projects</p>
           </div>
           <Button className="bg-primary-500 hover:bg-primary-600 flex items-center gap-2">
             <Plus className="w-4 h-4" />
-            Yeni Proje
+            New Project
           </Button>
         </div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
           {[
-            { label: "Aktif Projeler", value: projects.filter(p => p.status === "active").length, color: "text-green-600" },
-            { label: "Bekleyen", value: projects.filter(p => p.status === "pending").length, color: "text-yellow-600" },
-            { label: "Tamamlanan", value: projects.filter(p => p.status === "completed").length, color: "text-blue-600" },
-            { label: "Toplam", value: projects.length, color: "text-gray-900" }
+            { label: "Active Projects", value: projects.filter(p => p.status === "active").length, color: "text-green-600" },
+            { label: "Pending", value: projects.filter(p => p.status === "pending").length, color: "text-yellow-600" },
+            { label: "Completed", value: projects.filter(p => p.status === "completed").length, color: "text-blue-600" },
+            { label: "Total", value: projects.length, color: "text-gray-900" }
           ].map((stat, i) => (
             <div key={i} className="bg-white rounded-xl p-4 border border-gray-200">
               <p className="text-sm text-gray-600">{stat.label}</p>
@@ -125,10 +124,10 @@ export default function FreelancerProjectsPage() {
         ) : projects.length === 0 ? (
           <div className="bg-white rounded-xl p-12 border border-gray-200 text-center">
             <FolderKanban className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Henüz proje yok</h3>
-            <p className="text-gray-500 mb-4">İlk projenizi oluşturun veya bir iş ilanına başvurun</p>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">No projects yet</h3>
+            <p className="text-gray-500 mb-4">Create your first project or apply for a job listing</p>
             <Button className="bg-primary-500 hover:bg-primary-600">
-              İş İlanlarına Göz At
+              Browse Job Listings
             </Button>
           </div>
         ) : (
@@ -136,13 +135,13 @@ export default function FreelancerProjectsPage() {
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Proje</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Müşteri</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Durum</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">İlerleme</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Teslim</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bütçe</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">İşlem</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Project</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Progress</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deadline</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Budget</th>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
@@ -175,7 +174,7 @@ export default function FreelancerProjectsPage() {
                       {project.budget}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right">
-                      <Button variant="ghost" size="sm">Görüntüle</Button>
+                      <Button variant="ghost" size="sm">View</Button>
                     </td>
                   </tr>
                 ))}

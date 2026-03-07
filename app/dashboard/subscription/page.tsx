@@ -28,12 +28,12 @@ const companyPlans: Plan[] = [
     icon: <Building2 className="w-8 h-8" />,
     monthlyPrice: 49,
     yearlyPrice: 470,
-    description: "Küçük ekipler için",
+    description: "For small teams",
     features: [
-      "1 entegrasyon",
-      "2 çalışan",
-      "Temel raporlama",
-      "Email desteği"
+      "1 integration",
+      "2 employees",
+      "Basic reporting",
+      "Email support"
     ],
     forCompany: true
   },
@@ -43,13 +43,13 @@ const companyPlans: Plan[] = [
     icon: <Crown className="w-8 h-8 text-yellow-500" />,
     monthlyPrice: 99,
     yearlyPrice: 950,
-    description: "Büyüyen şirketler için",
+    description: "For growing companies",
     features: [
-      "3 entegrasyon",
-      "6 çalışan",
-      "Gelişmiş raporlama",
-      "Öncelikli destek",
-      "Proje yönetimi"
+      "3 integrations",
+      "6 employees",
+      "Advanced reporting",
+      "Priority support",
+      "Project management"
     ],
     recommended: true,
     forCompany: true
@@ -60,14 +60,14 @@ const companyPlans: Plan[] = [
     icon: <Zap className="w-8 h-8 text-purple-500" />,
     monthlyPrice: 199,
     yearlyPrice: 1900,
-    description: "Büyük organizasyonlar için",
+    description: "For large organizations",
     features: [
-      "5 entegrasyon",
-      "10 çalışan",
-      "1 ücretsiz ilan",
-      "Tam raporlama",
-      "7/24 destek",
-      "API erişimi"
+      "5 integrations",
+      "10 employees",
+      "1 free job listing",
+      "Full reporting",
+      "24/7 support",
+      "API access"
     ],
     forCompany: true
   },
@@ -77,14 +77,14 @@ const companyPlans: Plan[] = [
     icon: <Users className="w-8 h-8 text-blue-500" />,
     monthlyPrice: 399,
     yearlyPrice: 3800,
-    description: "Enterprise çözümler",
+    description: "Enterprise solutions",
     features: [
-      "Sınırsız entegrasyon",
-      "Sınırsız çalışan",
-      "3 ücretsiz ilan",
-      "Özel destek",
-      "Özel entegrasyonlar",
-      "SLA garantisi"
+      "Unlimited integrations",
+      "Unlimited employees",
+      "3 free job listings",
+      "Dedicated support",
+      "Custom integrations",
+      "SLA guarantee"
     ],
     forCompany: true
   }
@@ -97,12 +97,12 @@ const freelancerPlans: Plan[] = [
     icon: <Building2 className="w-8 h-8" />,
     monthlyPrice: 0,
     yearlyPrice: 0,
-    description: "Başlangıç",
+    description: "Getting started",
     features: [
-      "%15 komisyon bazlı",
-      "Temel profil",
-      "5 başvuru/ay",
-      "Email desteği"
+      "15% commission based",
+      "Basic profile",
+      "5 applications/month",
+      "Email support"
     ],
     forFreelancer: true
   },
@@ -112,13 +112,13 @@ const freelancerPlans: Plan[] = [
     icon: <Crown className="w-8 h-8 text-yellow-500" />,
     monthlyPrice: 29,
     yearlyPrice: 280,
-    description: "Profesyonel freelancer",
+    description: "Professional freelancer",
     features: [
-      "Üyelik ücreti + %5 komisyon",
-      "Öne çıkan profil",
-      "Sınırsız başvuru",
-      "Öncelikli destek",
-      "Portfolyo vitrini"
+      "Membership fee + 5% commission",
+      "Featured profile",
+      "Unlimited applications",
+      "Priority support",
+      "Portfolio showcase"
     ],
     recommended: true,
     forFreelancer: true
@@ -129,13 +129,13 @@ const freelancerPlans: Plan[] = [
     icon: <Zap className="w-8 h-8 text-purple-500" />,
     monthlyPrice: 49,
     yearlyPrice: 470,
-    description: "Uzman freelancer",
+    description: "Expert freelancer",
     features: [
-      "GOLD + Süresiz reklam",
-      "VIP rozeti",
-      "Doğrudan davet",
-      "Analitik araçlar",
-      "Eğitim içerikleri"
+      "GOLD + Permanent promotion",
+      "VIP badge",
+      "Direct invitations",
+      "Analytics tools",
+      "Training content"
     ],
     forFreelancer: true
   }
@@ -148,14 +148,12 @@ export default function SubscriptionPage() {
 
   const accountType = (session?.user as any)?.accountType
 
-  // Hesap tipine göre planları göster
   const plans = accountType === "FREELANCER" ? freelancerPlans : companyPlans
   const isFreelancer = accountType === "FREELANCER"
 
   const handleSubscribe = (planId: PlanType) => {
     setSelectedPlan(planId)
-    // TODO: Ödeme entegrasyonu
-    alert(`${planId.toUpperCase()} planı seçildi. Ödeme entegrasyonu yakında!`)
+    alert(`${planId.toUpperCase()} plan selected. Payment integration coming soon!`)
   }
 
   return (
@@ -163,16 +161,15 @@ export default function SubscriptionPage() {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            {isFreelancer ? "Freelancer Üyelik Planları" : "Şirket Üyelik Planları"}
+            {isFreelancer ? "Freelancer Subscription Plans" : "Company Subscription Plans"}
           </h1>
           <p className="text-gray-600">
-            İhtiyaçlarınıza uygun planı seçin
+            Choose the plan that fits your needs
           </p>
           
-          {/* Deneme Sürümü Banner */}
+          {/* Trial Banner */}
           <div className="mt-4 inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full">
-            <span className="text-lg">🎁</span>
-            <span className="font-medium">İlk 1 ay TÜM ÖZELLİKLER ÜCRETSİZ!</span>
+            <span className="font-medium">First month ALL FEATURES FREE!</span>
           </div>
         </div>
 
@@ -187,7 +184,7 @@ export default function SubscriptionPage() {
                   : "text-gray-600 hover:text-gray-900"
               }`}
             >
-              Aylık
+              Monthly
             </button>
             <button
               onClick={() => setBillingCycle("yearly")}
@@ -197,7 +194,7 @@ export default function SubscriptionPage() {
                   : "text-gray-600 hover:text-gray-900"
               }`}
             >
-              Yıllık <span className="text-green-600 text-xs">%20 tasarruf</span>
+              Yearly <span className="text-green-600 text-xs">Save 20%</span>
             </button>
           </div>
         </div>
@@ -216,7 +213,7 @@ export default function SubscriptionPage() {
               {plan.recommended && (
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                   <span className="bg-primary-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                    Önerilen
+                    Recommended
                   </span>
                 </div>
               )}
@@ -234,11 +231,11 @@ export default function SubscriptionPage() {
                   <span className="text-4xl font-bold text-gray-900">
                     ${billingCycle === "monthly" ? plan.monthlyPrice : Math.round(plan.yearlyPrice / 12)}
                   </span>
-                  <span className="text-gray-500 ml-1">/ay</span>
+                  <span className="text-gray-500 ml-1">/mo</span>
                 </div>
                 {billingCycle === "yearly" && (
                   <p className="text-sm text-gray-500 mt-1">
-                    ${plan.yearlyPrice}/yıl olarak faturalanır
+                    Billed as ${plan.yearlyPrice}/year
                   </p>
                 )}
               </div>
@@ -260,7 +257,7 @@ export default function SubscriptionPage() {
                     : "bg-gray-100 hover:bg-gray-200 text-gray-900"
                 }`}
               >
-                {plan.monthlyPrice === 0 ? "Ücretsiz Başla" : "Plan Seç"}
+                {plan.monthlyPrice === 0 ? "Start Free" : "Select Plan"}
               </Button>
             </div>
           ))}
@@ -268,20 +265,20 @@ export default function SubscriptionPage() {
 
         {/* FAQ */}
         <div className="mt-12 text-center">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Sıkça Sorulan Sorular</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">Frequently Asked Questions</h2>
           <div className="max-w-2xl mx-auto space-y-4 text-left">
             <div className="bg-gray-50 rounded-lg p-4">
-              <h3 className="font-medium text-gray-900">Deneme süresi nasıl çalışıyor?</h3>
+              <h3 className="font-medium text-gray-900">How does the trial period work?</h3>
               <p className="text-sm text-gray-600 mt-1">
-                İlk 1 ay boyunca tüm Platinum özellikleri ücretsiz kullanabilirsiniz. 
-                Süre sonunda istediğiniz plana geçebilirsiniz.
+                You can use all Platinum features free for the first month. 
+                After that, you can switch to any plan you prefer.
               </p>
             </div>
             <div className="bg-gray-50 rounded-lg p-4">
-              <h3 className="font-medium text-gray-900">İstediğim zaman iptal edebilir miyim?</h3>
+              <h3 className="font-medium text-gray-900">Can I cancel anytime?</h3>
               <p className="text-sm text-gray-600 mt-1">
-                Evet, herhangi bir zamanda aboneliğinizi iptal edebilirsiniz. 
-                Kalan süreniz boyunca erişiminiz devam eder.
+                Yes, you can cancel your subscription at any time. 
+                Your access will continue until the end of your billing period.
               </p>
             </div>
           </div>

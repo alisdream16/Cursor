@@ -23,30 +23,30 @@ export default function EmployerTasksPage() {
     const mockTasks: Task[] = [
       {
         id: "1",
-        title: "Homepage tasarımı",
-        project: "Yeni Web Sitesi",
-        assignedTo: "Ahmet Yılmaz",
+        title: "Homepage design",
+        project: "New Website",
+        assignedTo: "John Smith",
         status: "in_progress",
         priority: "high",
-        dueDate: "28 Şubat 2026"
+        dueDate: "February 28, 2026"
       },
       {
         id: "2",
-        title: "API geliştirme",
-        project: "Yeni Web Sitesi",
+        title: "API development",
+        project: "New Website",
         assignedTo: "Mehmet Demir",
         status: "todo",
         priority: "medium",
-        dueDate: "5 Mart 2026"
+        dueDate: "March 5, 2026"
       },
       {
         id: "3",
-        title: "Mobil UI tasarımı",
-        project: "Mobil Uygulama",
-        assignedTo: "Ayşe Kaya",
+        title: "Mobile UI design",
+        project: "Mobile App",
+        assignedTo: "Emily Chen",
         status: "done",
         priority: "high",
-        dueDate: "25 Şubat 2026"
+        dueDate: "February 25, 2026"
       }
     ]
     
@@ -71,7 +71,7 @@ export default function EmployerTasksPage() {
       medium: "bg-yellow-100 text-yellow-700",
       low: "bg-green-100 text-green-700"
     }
-    const labels = { high: "Yüksek", medium: "Orta", low: "Düşük" }
+    const labels = { high: "High", medium: "Medium", low: "Low" }
     return (
       <span className={`px-2 py-0.5 text-xs font-medium rounded ${styles[priority]}`}>
         {labels[priority]}
@@ -84,21 +84,21 @@ export default function EmployerTasksPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Görevler</h1>
-            <p className="text-gray-600">Tüm proje görevlerini yönetin</p>
+            <h1 className="text-2xl font-bold text-gray-900">Tasks</h1>
+            <p className="text-gray-600">Manage all project tasks</p>
           </div>
           <Button className="bg-primary-500 hover:bg-primary-600 flex items-center gap-2">
             <Plus className="w-4 h-4" />
-            Yeni Görev
+            New Task
           </Button>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
           {[
-            { label: "Bekleyen", count: tasks.filter(t => t.status === "todo").length, color: "text-gray-600" },
-            { label: "Devam Eden", count: tasks.filter(t => t.status === "in_progress").length, color: "text-blue-600" },
-            { label: "Tamamlanan", count: tasks.filter(t => t.status === "done").length, color: "text-green-600" },
-            { label: "Geciken", count: tasks.filter(t => t.status === "overdue").length, color: "text-red-600" }
+            { label: "Pending", count: tasks.filter(t => t.status === "todo").length, color: "text-gray-600" },
+            { label: "In Progress", count: tasks.filter(t => t.status === "in_progress").length, color: "text-blue-600" },
+            { label: "Completed", count: tasks.filter(t => t.status === "done").length, color: "text-green-600" },
+            { label: "Overdue", count: tasks.filter(t => t.status === "overdue").length, color: "text-red-600" }
           ].map((stat, i) => (
             <div key={i} className="bg-white rounded-xl p-4 border border-gray-200 text-center">
               <p className={`text-2xl font-bold ${stat.color}`}>{stat.count}</p>
@@ -116,12 +116,12 @@ export default function EmployerTasksPage() {
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Durum</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Görev</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Proje</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Atanan</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Öncelik</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Teslim</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Task</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Project</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Assigned</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Priority</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Due Date</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">

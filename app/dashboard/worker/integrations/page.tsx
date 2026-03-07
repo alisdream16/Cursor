@@ -19,7 +19,7 @@ export default function WorkerIntegrationsPage() {
     {
       id: "1",
       name: "Slack",
-      description: "Ekip iletişimi ve bildirimler",
+      description: "Team communication and notifications",
       icon: "💬",
       connected: true,
       category: "communication"
@@ -27,7 +27,7 @@ export default function WorkerIntegrationsPage() {
     {
       id: "2",
       name: "Google Calendar",
-      description: "Takvim senkronizasyonu",
+      description: "Calendar synchronization",
       icon: "📅",
       connected: true,
       category: "calendar"
@@ -35,7 +35,7 @@ export default function WorkerIntegrationsPage() {
     {
       id: "3",
       name: "Jira",
-      description: "Proje ve görev takibi",
+      description: "Project and task tracking",
       icon: "📋",
       connected: false,
       category: "productivity"
@@ -43,7 +43,7 @@ export default function WorkerIntegrationsPage() {
     {
       id: "4",
       name: "Notion",
-      description: "Dokümantasyon ve notlar",
+      description: "Documentation and notes",
       icon: "📝",
       connected: false,
       category: "productivity"
@@ -51,7 +51,7 @@ export default function WorkerIntegrationsPage() {
     {
       id: "5",
       name: "Microsoft Teams",
-      description: "Video görüşme ve chat",
+      description: "Video calls and chat",
       icon: "👥",
       connected: false,
       category: "communication"
@@ -59,7 +59,7 @@ export default function WorkerIntegrationsPage() {
     {
       id: "6",
       name: "Outlook",
-      description: "E-posta ve takvim",
+      description: "Email and calendar",
       icon: "📧",
       connected: false,
       category: "calendar"
@@ -78,8 +78,8 @@ export default function WorkerIntegrationsPage() {
     <DashboardLayout>
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Entegrasyonlar</h1>
-          <p className="text-gray-600">Harici araçları HireNUp ile bağlayın</p>
+          <h1 className="text-2xl font-bold text-gray-900">Integrations</h1>
+          <p className="text-gray-600">Connect external tools with HireNUp</p>
         </div>
 
         {/* Stats */}
@@ -89,9 +89,9 @@ export default function WorkerIntegrationsPage() {
               <Zap className="w-6 h-6 text-white" />
             </div>
             <div>
-              <p className="font-semibold text-gray-900">{connectedCount} Entegrasyon Aktif</p>
+              <p className="font-semibold text-gray-900">{connectedCount} Integrations Active</p>
               <p className="text-sm text-gray-600">
-                {integrations.length - connectedCount} entegrasyon daha bağlanabilir
+                {integrations.length - connectedCount} more integrations available
               </p>
             </div>
           </div>
@@ -101,9 +101,9 @@ export default function WorkerIntegrationsPage() {
         {["communication", "productivity", "calendar"].map((category) => {
           const categoryIntegrations = integrations.filter(i => i.category === category)
           const labels = {
-            communication: "İletişim",
-            productivity: "Verimlilik",
-            calendar: "Takvim"
+            communication: "Communication",
+            productivity: "Productivity",
+            calendar: "Calendar"
           }
           
           return (
@@ -140,7 +140,7 @@ export default function WorkerIntegrationsPage() {
                         className={integration.connected ? "" : "bg-primary-500 hover:bg-primary-600"}
                         onClick={() => toggleConnection(integration.id)}
                       >
-                        {integration.connected ? "Bağlantıyı Kes" : "Bağlan"}
+                        {integration.connected ? "Disconnect" : "Connect"}
                       </Button>
                       {integration.connected && (
                         <Button variant="ghost" size="sm">

@@ -25,7 +25,7 @@ export default function NewCompanyProjectPage() {
 
   const handleCreateProject = async () => {
     if (!projectData.name || !projectData.description) {
-      alert("Lütfen en azından proje adı ve açıklamasını doldurun.")
+      alert("Please fill in at least the project name and description.")
       return
     }
 
@@ -44,13 +44,13 @@ export default function NewCompanyProjectPage() {
 
       if (response.ok) {
         setProjectId(data.project.id)
-        alert("Proje oluşturuldu! AI asistanı ile devam edebilirsiniz.")
+        alert("Project created! You can continue with the AI assistant.")
       } else {
-        alert("Hata: " + (data.error || "Proje oluşturulamadı"))
+        alert("Error: " + (data.error || "Project could not be created"))
       }
     } catch (error) {
       console.error("Error creating project:", error)
-      alert("Bir hata oluştu. Lütfen tekrar deneyin.")
+      alert("An error occurred. Please try again.")
     } finally {
       setLoading(false)
     }
@@ -68,7 +68,7 @@ export default function NewCompanyProjectPage() {
             <Link href="/dashboard/employer/projects">
               <Button variant="ghost" size="sm">
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Geri
+                Back
               </Button>
             </Link>
             <Link href="/dashboard">
@@ -83,50 +83,50 @@ export default function NewCompanyProjectPage() {
           <div className="flex items-center gap-2 mb-2">
             <Sparkles className="w-6 h-6 text-turquoise-500" />
             <h1 className="text-3xl font-bold bg-gradient-to-r from-turquoise-600 to-primary-600 bg-clip-text text-transparent">
-              Yeni Şirket Projesi Oluştur
+              Create New Company Project
             </h1>
           </div>
           <p className="text-gray-600">
-            AI asistanımız size proje planlaması, bütçe ve ekip kurma konusunda yardımcı olacak
+            Our AI assistant will help you with project planning, budgeting, and team building
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Project Form */}
           <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
-            <h2 className="text-xl font-semibold mb-4 text-gray-800">Proje Bilgileri</h2>
+            <h2 className="text-xl font-semibold mb-4 text-gray-800">Project Information</h2>
             
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Proje Adı *
+                  Project Name *
                 </label>
                 <input
                   type="text"
                   value={projectData.name}
                   onChange={(e) => setProjectData({ ...projectData, name: e.target.value })}
                   className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-turquoise-500"
-                  placeholder="Örn: Yeni Ürün Geliştirme"
+                  placeholder="e.g., New Product Development"
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Proje Açıklaması *
+                  Project Description *
                 </label>
                 <textarea
                   value={projectData.description}
                   onChange={(e) => setProjectData({ ...projectData, description: e.target.value })}
                   className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-turquoise-500"
                   rows={4}
-                  placeholder="Projenizin detaylarını açıklayın..."
+                  placeholder="Describe your project details..."
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Bütçe (₺)
+                    Budget ($)
                   </label>
                   <input
                     type="number"
@@ -139,41 +139,41 @@ export default function NewCompanyProjectPage() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Endüstri
+                    Industry
                   </label>
                   <input
                     type="text"
                     value={projectData.industry}
                     onChange={(e) => setProjectData({ ...projectData, industry: e.target.value })}
                     className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-turquoise-500"
-                    placeholder="Örn: Teknoloji, Finans"
+                    placeholder="e.g., Technology, Finance"
                   />
                 </div>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Tahmini Süre
+                  Estimated Timeline
                 </label>
                 <input
                   type="text"
                   value={projectData.timeline}
                   onChange={(e) => setProjectData({ ...projectData, timeline: e.target.value })}
                   className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-turquoise-500"
-                  placeholder="Örn: 6 ay, 1 yıl"
+                  placeholder="e.g., 6 months, 1 year"
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Gereksinimler
+                  Requirements
                 </label>
                 <textarea
                   value={projectData.requirements}
                   onChange={(e) => setProjectData({ ...projectData, requirements: e.target.value })}
                   className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-turquoise-500"
                   rows={3}
-                  placeholder="Teknik gereksinimler, özellikler vb..."
+                  placeholder="Technical requirements, features, etc..."
                 />
               </div>
 
@@ -183,7 +183,7 @@ export default function NewCompanyProjectPage() {
                 className="w-full bg-gradient-to-r from-turquoise-500 to-primary-500 hover:from-turquoise-600 hover:to-primary-600"
                 size="lg"
               >
-                {loading ? "Oluşturuluyor..." : "Projeyi Oluştur"}
+                {loading ? "Creating..." : "Create Project"}
               </Button>
             </div>
           </div>
@@ -207,12 +207,12 @@ export default function NewCompanyProjectPage() {
                   <div>
                     <Sparkles className="w-16 h-16 mx-auto mb-4 text-turquoise-400" />
                     <p className="text-lg font-semibold mb-2">
-                      AI Asistanına Erişmek İçin
+                      To Access AI Assistant
                     </p>
                     <p className="text-sm">
-                      Önce proje bilgilerini doldurup projeyi oluşturun.
+                      First fill in the project information and create the project.
                       <br />
-                      Ardından AI asistanı size yardımcı olacak!
+                      Then the AI assistant will help you!
                     </p>
                   </div>
                 </div>

@@ -16,12 +16,12 @@ interface Integration {
 
 export default function EmployerIntegrationsPage() {
   const [integrations, setIntegrations] = useState<Integration[]>([
-    { id: "1", name: "Slack", description: "Ekip iletişimi", icon: "💬", connected: true, category: "communication" },
-    { id: "2", name: "Google Workspace", description: "E-posta ve dokümanlar", icon: "📧", connected: true, category: "productivity" },
-    { id: "3", name: "QuickBooks", description: "Muhasebe yazılımı", icon: "📊", connected: false, category: "accounting" },
-    { id: "4", name: "Gusto", description: "Bordro ve İK", icon: "👥", connected: false, category: "hr" },
-    { id: "5", name: "Jira", description: "Proje yönetimi", icon: "📋", connected: true, category: "productivity" },
-    { id: "6", name: "Zoom", description: "Video konferans", icon: "📹", connected: false, category: "communication" }
+    { id: "1", name: "Slack", description: "Team communication", icon: "💬", connected: true, category: "communication" },
+    { id: "2", name: "Google Workspace", description: "Email and documents", icon: "📧", connected: true, category: "productivity" },
+    { id: "3", name: "QuickBooks", description: "Accounting software", icon: "📊", connected: false, category: "accounting" },
+    { id: "4", name: "Gusto", description: "Payroll and HR", icon: "👥", connected: false, category: "hr" },
+    { id: "5", name: "Jira", description: "Project management", icon: "📋", connected: true, category: "productivity" },
+    { id: "6", name: "Zoom", description: "Video conferencing", icon: "📹", connected: false, category: "communication" }
   ])
 
   const toggleConnection = (id: string) => {
@@ -31,18 +31,18 @@ export default function EmployerIntegrationsPage() {
   }
 
   const categories = {
-    communication: "İletişim",
-    productivity: "Verimlilik",
-    accounting: "Muhasebe",
-    hr: "İnsan Kaynakları"
+    communication: "Communication",
+    productivity: "Productivity",
+    accounting: "Accounting",
+    hr: "Human Resources"
   }
 
   return (
     <DashboardLayout>
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Entegrasyonlar</h1>
-          <p className="text-gray-600">İş araçlarınızı HireNUp ile bağlayın</p>
+          <h1 className="text-2xl font-bold text-gray-900">Integrations</h1>
+          <p className="text-gray-600">Connect your business tools with HireNUp</p>
         </div>
 
         <div className="bg-gradient-to-r from-primary-50 to-turquoise-50 rounded-xl p-6 border border-primary-200">
@@ -52,10 +52,10 @@ export default function EmployerIntegrationsPage() {
             </div>
             <div>
               <p className="font-semibold text-gray-900">
-                {integrations.filter(i => i.connected).length} Entegrasyon Aktif
+                {integrations.filter(i => i.connected).length} Integrations Active
               </p>
               <p className="text-sm text-gray-600">
-                {integrations.filter(i => !i.connected).length} entegrasyon daha bağlanabilir
+                {integrations.filter(i => !i.connected).length} more integrations can be connected
               </p>
             </div>
           </div>
@@ -98,7 +98,7 @@ export default function EmployerIntegrationsPage() {
                         className={integration.connected ? "" : "bg-primary-500 hover:bg-primary-600"}
                         onClick={() => toggleConnection(integration.id)}
                       >
-                        {integration.connected ? "Bağlantıyı Kes" : "Bağlan"}
+                        {integration.connected ? "Disconnect" : "Connect"}
                       </Button>
                       {integration.connected && (
                         <Button variant="ghost" size="sm">

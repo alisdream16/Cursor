@@ -25,37 +25,36 @@ export default function FreelancerJobsPage() {
   const [filter, setFilter] = useState("all")
 
   useEffect(() => {
-    // TODO: Fetch real jobs from API
     const mockJobs: Job[] = [
       {
         id: "1",
         title: "Senior React Developer",
         company: "TechCorp",
         location: "Remote",
-        salary: "$80-120/saat",
+        salary: "$80-120/hr",
         type: "Freelance",
-        postedAt: "2 gün önce",
-        description: "React ve Next.js deneyimli senior geliştirici arıyoruz..."
+        postedAt: "2 days ago",
+        description: "Looking for an experienced senior developer with React and Next.js..."
       },
       {
         id: "2",
         title: "UI/UX Designer",
         company: "DesignStudio",
-        location: "İstanbul",
-        salary: "$50-80/saat",
+        location: "Istanbul",
+        salary: "$50-80/hr",
         type: "Freelance",
-        postedAt: "1 hafta önce",
-        description: "Figma ve modern tasarım araçlarında uzman tasarımcı..."
+        postedAt: "1 week ago",
+        description: "Expert designer with Figma and modern design tools..."
       },
       {
         id: "3",
         title: "Backend Developer - Node.js",
         company: "StartupABC",
         location: "Remote",
-        salary: "$70-100/saat",
+        salary: "$70-100/hr",
         type: "Part-time",
-        postedAt: "3 gün önce",
-        description: "Node.js ve PostgreSQL deneyimli backend geliştirici..."
+        postedAt: "3 days ago",
+        description: "Backend developer with Node.js and PostgreSQL experience..."
       }
     ]
     
@@ -78,8 +77,8 @@ export default function FreelancerJobsPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">İş İlanları</h1>
-            <p className="text-gray-600">Size uygun freelance iş fırsatlarını keşfedin</p>
+            <h1 className="text-2xl font-bold text-gray-900">Job Listings</h1>
+            <p className="text-gray-600">Discover freelance job opportunities that suit you</p>
           </div>
         </div>
 
@@ -90,7 +89,7 @@ export default function FreelancerJobsPage() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
               <input
                 type="text"
-                placeholder="İş ara... (pozisyon, şirket)"
+                placeholder="Search jobs... (position, company)"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
@@ -102,14 +101,14 @@ export default function FreelancerJobsPage() {
                 onChange={(e) => setFilter(e.target.value)}
                 className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
               >
-                <option value="all">Tümü</option>
+                <option value="all">All</option>
                 <option value="freelance">Freelance</option>
                 <option value="part-time">Part-time</option>
                 <option value="full-time">Full-time</option>
               </select>
               <Button variant="outline" className="flex items-center gap-2">
                 <Filter className="w-4 h-4" />
-                Filtreler
+                Filters
               </Button>
             </div>
           </div>
@@ -123,8 +122,8 @@ export default function FreelancerJobsPage() {
         ) : filteredJobs.length === 0 ? (
           <div className="bg-white rounded-xl p-12 border border-gray-200 text-center">
             <Briefcase className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">İş ilanı bulunamadı</h3>
-            <p className="text-gray-500">Arama kriterlerinizi değiştirmeyi deneyin</p>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">No job listings found</h3>
+            <p className="text-gray-500">Try changing your search criteria</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -164,13 +163,13 @@ export default function FreelancerJobsPage() {
                 </div>
                 <div className="flex gap-2 mt-4 pt-4 border-t border-gray-100">
                   <Button size="sm" className="bg-primary-500 hover:bg-primary-600">
-                    Başvur
+                    Apply
                   </Button>
                   <Button size="sm" variant="outline">
-                    Detaylar
+                    Details
                   </Button>
                   <Button size="sm" variant="ghost">
-                    Kaydet
+                    Save
                   </Button>
                 </div>
               </div>

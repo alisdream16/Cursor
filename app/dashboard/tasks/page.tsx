@@ -19,8 +19,8 @@ interface Task {
 const mockTasks: Task[] = [
   {
     id: "1",
-    title: "Landing page tasarımını tamamla",
-    description: "Ana sayfa için yeni tasarımı uygula",
+    title: "Complete landing page design",
+    description: "Implement new design for homepage",
     status: "in_progress",
     priority: "high",
     dueDate: "2026-03-01",
@@ -28,17 +28,17 @@ const mockTasks: Task[] = [
   },
   {
     id: "2",
-    title: "API entegrasyonunu test et",
-    description: "Tüm API endpoint'lerini test et ve dokümante et",
+    title: "Test API integration",
+    description: "Test and document all API endpoints",
     status: "pending",
     priority: "medium",
     dueDate: "2026-03-05",
-    project: "Backend Geliştirme"
+    project: "Backend Development"
   },
   {
     id: "3",
-    title: "Kullanıcı geri bildirimlerini analiz et",
-    description: "Son 1 aylık geri bildirimleri incele",
+    title: "Analyze user feedback",
+    description: "Review feedback from the last month",
     status: "completed",
     priority: "low",
     dueDate: "2026-02-20",
@@ -86,20 +86,20 @@ export default function TasksPage() {
     <DashboardLayout>
       <div className="max-w-5xl">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-3xl font-bold text-gray-900">Görevlerim</h1>
+          <h1 className="text-3xl font-bold text-gray-900">My Tasks</h1>
           <Button className="bg-primary-500 hover:bg-primary-600 text-white">
             <Plus className="w-4 h-4 mr-2" />
-            Yeni Görev
+            New Task
           </Button>
         </div>
 
-        {/* Filtreler */}
+        {/* Filters */}
         <div className="flex gap-2 mb-6">
           {[
-            { value: "all", label: "Tümü" },
-            { value: "pending", label: "Bekleyen" },
-            { value: "in_progress", label: "Devam Eden" },
-            { value: "completed", label: "Tamamlanan" },
+            { value: "all", label: "All" },
+            { value: "pending", label: "Pending" },
+            { value: "in_progress", label: "In Progress" },
+            { value: "completed", label: "Completed" },
           ].map(f => (
             <button
               key={f.value}
@@ -115,15 +115,15 @@ export default function TasksPage() {
           ))}
         </div>
 
-        {/* Görev Listesi */}
+        {/* Task List */}
         <div className="space-y-4">
           {filteredTasks.length === 0 ? (
             <div className="bg-white rounded-lg border border-gray-200 p-12 text-center">
               <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle2 className="w-8 h-8 text-gray-400" />
               </div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Görev bulunamadı</h3>
-              <p className="text-gray-600">Bu kategoride henüz görev yok.</p>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">No tasks found</h3>
+              <p className="text-gray-600">No tasks in this category yet.</p>
             </div>
           ) : (
             filteredTasks.map(task => (
@@ -141,14 +141,14 @@ export default function TasksPage() {
                         {task.title}
                       </h3>
                       <span className={`px-2 py-0.5 rounded text-xs font-medium ${getPriorityColor(task.priority)}`}>
-                        {task.priority === "high" ? "Yüksek" : task.priority === "medium" ? "Orta" : "Düşük"}
+                        {task.priority === "high" ? "High" : task.priority === "medium" ? "Medium" : "Low"}
                       </span>
                     </div>
                     <p className="text-sm text-gray-600 mb-2">{task.description}</p>
                     <div className="flex items-center gap-4 text-xs text-gray-500">
                       <span className="flex items-center gap-1">
                         <Calendar className="w-3 h-3" />
-                        {new Date(task.dueDate).toLocaleDateString("tr-TR")}
+                        {new Date(task.dueDate).toLocaleDateString("en-US")}
                       </span>
                       {task.project && (
                         <span className="bg-primary-50 text-primary-700 px-2 py-0.5 rounded">
