@@ -19,6 +19,49 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@layer components {
+  /* Consistent page container */
+  .page-container {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Full width hero sections */
+  .hero-section {
+    @apply w-full bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12 sm:py-16;
+  }
+  
+  .hero-container {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Card grid layouts */
+  .card-grid {
+    @apply grid gap-6;
+  }
+  
+  .card-grid-2 {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-6;
+  }
+  
+  .card-grid-3 {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+  }
+  
+  .card-grid-4 {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6;
+  }
+  
+  /* Consistent card styling */
+  .card {
+    @apply bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow;
+  }
+  
+  /* Page sections */
+  .section {
+    @apply py-8 sm:py-12;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
