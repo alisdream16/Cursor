@@ -23,7 +23,8 @@ import {
   DollarSign,
   Clock,
   PieChart,
-  CreditCard
+  CreditCard,
+  Share2
 } from "lucide-react"
 import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
@@ -82,7 +83,6 @@ export function DashboardSidebar() {
   }
 
   const getMenuItems = (): MenuItem[] => {
-    // Temel menü - herkes için
     const baseItems: MenuItem[] = [
       {
         label: "Dashboard",
@@ -90,17 +90,17 @@ export function DashboardSidebar() {
         icon: <PieChart className="w-5 h-5" />,
       },
       {
-        label: "Profil",
+        label: "Profile",
         href: "/dashboard/profile",
         icon: <User className="w-5 h-5" />,
       },
       {
-        label: "Mesajlar",
+        label: "Messages",
         href: "/dashboard/messages",
         icon: <MessageCircle className="w-5 h-5" />,
       },
       {
-        label: "Bildirimler",
+        label: "Notifications",
         href: "/dashboard/notifications",
         icon: <Bell className="w-5 h-5" />,
       },
@@ -110,69 +110,68 @@ export function DashboardSidebar() {
     if (accountType === "FREELANCER") {
       baseItems.push(
         {
-          label: "İş İlanları",
+          label: "Job Listings",
           href: "/dashboard/freelancer/jobs",
           icon: <Briefcase className="w-5 h-5" />,
         },
         {
-          label: "Projelerim",
+          label: "My Projects",
           href: "/dashboard/freelancer/projects",
           icon: <FolderKanban className="w-5 h-5" />,
         },
         {
-          label: "Görevler",
+          label: "Tasks",
           href: "/dashboard/freelancer/tasks",
           icon: <ClipboardList className="w-5 h-5" />,
         },
         {
-          label: "Kazançlarım",
+          label: "Earnings",
           href: "/dashboard/freelancer/earnings",
           icon: <DollarSign className="w-5 h-5" />,
         },
         {
-          label: "Değerlendirmeler",
+          label: "Reviews",
           href: "/dashboard/freelancer/reviews",
           icon: <Shield className="w-5 h-5" />,
         }
       )
     }
 
-    // === ÇALIŞAN (WORKER) - Sistem Entegrasyonları ===
+    // === WORKER ===
     if (accountType === "WORKER") {
       baseItems.push(
         {
-          label: "Projeler",
+          label: "Projects",
           href: "/dashboard/worker/projects",
           icon: <FolderKanban className="w-5 h-5" />,
         },
         {
-          label: "Görevler",
+          label: "Tasks",
           href: "/dashboard/worker/tasks",
           icon: <ClipboardList className="w-5 h-5" />,
         },
         {
-          label: "İzinler",
+          label: "Leave",
           href: "/dashboard/worker/leaves",
           icon: <Calendar className="w-5 h-5" />,
         },
         {
-          label: "Çalışma Saatleri",
+          label: "Timesheet",
           href: "/dashboard/worker/timesheet",
           icon: <Clock className="w-5 h-5" />,
         },
         {
-          label: "Raporlar",
+          label: "Reports",
           href: "/dashboard/worker/reports",
           icon: <FileText className="w-5 h-5" />,
         },
         {
-          label: "Entegrasyonlar",
+          label: "Integrations",
           href: "/dashboard/worker/integrations",
           icon: <Zap className="w-5 h-5" />,
         }
       )
 
-      // Şirket erişimi varsa
       if (userCompanies.length > 0) {
         userCompanies.forEach((company) => {
           baseItems.push({
@@ -181,17 +180,17 @@ export function DashboardSidebar() {
             icon: <Building2 className="w-5 h-5" />,
             children: [
               {
-                label: "Projeler",
+                label: "Projects",
                 href: `/dashboard/company/${company.id}/projects`,
                 icon: <FolderKanban className="w-4 h-4" />,
               },
               {
-                label: "Görevler",
+                label: "Tasks",
                 href: `/dashboard/company/${company.id}/tasks`,
                 icon: <ClipboardList className="w-4 h-4" />,
               },
               {
-                label: "Çalışanlar",
+                label: "Employees",
                 href: `/dashboard/company/${company.id}/employees`,
                 icon: <Users className="w-4 h-4" />,
               },
@@ -201,138 +200,133 @@ export function DashboardSidebar() {
       }
     }
 
-    // === ŞİRKET (EMPLOYER) - Tam Sistem Entegrasyonları ===
+    // === EMPLOYER ===
     if (accountType === "EMPLOYER") {
       baseItems.push(
-        // Şirket Yönetimi
         {
-          label: "Şirketlerim",
+          label: "My Companies",
           href: "/dashboard/employer/companies",
           icon: <Building2 className="w-5 h-5" />,
           children: [
             {
-              label: "Şirketler",
+              label: "Companies",
               href: "/dashboard/employer/company",
               icon: <Building2 className="w-4 h-4" />,
             },
             {
-              label: "Yeni Şirket",
+              label: "New Company",
               href: "/dashboard/employer/company/create",
               icon: <Building2 className="w-4 h-4" />,
             },
           ],
         },
-        // Çalışan Yönetimi
         {
-          label: "Çalışanlar",
+          label: "Employees",
           href: "/dashboard/employer/employees",
           icon: <Users className="w-5 h-5" />,
           children: [
             {
-              label: "Çalışan Listesi",
+              label: "Employee List",
               href: "/dashboard/employer/employees",
               icon: <Users className="w-4 h-4" />,
             },
             {
-              label: "Yetki Yönetimi",
+              label: "Permission Management",
               href: "/dashboard/employer/permissions",
               icon: <Shield className="w-4 h-4" />,
             },
           ],
         },
-        // Projeler
         {
-          label: "Projeler",
+          label: "Projects",
           href: "/dashboard/employer/projects",
           icon: <FolderKanban className="w-5 h-5" />,
           children: [
             {
-              label: "Tüm Projeler",
+              label: "All Projects",
               href: "/dashboard/employer/projects",
               icon: <FolderKanban className="w-4 h-4" />,
             },
             {
-              label: "Yeni Proje",
+              label: "New Project",
               href: "/dashboard/employer/projects/new",
               icon: <FolderKanban className="w-4 h-4" />,
             },
           ],
         },
-        // Görevler
         {
-          label: "Görevler",
+          label: "Tasks",
           href: "/dashboard/employer/tasks",
           icon: <ClipboardList className="w-5 h-5" />,
         },
-        // İzinler
         {
-          label: "İzin Yönetimi",
+          label: "Leave Management",
           href: "/dashboard/employer/leaves",
           icon: <Calendar className="w-5 h-5" />,
         },
-        // Muhasebe
         {
-          label: "Muhasebe",
+          label: "Accounting",
           href: "/dashboard/employer/accounting",
           icon: <DollarSign className="w-5 h-5" />,
           children: [
             {
-              label: "Genel Bakış",
+              label: "Overview",
               href: "/dashboard/employer/accounting",
               icon: <DollarSign className="w-4 h-4" />,
             },
             {
-              label: "Faturalar",
+              label: "Invoices",
               href: "/dashboard/employer/accounting/invoices",
               icon: <FileText className="w-4 h-4" />,
             },
             {
-              label: "Ödemeler",
+              label: "Payments",
               href: "/dashboard/employer/accounting/payments",
               icon: <CreditCard className="w-4 h-4" />,
             },
           ],
         },
-        // Raporlama
         {
-          label: "Raporlar",
+          label: "Reports",
           href: "/dashboard/employer/reports",
           icon: <BarChart3 className="w-5 h-5" />,
         },
-        // Entegrasyonlar
         {
-          label: "Entegrasyonlar",
+          label: "Integrations",
           href: "/dashboard/employer/integrations",
           icon: <Zap className="w-5 h-5" />,
         },
-        // İş İlanları
         {
-          label: "İş İlanları",
+          label: "Job Listings",
           href: "/dashboard/employer/jobs",
           icon: <Briefcase className="w-5 h-5" />,
+        },
+        {
+          label: "Social Media",
+          href: "/dashboard/social-media",
+          icon: <Share2 className="w-5 h-5" />,
         }
       )
     }
 
-    // Ortak alt menüler
     baseItems.push(
       {
-        label: "Üyelik",
+        label: "Subscription",
         href: "/dashboard/subscription",
         icon: <CreditCard className="w-5 h-5" />,
       },
       {
-        label: "AI Asistan",
+        label: "AI Assistant",
         href: "/dashboard/ai-assistant",
         icon: <Bot className="w-5 h-5" />,
       },
       {
-        label: "Güvenlik",
+        label: "Security",
         href: "/dashboard/security",
         icon: <Shield className="w-5 h-5" />,
       },
       {
-        label: "KYC Doğrulama",
+        label: "KYC Verification",
         href: "/dashboard/kyc",
         icon: <Shield className="w-5 h-5" />,
       }
@@ -350,10 +344,10 @@ export function DashboardSidebar() {
   return (
     <aside className="w-64 bg-white border-r border-gray-200 h-screen sticky top-0 overflow-y-auto">
       <div className="p-4">
-        {/* Üyelik Durumu */}
+        {/* Subscription Status */}
         <div className="mb-4 p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200">
-          <p className="text-xs font-medium text-green-800">🎁 Deneme Sürümü</p>
-          <p className="text-xs text-green-600">Tüm özellikler 1 ay ücretsiz!</p>
+          <p className="text-xs font-medium text-green-800">Trial Version</p>
+          <p className="text-xs text-green-600">All features free for 1 month!</p>
         </div>
 
         <nav className="space-y-1">
