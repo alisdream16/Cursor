@@ -24,65 +24,65 @@ const mockCompanies: Company[] = [
     id: "1",
     name: "TechCorp",
     logo: "T",
-    industry: "Teknoloji",
-    location: "İstanbul, Türkiye",
+    industry: "Technology",
+    location: "New York, USA",
     size: "100-500",
     rating: 4.5,
     reviews: 127,
     openJobs: 12,
-    description: "Yenilikçi yazılım çözümleri sunan lider teknoloji şirketi.",
+    description: "Leading technology company offering innovative software solutions.",
     verified: true
   },
   {
     id: "2",
     name: "DesignHub",
     logo: "D",
-    industry: "Tasarım",
-    location: "Ankara, Türkiye",
+    industry: "Design",
+    location: "San Francisco, USA",
     size: "50-100",
     rating: 4.8,
     reviews: 89,
     openJobs: 5,
-    description: "Kreatif tasarım ajansı, marka ve dijital tasarım hizmetleri.",
+    description: "Creative design agency specializing in branding and digital design.",
     verified: true
   },
   {
     id: "3",
     name: "DataFlow",
     logo: "DF",
-    industry: "Veri Analizi",
-    location: "İzmir, Türkiye",
+    industry: "Data Analytics",
+    location: "Austin, USA",
     size: "20-50",
     rating: 4.3,
     reviews: 45,
     openJobs: 8,
-    description: "Büyük veri ve yapay zeka çözümleri sunan startup.",
+    description: "Startup offering big data and AI solutions.",
     verified: false
   },
   {
     id: "4",
     name: "CloudScale",
     logo: "C",
-    industry: "Bulut Hizmetleri",
+    industry: "Cloud Services",
     location: "Remote",
     size: "200-500",
     rating: 4.6,
     reviews: 203,
     openJobs: 15,
-    description: "Enterprise bulut altyapı ve DevOps çözümleri.",
+    description: "Enterprise cloud infrastructure and DevOps solutions.",
     verified: true
   },
   {
     id: "5",
     name: "GreenEnergy",
     logo: "G",
-    industry: "Enerji",
-    location: "Bursa, Türkiye",
+    industry: "Energy",
+    location: "Boston, USA",
     size: "500+",
     rating: 4.2,
     reviews: 312,
     openJobs: 7,
-    description: "Yenilenebilir enerji teknolojileri ve çözümleri.",
+    description: "Renewable energy technologies and solutions.",
     verified: true
   },
 ]
@@ -91,7 +91,7 @@ export default function CompaniesPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedIndustry, setSelectedIndustry] = useState("all")
 
-  const industries = ["all", "Teknoloji", "Tasarım", "Veri Analizi", "Bulut Hizmetleri", "Enerji"]
+  const industries = ["all", "Technology", "Design", "Data Analytics", "Cloud Services", "Energy"]
 
   const filteredCompanies = mockCompanies.filter(company => {
     const matchesSearch = company.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -107,15 +107,15 @@ export default function CompaniesPage() {
       {/* Hero */}
       <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12">
         <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-4 text-center">Şirketleri Keşfet</h1>
-          <p className="text-primary-100 text-center mb-8">En iyi şirketlerde çalışma fırsatları</p>
+          <h1 className="text-3xl font-bold mb-4 text-center">Discover Companies</h1>
+          <p className="text-primary-100 text-center mb-8">Find opportunities at the best companies</p>
           
           <div className="max-w-2xl mx-auto">
             <div className="relative">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="text"
-                placeholder="Şirket veya sektör ara..."
+                placeholder="Search companies or industries..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-12 pr-4 py-3 rounded-lg text-gray-900"
@@ -138,13 +138,13 @@ export default function CompaniesPage() {
                   : "bg-white text-gray-700 border border-gray-200 hover:bg-gray-50"
               }`}
             >
-              {industry === "all" ? "Tümü" : industry}
+              {industry === "all" ? "All" : industry}
             </button>
           ))}
         </div>
 
         <p className="text-gray-600 mb-4">
-          <span className="font-semibold">{filteredCompanies.length}</span> şirket bulundu
+          <span className="font-semibold">{filteredCompanies.length}</span> companies found
         </p>
 
         {/* Company Grid */}
@@ -159,7 +159,7 @@ export default function CompaniesPage() {
                   <div className="flex items-center gap-2">
                     <h3 className="font-semibold text-gray-900">{company.name}</h3>
                     {company.verified && (
-                      <span className="text-primary-500" title="Doğrulanmış">✓</span>
+                      <span className="text-primary-500" title="Verified">✓</span>
                     )}
                   </div>
                   <p className="text-sm text-primary-600">{company.industry}</p>
@@ -175,21 +175,21 @@ export default function CompaniesPage() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Users className="w-4 h-4" />
-                  {company.size} çalışan
+                  {company.size} employees
                 </div>
                 <div className="flex items-center gap-2">
                   <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                  {company.rating} ({company.reviews} değerlendirme)
+                  {company.rating} ({company.reviews} reviews)
                 </div>
               </div>
 
               <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                 <span className="flex items-center gap-1 text-sm text-green-600 font-medium">
                   <Briefcase className="w-4 h-4" />
-                  {company.openJobs} açık pozisyon
+                  {company.openJobs} open positions
                 </span>
                 <Button variant="outline" size="sm">
-                  Profili Gör
+                  View Profile
                 </Button>
               </div>
             </div>

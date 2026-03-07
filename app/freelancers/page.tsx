@@ -8,13 +8,13 @@ import { Search, Star, MapPin, Briefcase, CheckCircle } from "lucide-react"
 const freelancers = [
   {
     id: 1,
-    name: "Ahmet Yılmaz",
+    name: "John Smith",
     title: "Senior Full Stack Developer",
-    avatar: "AY",
+    avatar: "JS",
     rating: 4.9,
     reviews: 47,
-    hourlyRate: "250 ₺/saat",
-    location: "İstanbul, Türkiye",
+    hourlyRate: "$75/hr",
+    location: "New York, USA",
     skills: ["React", "Node.js", "TypeScript", "AWS"],
     completedJobs: 52,
     verified: true,
@@ -22,13 +22,13 @@ const freelancers = [
   },
   {
     id: 2,
-    name: "Elif Kaya",
+    name: "Emily Chen",
     title: "UI/UX Designer",
-    avatar: "EK",
+    avatar: "EC",
     rating: 5.0,
     reviews: 38,
-    hourlyRate: "200 ₺/saat",
-    location: "Ankara, Türkiye",
+    hourlyRate: "$65/hr",
+    location: "San Francisco, USA",
     skills: ["Figma", "Adobe XD", "Prototyping", "User Research"],
     completedJobs: 41,
     verified: true,
@@ -36,13 +36,13 @@ const freelancers = [
   },
   {
     id: 3,
-    name: "Mehmet Demir",
+    name: "Michael Brown",
     title: "Mobile App Developer",
-    avatar: "MD",
+    avatar: "MB",
     rating: 4.8,
     reviews: 29,
-    hourlyRate: "275 ₺/saat",
-    location: "İzmir, Türkiye",
+    hourlyRate: "$80/hr",
+    location: "Austin, USA",
     skills: ["React Native", "Flutter", "iOS", "Android"],
     completedJobs: 33,
     verified: true,
@@ -50,13 +50,13 @@ const freelancers = [
   },
   {
     id: 4,
-    name: "Zeynep Arslan",
+    name: "Sarah Wilson",
     title: "Data Scientist",
-    avatar: "ZA",
+    avatar: "SW",
     rating: 4.9,
     reviews: 22,
-    hourlyRate: "300 ₺/saat",
-    location: "Bursa, Türkiye",
+    hourlyRate: "$90/hr",
+    location: "Boston, USA",
     skills: ["Python", "Machine Learning", "TensorFlow", "SQL"],
     completedJobs: 28,
     verified: true,
@@ -64,13 +64,13 @@ const freelancers = [
   },
   {
     id: 5,
-    name: "Can Özkan",
+    name: "David Lee",
     title: "DevOps Engineer",
-    avatar: "CO",
+    avatar: "DL",
     rating: 4.7,
     reviews: 35,
-    hourlyRate: "280 ₺/saat",
-    location: "Antalya, Türkiye",
+    hourlyRate: "$85/hr",
+    location: "Seattle, USA",
     skills: ["Docker", "Kubernetes", "AWS", "CI/CD"],
     completedJobs: 45,
     verified: true,
@@ -78,13 +78,13 @@ const freelancers = [
   },
   {
     id: 6,
-    name: "Ayşe Çelik",
+    name: "Amanda Taylor",
     title: "Content Writer & SEO",
-    avatar: "AÇ",
+    avatar: "AT",
     rating: 4.8,
     reviews: 56,
-    hourlyRate: "150 ₺/saat",
-    location: "İstanbul, Türkiye",
+    hourlyRate: "$45/hr",
+    location: "Los Angeles, USA",
     skills: ["SEO", "Content Writing", "Copywriting", "WordPress"],
     completedJobs: 78,
     verified: true,
@@ -92,11 +92,11 @@ const freelancers = [
   }
 ]
 
-const categories = ["Tümü", "Geliştirici", "Tasarımcı", "Veri Bilimi", "DevOps", "İçerik"]
+const categories = ["All", "Developer", "Designer", "Data Science", "DevOps", "Content"]
 
 export default function FreelancersPage() {
   const [searchTerm, setSearchTerm] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState("Tümü")
+  const [selectedCategory, setSelectedCategory] = useState("All")
 
   const filteredFreelancers = freelancers.filter(f => {
     const matchesSearch = f.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -112,9 +112,9 @@ export default function FreelancersPage() {
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12">
         <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-4xl font-bold mb-4">Freelancer'ları Keşfet</h1>
+          <h1 className="text-4xl font-bold mb-4">Discover Freelancers</h1>
           <p className="text-primary-100 text-lg mb-8">
-            En yetenekli freelancer'ları bulun ve projelerinizi gerçekleştirin.
+            Find the most talented freelancers and bring your projects to life.
           </p>
           
           {/* Search */}
@@ -122,7 +122,7 @@ export default function FreelancersPage() {
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="text"
-              placeholder="İsim, yetenek veya uzmanlık ara..."
+              placeholder="Search by name, skill, or expertise..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-12 pr-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-300"
@@ -150,7 +150,7 @@ export default function FreelancersPage() {
         </div>
 
         {/* Results count */}
-        <p className="text-gray-600 mb-6">{filteredFreelancers.length} freelancer bulundu</p>
+        <p className="text-gray-600 mb-6">{filteredFreelancers.length} freelancers found</p>
 
         {/* Freelancers Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -176,7 +176,7 @@ export default function FreelancersPage() {
                   <Star className="w-4 h-4 fill-current" />
                   {freelancer.rating}
                 </span>
-                <span className="text-gray-500">({freelancer.reviews} değerlendirme)</span>
+                <span className="text-gray-500">({freelancer.reviews} reviews)</span>
               </div>
 
               <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
@@ -200,14 +200,14 @@ export default function FreelancersPage() {
                   <p className="text-primary-600 font-bold">{freelancer.hourlyRate}</p>
                   <p className="text-xs text-gray-500 flex items-center gap-1">
                     <Briefcase className="w-3 h-3" />
-                    {freelancer.completedJobs} iş tamamlandı
+                    {freelancer.completedJobs} jobs completed
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
                   {freelancer.available ? (
-                    <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">Müsait</span>
+                    <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">Available</span>
                   ) : (
-                    <span className="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full">Meşgul</span>
+                    <span className="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full">Busy</span>
                   )}
                 </div>
               </div>
@@ -216,7 +216,7 @@ export default function FreelancersPage() {
                 href="/auth/signup"
                 className="mt-4 block w-full text-center bg-primary-500 hover:bg-primary-600 text-white py-2 rounded-lg font-medium transition"
               >
-                Profili Gör
+                View Profile
               </Link>
             </div>
           ))}
@@ -224,7 +224,7 @@ export default function FreelancersPage() {
 
         {filteredFreelancers.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">Arama kriterlerinize uygun freelancer bulunamadı.</p>
+            <p className="text-gray-500 text-lg">No freelancers found matching your criteria.</p>
           </div>
         )}
       </div>

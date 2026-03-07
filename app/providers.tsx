@@ -1,6 +1,7 @@
 "use client"
 
 import { SessionProvider } from "next-auth/react"
+import { AIChatbot } from "@/components/ai-chatbot/ai-chatbot"
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -9,6 +10,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       refetchOnWindowFocus={true}
     >
       {children}
+      <AIChatbot />
     </SessionProvider>
   )
 }

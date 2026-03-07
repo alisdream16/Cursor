@@ -7,38 +7,38 @@ import Link from "next/link"
 const posts = [
   {
     id: "1",
-    title: "Freelancer Olarak Başarılı Olmanın 10 Sırrı",
-    excerpt: "Freelance kariyerinizde başarıya ulaşmak için bilmeniz gereken en önemli stratejiler ve ipuçları.",
-    author: "Ahmet Yılmaz",
-    date: "20 Şubat 2026",
-    category: "Kariyer",
+    title: "10 Secrets to Succeed as a Freelancer",
+    excerpt: "The most important strategies and tips you need to know to succeed in your freelance career.",
+    author: "John Smith",
+    date: "February 20, 2026",
+    category: "Career",
     image: "bg-gradient-to-br from-blue-400 to-blue-600"
   },
   {
     id: "2",
-    title: "2026'da En Çok Aranan Yazılım Becerileri",
-    excerpt: "Bu yıl şirketlerin en çok aradığı programlama dilleri ve teknolojiler hakkında kapsamlı bir analiz.",
-    author: "Zeynep Kaya",
-    date: "18 Şubat 2026",
-    category: "Teknoloji",
+    title: "Most In-Demand Software Skills in 2026",
+    excerpt: "A comprehensive analysis of the programming languages and technologies companies are looking for most this year.",
+    author: "Emily Chen",
+    date: "February 18, 2026",
+    category: "Technology",
     image: "bg-gradient-to-br from-purple-400 to-purple-600"
   },
   {
     id: "3",
-    title: "Uzaktan Çalışma Kültürü Nasıl Oluşturulur?",
-    excerpt: "Ekibinizle uzaktan çalışırken verimliliği ve motivasyonu artırmanın yolları.",
-    author: "Can Demir",
-    date: "15 Şubat 2026",
-    category: "İş Yönetimi",
+    title: "How to Build a Remote Work Culture",
+    excerpt: "Ways to increase productivity and motivation while working remotely with your team.",
+    author: "David Lee",
+    date: "February 15, 2026",
+    category: "Management",
     image: "bg-gradient-to-br from-green-400 to-green-600"
   },
   {
     id: "4",
-    title: "Portföy Oluşturma Rehberi",
-    excerpt: "Potansiyel müşterileri etkileyecek profesyonel bir portföy nasıl hazırlanır?",
-    author: "Elif Öztürk",
-    date: "12 Şubat 2026",
-    category: "Kariyer",
+    title: "Portfolio Building Guide",
+    excerpt: "How to create a professional portfolio that will impress potential clients?",
+    author: "Sarah Wilson",
+    date: "February 12, 2026",
+    category: "Career",
     image: "bg-gradient-to-br from-orange-400 to-orange-600"
   },
 ]
@@ -53,7 +53,7 @@ export default function BlogPage() {
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h1 className="text-4xl font-bold mb-4">Blog</h1>
           <p className="text-primary-100 text-lg">
-            Kariyer, teknoloji ve iş dünyası hakkında en güncel içerikler
+            The latest content about career, technology, and business
           </p>
         </div>
       </div>
@@ -81,7 +81,7 @@ export default function BlogPage() {
                   </span>
                 </div>
                 <Link href="#" className="inline-flex items-center gap-2 text-primary-600 font-medium hover:gap-3 transition-all">
-                  Devamını Oku <ArrowRight className="w-4 h-4" />
+                  Read More <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
             </div>

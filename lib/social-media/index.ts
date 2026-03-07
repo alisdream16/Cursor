@@ -1,5 +1,5 @@
-export { InstagramClient, instagram } from "./instagram";
-export { LinkedInClient, linkedin } from "./linkedin";
+export { InstagramClient, instagram, getInstagramClient } from "./instagram";
+export { LinkedInClient, linkedin, getLinkedInClient } from "./linkedin";
 export {
   generateCaption,
   selectHashtags,

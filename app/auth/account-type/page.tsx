@@ -6,50 +6,49 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Header } from "@/components/layout/header"
 
-// MVP: Sadece 3 hesap tipi aktif
 type AccountType = "freelancer" | "worker" | "employer"
 
 const accountTypes = [
   {
     type: "employer" as AccountType,
-    title: "Şirket",
+    title: "Company",
     icon: "🏢",
-    description: "Şirketinizi yönetin, çalışanları koordine edin, projeleri takip edin",
+    description: "Manage your company, coordinate employees, track projects",
     color: "bg-orange-50 border-orange-200 text-orange-700",
     features: [
-      "Şirket profili oluşturun",
-      "Çalışanları yönetin",
-      "Projeleri takip edin",
-      "Freelancer'larla çalışın",
-      "Entegrasyonları kullanın"
+      "Create company profile",
+      "Manage employees",
+      "Track projects",
+      "Work with freelancers",
+      "Use integrations"
     ],
   },
   {
     type: "freelancer" as AccountType,
     title: "Freelancer",
     icon: "💼",
-    description: "Bağımsız çalışın, projeler alın, yeteneklerinizi sergileyin",
+    description: "Work independently, take on projects, showcase your skills",
     color: "bg-blue-50 border-blue-200 text-blue-700",
     features: [
-      "Profil ve portfolyo",
-      "İş ilanlarına başvurun",
-      "Projeler alın",
-      "Değerlendirmeler kazanın",
-      "Komisyon bazlı gelir"
+      "Profile and portfolio",
+      "Apply to job listings",
+      "Take on projects",
+      "Earn reviews",
+      "Commission-based income"
     ],
   },
   {
     type: "worker" as AccountType,
-    title: "Şirket Çalışanı",
+    title: "Employee",
     icon: "👷",
-    description: "Şirketinize bağlı çalışın, görevleri tamamlayın, raporlar oluşturun",
+    description: "Work for your company, complete tasks, create reports",
     color: "bg-green-50 border-green-200 text-green-700",
     features: [
-      "Görevleri görüntüleyin",
-      "Raporlar oluşturun",
-      "İzinleri yönetin",
-      "Proje takibi",
-      "Entegrasyon erişimi"
+      "View tasks",
+      "Create reports",
+      "Manage leave",
+      "Track projects",
+      "Integration access"
     ],
   },
 ]
@@ -89,12 +88,12 @@ export default function AccountTypePage() {
         window.location.href = "/dashboard"
       } else {
         const errorData = await response.json().catch(() => ({}))
-        setError(errorData.error || "Hesap tipi ayarlanamadı. Lütfen tekrar deneyin.")
+        setError(errorData.error || "Failed to set account type. Please try again.")
         setLoading(false)
       }
     } catch (err) {
       console.error("Error setting account type:", err)
-      setError("Bir hata oluştu. Lütfen tekrar deneyin.")
+      setError("An error occurred. Please try again.")
       setLoading(false)
     }
   }
@@ -102,7 +101,7 @@ export default function AccountTypePage() {
   if (status === "loading") {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-xl">Yükleniyor...</div>
+        <div className="text-xl">Loading...</div>
       </div>
     )
   }
@@ -113,13 +112,13 @@ export default function AccountTypePage() {
       <div className="max-w-5xl mx-auto px-4 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Hesap Türünüzü Seçin
+            Choose Your Account Type
           </h1>
           <p className="text-xl text-gray-600">
-            HireNUp'ta nasıl yer almak istediğinizi seçin.
+            Select how you want to participate on HireNUp.
           </p>
           <p className="text-sm text-green-600 mt-2 font-medium">
-            🎁 İlk 1 ay tüm özellikler ÜCRETSİZ!
+            First month all features FREE!
           </p>
         </div>
 
@@ -163,10 +162,10 @@ export default function AccountTypePage() {
             size="lg"
             className="bg-primary-500 hover:bg-primary-600 text-white px-12"
           >
-            {loading ? "Kaydediliyor..." : "Devam Et"}
+            {loading ? "Saving..." : "Continue"}
           </Button>
           <p className="text-sm text-gray-500 mt-4">
-            Daha sonra hesap türünüzü değiştirebilirsiniz.
+            You can change your account type later.
           </p>
         </div>
       </div>

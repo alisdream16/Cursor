@@ -31,7 +31,9 @@ export class InstagramClient {
   constructor(accessToken?: string, instagramAccountId?: string) {
     this.accessToken = accessToken || process.env.FACEBOOK_PAGE_ACCESS_TOKEN || "";
     this.instagramAccountId = instagramAccountId || process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID || "";
-    
+  }
+
+  private validateCredentials(): void {
     if (!this.accessToken) {
       throw new Error("Facebook Page Access Token is required");
     }
@@ -41,6 +43,7 @@ export class InstagramClient {
   }
 
   async getUserProfile(): Promise<InstagramUser> {
+    this.validateCredentials();
     const response = await fetch(
       `${FACEBOOK_GRAPH_URL}/${this.instagramAccountId}?fields=id,username,name,profile_picture_url,followers_count,media_count&access_token=${this.accessToken}`
     );
@@ -244,4 +247,13 @@ export class InstagramClient {
   }
 }
 
-export const instagram = new InstagramClient();
+let _instagram: InstagramClient | null = null;
+
+export function getInstagramClient(): InstagramClient {
+  if (!_instagram) {
+    _instagram = new InstagramClient();
+  }
+  return _instagram;
+}
+
+export { _instagram as instagram };

@@ -14,11 +14,11 @@ export default function AboutPage() {
       <div className="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white py-20">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Profesyonelleri Birleştiren Platform
+            The Platform That Connects Professionals
           </h1>
           <p className="text-xl text-primary-100 mb-8">
-            HireNUp, freelancer'lar, şirketler ve çalışanların bir araya geldiği, 
-            iş birliği yaptığı ve birlikte büyüdüğü yenilikçi bir platformdur.
+            HireNUp is an innovative platform where freelancers, companies, and employees 
+            come together, collaborate, and grow together.
           </p>
         </div>
       </div>
@@ -27,34 +27,34 @@ export default function AboutPage() {
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Misyonumuz</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Mission</h2>
             <p className="text-gray-600 text-lg mb-4">
-              İş dünyasında bağlantı kurmanın ve iş birliği yapmanın en kolay yolunu sunmak. 
-              Yetenekli profesyonelleri doğru fırsatlarla buluşturarak herkesin potansiyelini 
-              gerçekleştirmesine yardımcı oluyoruz.
+              To provide the easiest way to connect and collaborate in the business world. 
+              We help everyone realize their potential by matching talented professionals 
+              with the right opportunities.
             </p>
             <p className="text-gray-600 text-lg">
-              Upwork, LinkedIn, Fiverr ve Odoo'nun en iyi özelliklerini tek bir platformda 
-              birleştirerek, iş yapma şeklinizi dönüştürüyoruz.
+              We are transforming the way you work by combining the best features of 
+              Upwork, LinkedIn, Fiverr, and Odoo into a single platform.
             </p>
           </div>
           <div className="bg-gradient-to-br from-primary-100 to-primary-50 rounded-2xl p-8">
             <div className="grid grid-cols-2 gap-6">
               <div className="text-center">
                 <div className="text-4xl font-bold text-primary-600">10K+</div>
-                <div className="text-gray-600">Aktif Kullanıcı</div>
+                <div className="text-gray-600">Active Users</div>
               </div>
               <div className="text-center">
                 <div className="text-4xl font-bold text-primary-600">5K+</div>
-                <div className="text-gray-600">Tamamlanan Proje</div>
+                <div className="text-gray-600">Completed Projects</div>
               </div>
               <div className="text-center">
                 <div className="text-4xl font-bold text-primary-600">2K+</div>
-                <div className="text-gray-600">Şirket</div>
+                <div className="text-gray-600">Companies</div>
               </div>
               <div className="text-center">
                 <div className="text-4xl font-bold text-primary-600">98%</div>
-                <div className="text-gray-600">Memnuniyet</div>
+                <div className="text-gray-600">Satisfaction</div>
               </div>
             </div>
           </div>
@@ -64,38 +64,38 @@ export default function AboutPage() {
       {/* Values */}
       <div className="bg-white py-16">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">Değerlerimiz</h2>
+          <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">Our Values</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
                 icon: <Users className="w-8 h-8" />,
-                title: "Topluluk Öncelikli",
-                desc: "Her kararımızda kullanıcılarımızın ihtiyaçlarını ön planda tutuyoruz."
+                title: "Community First",
+                desc: "We prioritize our users' needs in every decision we make."
               },
               {
                 icon: <Target className="w-8 h-8" />,
-                title: "Şeffaflık",
-                desc: "Açık ve dürüst iletişim ile güven inşa ediyoruz."
+                title: "Transparency",
+                desc: "We build trust through open and honest communication."
               },
               {
                 icon: <Zap className="w-8 h-8" />,
-                title: "Yenilikçilik",
-                desc: "Sürekli gelişim ve yeni çözümler sunmak için çalışıyoruz."
+                title: "Innovation",
+                desc: "We work to continuously improve and offer new solutions."
               },
               {
                 icon: <Globe className="w-8 h-8" />,
-                title: "Küresel Bakış",
-                desc: "Dünyanın her yerinden yetenekleri bir araya getiriyoruz."
+                title: "Global Perspective",
+                desc: "We bring together talent from all over the world."
               },
               {
                 icon: <Award className="w-8 h-8" />,
-                title: "Kalite",
-                desc: "En yüksek standartlarda hizmet sunmayı hedefliyoruz."
+                title: "Quality",
+                desc: "We aim to provide service at the highest standards."
               },
               {
                 icon: <Heart className="w-8 h-8" />,
-                title: "Tutku",
-                desc: "İşimizi seviyoruz ve bu tutku her şeye yansıyor."
+                title: "Passion",
+                desc: "We love what we do and this passion reflects in everything."
               },
             ].map((value, i) => (
               <div key={i} className="text-center p-6">
@@ -113,13 +113,13 @@ export default function AboutPage() {
       {/* CTA */}
       <div className="bg-primary-600 py-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Hemen Başlayın</h2>
+          <h2 className="text-3xl font-bold text-white mb-4">Get Started Today</h2>
           <p className="text-primary-100 text-lg mb-8">
-            Binlerce profesyonelin arasına katılın ve fırsatları keşfedin.
+            Join thousands of professionals and discover opportunities.
           </p>
           <Link href="/auth/signup">
             <Button size="lg" className="bg-white text-primary-600 hover:bg-primary-50">
-              Ücretsiz Kayıt Ol
+              Sign Up Free
             </Button>
           </Link>
         </div>

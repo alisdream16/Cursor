@@ -8,72 +8,72 @@ import { Search, Filter, Users, DollarSign, Clock, MapPin } from "lucide-react"
 const projects = [
   {
     id: 1,
-    title: "E-Ticaret Platformu Geliştirme",
+    title: "E-Commerce Platform Development",
     company: "TechCorp",
-    description: "Modern ve ölçeklenebilir bir e-ticaret platformu geliştiriyoruz. React, Node.js ve PostgreSQL deneyimi aranıyor.",
-    budget: "50.000 - 80.000 ₺",
-    duration: "3-4 ay",
-    location: "Uzaktan",
+    description: "We are developing a modern and scalable e-commerce platform. Experience with React, Node.js and PostgreSQL required.",
+    budget: "$5,000 - $8,000",
+    duration: "3-4 months",
+    location: "Remote",
     skills: ["React", "Node.js", "PostgreSQL", "AWS"],
     applicants: 12,
-    status: "Açık",
-    type: "Teknoloji"
+    status: "Open",
+    type: "Technology"
   },
   {
     id: 2,
-    title: "Mobil Uygulama UI/UX Tasarımı",
+    title: "Mobile App UI/UX Design",
     company: "DesignHub",
-    description: "Fintech uygulaması için modern ve kullanıcı dostu arayüz tasarımı. Figma ve prototyping deneyimi gerekli.",
-    budget: "25.000 - 40.000 ₺",
-    duration: "1-2 ay",
-    location: "Hibrit - İstanbul",
+    description: "Modern and user-friendly interface design for a fintech application. Figma and prototyping experience required.",
+    budget: "$2,500 - $4,000",
+    duration: "1-2 months",
+    location: "Hybrid - New York",
     skills: ["Figma", "UI/UX", "Prototyping", "User Research"],
     applicants: 8,
-    status: "Açık",
-    type: "Tasarım"
+    status: "Open",
+    type: "Design"
   },
   {
     id: 3,
-    title: "Yapay Zeka Chatbot Entegrasyonu",
+    title: "AI Chatbot Integration",
     company: "DataFlow",
-    description: "Müşteri hizmetleri için AI destekli chatbot geliştirme ve entegrasyon projesi.",
-    budget: "75.000 - 120.000 ₺",
-    duration: "2-3 ay",
-    location: "Uzaktan",
+    description: "AI-powered chatbot development and integration project for customer service.",
+    budget: "$7,500 - $12,000",
+    duration: "2-3 months",
+    location: "Remote",
     skills: ["Python", "OpenAI API", "NLP", "FastAPI"],
     applicants: 15,
-    status: "Açık",
-    type: "Yapay Zeka"
+    status: "Open",
+    type: "AI"
   },
   {
     id: 4,
-    title: "Kurumsal Web Sitesi Yenileme",
+    title: "Corporate Website Redesign",
     company: "CloudScale",
-    description: "Şirket web sitesinin modern teknolojilerle yeniden tasarlanması ve geliştirilmesi.",
-    budget: "30.000 - 50.000 ₺",
-    duration: "1-2 ay",
-    location: "Uzaktan",
+    description: "Redesigning and developing the company website with modern technologies.",
+    budget: "$3,000 - $5,000",
+    duration: "1-2 months",
+    location: "Remote",
     skills: ["Next.js", "Tailwind CSS", "SEO", "CMS"],
     applicants: 20,
-    status: "Açık",
+    status: "Open",
     type: "Web"
   },
   {
     id: 5,
-    title: "IoT Dashboard Geliştirme",
+    title: "IoT Dashboard Development",
     company: "GreenEnergy",
-    description: "Yenilenebilir enerji sistemleri için gerçek zamanlı izleme dashboard'u geliştirme.",
-    budget: "60.000 - 90.000 ₺",
-    duration: "2-3 ay",
-    location: "Hibrit - Ankara",
+    description: "Real-time monitoring dashboard development for renewable energy systems.",
+    budget: "$6,000 - $9,000",
+    duration: "2-3 months",
+    location: "Hybrid - San Francisco",
     skills: ["React", "D3.js", "MQTT", "Time Series DB"],
     applicants: 6,
-    status: "Açık",
+    status: "Open",
     type: "IoT"
   }
 ]
 
-const categories = ["Tümü", "Teknoloji", "Tasarım", "Yapay Zeka", "Web", "IoT", "Mobil"]
+const categories = ["All", "Technology", "Design", "AI", "Web", "IoT", "Mobile"]
 
 export default function ProjectsPage() {
   const [searchTerm, setSearchTerm] = useState("")
@@ -83,7 +83,7 @@ export default function ProjectsPage() {
     const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          project.company.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesCategory = selectedCategory === "Tümü" || project.type === selectedCategory
+    const matchesCategory = selectedCategory === "All" || project.type === selectedCategory
     return matchesSearch && matchesCategory
   })
 
@@ -94,9 +94,9 @@ export default function ProjectsPage() {
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12">
         <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-4xl font-bold mb-4">Projeleri Keşfet</h1>
+          <h1 className="text-4xl font-bold mb-4">Discover Projects</h1>
           <p className="text-primary-100 text-lg mb-8">
-            Girişimcilerden ve şirketlerden gelen projeleri inceleyin ve başvurun.
+            Browse and apply to projects from entrepreneurs and companies.
           </p>
           
           {/* Search */}
@@ -105,7 +105,7 @@ export default function ProjectsPage() {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="text"
-                placeholder="Proje, şirket veya beceri ara..."
+                placeholder="Search projects, companies, or skills..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-12 pr-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-300"
@@ -134,7 +134,7 @@ export default function ProjectsPage() {
         </div>
 
         {/* Results count */}
-        <p className="text-gray-600 mb-6">{filteredProjects.length} proje bulundu</p>
+        <p className="text-gray-600 mb-6">{filteredProjects.length} projects found</p>
 
         {/* Projects Grid */}
         <div className="grid gap-6">
@@ -153,7 +153,7 @@ export default function ProjectsPage() {
                   href="/auth/signup"
                   className="bg-primary-500 hover:bg-primary-600 text-white px-6 py-2 rounded-lg font-medium transition"
                 >
-                  Başvur
+                  Apply
                 </Link>
               </div>
               
@@ -182,7 +182,7 @@ export default function ProjectsPage() {
                 </span>
                 <span className="flex items-center gap-1">
                   <Users className="w-4 h-4" />
-                  {project.applicants} başvuru
+                  {project.applicants} applicants
                 </span>
               </div>
             </div>
@@ -191,7 +191,7 @@ export default function ProjectsPage() {
 
         {filteredProjects.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">Arama kriterlerinize uygun proje bulunamadı.</p>
+            <p className="text-gray-500 text-lg">No projects found matching your criteria.</p>
           </div>
         )}
       </div>

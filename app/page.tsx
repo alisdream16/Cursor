@@ -86,26 +86,26 @@ export default function Home() {
 
         {/* Account Types - MVP: Only 3 active types */}
         <div className="mb-16">
-          <h2 className="text-2xl font-bold text-center mb-8 text-gray-900">Yolunuzu Seçin</h2>
+          <h2 className="text-2xl font-bold text-center mb-8 text-gray-900">Choose Your Path</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {[
               { 
                 name: "Freelancer", 
-                desc: "Bağımsız çalışın, projeler alın, kariyer oluşturun",
+                desc: "Work independently, take on projects, build your career",
                 color: "bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100",
                 icon: "💼",
                 active: true
               },
               { 
-                name: "Şirket", 
-                desc: "Ekibinizi yönetin, yetenekleri bulun, büyüyün",
+                name: "Company", 
+                desc: "Manage your team, find talent, and grow",
                 color: "bg-orange-50 border-orange-200 text-orange-700 hover:bg-orange-100",
                 icon: "🏢",
                 active: true
               },
               { 
-                name: "Şirket Çalışanı", 
-                desc: "Bir ekibe katılın, görevleri tamamlayın",
+                name: "Employee", 
+                desc: "Join a team and complete tasks",
                 color: "bg-green-50 border-green-200 text-green-700 hover:bg-green-100",
                 icon: "👷",
                 active: true

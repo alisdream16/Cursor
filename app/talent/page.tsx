@@ -23,98 +23,98 @@ interface Freelancer {
 const mockFreelancers: Freelancer[] = [
   {
     id: "1",
-    name: "Ahmet Yılmaz",
+    name: "John Smith",
     title: "Senior Full Stack Developer",
-    avatar: "A",
+    avatar: "J",
     rating: 4.9,
     reviews: 127,
     hourlyRate: 75,
-    location: "İstanbul, Türkiye",
+    location: "New York, USA",
     skills: ["React", "Node.js", "TypeScript", "PostgreSQL", "AWS"],
     completedJobs: 89,
-    description: "10+ yıl deneyimli full stack geliştirici. Startup ve enterprise projelerde çalıştım.",
+    description: "Full stack developer with 10+ years of experience. I've worked on startup and enterprise projects.",
     availability: "available"
   },
   {
     id: "2",
-    name: "Zeynep Kaya",
+    name: "Emily Chen",
     title: "UI/UX Designer",
-    avatar: "Z",
+    avatar: "E",
     rating: 4.8,
     reviews: 93,
     hourlyRate: 60,
-    location: "Ankara, Türkiye",
+    location: "San Francisco, USA",
     skills: ["Figma", "Adobe XD", "Sketch", "Prototyping", "User Research"],
     completedJobs: 65,
-    description: "Kullanıcı odaklı tasarım uzmanı. Mobil ve web uygulamaları için modern tasarımlar.",
+    description: "User-focused design expert. Modern designs for mobile and web applications.",
     availability: "available"
   },
   {
     id: "3",
-    name: "Mehmet Demir",
+    name: "Michael Brown",
     title: "Mobile App Developer",
     avatar: "M",
     rating: 4.7,
     reviews: 78,
     hourlyRate: 65,
-    location: "İzmir, Türkiye",
+    location: "Austin, USA",
     skills: ["React Native", "Flutter", "iOS", "Android", "Firebase"],
     completedJobs: 52,
-    description: "Cross-platform mobil uygulama geliştirme konusunda uzmanım.",
+    description: "Expert in cross-platform mobile application development.",
     availability: "busy"
   },
   {
     id: "4",
-    name: "Elif Öztürk",
+    name: "Sarah Wilson",
     title: "Data Scientist",
-    avatar: "E",
+    avatar: "S",
     rating: 4.9,
     reviews: 56,
     hourlyRate: 85,
-    location: "İstanbul, Türkiye",
+    location: "Boston, USA",
     skills: ["Python", "Machine Learning", "TensorFlow", "SQL", "Data Visualization"],
     completedJobs: 41,
-    description: "Veri bilimi ve makine öğrenmesi uzmanı. Büyük veri projeleri deneyimi.",
+    description: "Data science and machine learning expert. Experience with big data projects.",
     availability: "available"
   },
   {
     id: "5",
-    name: "Can Arslan",
+    name: "David Lee",
     title: "DevOps Engineer",
-    avatar: "C",
+    avatar: "D",
     rating: 4.6,
     reviews: 45,
     hourlyRate: 70,
-    location: "Bursa, Türkiye",
+    location: "Seattle, USA",
     skills: ["Docker", "Kubernetes", "AWS", "CI/CD", "Linux"],
     completedJobs: 38,
-    description: "Cloud infrastructure ve otomasyon konusunda deneyimli DevOps mühendisi.",
+    description: "Experienced DevOps engineer in cloud infrastructure and automation.",
     availability: "not_available"
   },
   {
     id: "6",
-    name: "Selin Yıldız",
+    name: "Amanda Taylor",
     title: "Content Writer & SEO Specialist",
-    avatar: "S",
+    avatar: "A",
     rating: 4.8,
     reviews: 112,
     hourlyRate: 40,
-    location: "Antalya, Türkiye",
+    location: "Los Angeles, USA",
     skills: ["SEO", "Content Marketing", "Copywriting", "Blog Writing", "Social Media"],
     completedJobs: 156,
-    description: "SEO odaklı içerik yazarı. Blog, sosyal medya ve web sitesi içerikleri.",
+    description: "SEO-focused content writer. Blog, social media, and website content.",
     availability: "available"
   },
 ]
 
 const categories = [
-  "Tümü",
-  "Yazılım Geliştirme",
-  "Tasarım",
-  "Pazarlama",
-  "Veri Bilimi",
-  "Yazarlık",
-  "Video & Animasyon",
+  "All",
+  "Software Development",
+  "Design",
+  "Marketing",
+  "Data Science",
+  "Writing",
+  "Video & Animation",
 ]
 
 const skills = [
@@ -124,7 +124,7 @@ const skills = [
 
 export default function TalentPage() {
   const [searchQuery, setSearchQuery] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState("Tümü")
+  const [selectedCategory, setSelectedCategory] = useState("All")
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 200])
   const [showFilters, setShowFilters] = useState(false)
@@ -142,11 +142,11 @@ export default function TalentPage() {
   const getAvailabilityBadge = (status: Freelancer["availability"]) => {
     switch (status) {
       case "available":
-        return <span className="flex items-center gap-1 text-green-600 text-sm"><span className="w-2 h-2 bg-green-500 rounded-full"></span>Müsait</span>
+        return <span className="flex items-center gap-1 text-green-600 text-sm"><span className="w-2 h-2 bg-green-500 rounded-full"></span>Available</span>
       case "busy":
-        return <span className="flex items-center gap-1 text-yellow-600 text-sm"><span className="w-2 h-2 bg-yellow-500 rounded-full"></span>Meşgul</span>
+        return <span className="flex items-center gap-1 text-yellow-600 text-sm"><span className="w-2 h-2 bg-yellow-500 rounded-full"></span>Busy</span>
       default:
-        return <span className="flex items-center gap-1 text-gray-500 text-sm"><span className="w-2 h-2 bg-gray-400 rounded-full"></span>Müsait Değil</span>
+        return <span className="flex items-center gap-1 text-gray-500 text-sm"><span className="w-2 h-2 bg-gray-400 rounded-full"></span>Not Available</span>
     }
   }
 
@@ -157,19 +157,19 @@ export default function TalentPage() {
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold mb-4 text-center">Yetenekli Freelancer'ları Keşfet</h1>
+          <h1 className="text-4xl font-bold mb-4 text-center">Discover Talented Freelancers</h1>
           <p className="text-xl text-primary-100 text-center mb-8">
-            Projeleriniz için en uygun profesyonelleri bulun
+            Find the best professionals for your projects
           </p>
           
-          {/* Arama */}
+          {/* Search */}
           <div className="max-w-3xl mx-auto">
             <div className="flex gap-2">
               <div className="flex-1 relative">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
                   type="text"
-                  placeholder="Yetenek, beceri veya isim ara..."
+                  placeholder="Search talent, skills, or names..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-12 pr-4 py-4 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-300"
@@ -180,7 +180,7 @@ export default function TalentPage() {
                 className="bg-white text-primary-600 hover:bg-primary-50 px-6"
               >
                 <Filter className="w-5 h-5 mr-2" />
-                Filtrele
+                Filter
               </Button>
             </div>
           </div>
@@ -189,24 +189,24 @@ export default function TalentPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex gap-8">
-          {/* Sol Sidebar - Filtreler */}
+          {/* Left Sidebar - Filters */}
           <div className={`w-64 shrink-0 ${showFilters ? 'block' : 'hidden lg:block'}`}>
             <div className="bg-white rounded-lg border border-gray-200 p-6 sticky top-4">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-gray-900">Filtreler</h3>
+                <h3 className="font-semibold text-gray-900">Filters</h3>
                 {selectedSkills.length > 0 && (
                   <button 
                     onClick={() => setSelectedSkills([])}
                     className="text-sm text-primary-600 hover:underline"
                   >
-                    Temizle
+                    Clear
                   </button>
                 )}
               </div>
 
-              {/* Kategoriler */}
+              {/* Categories */}
               <div className="mb-6">
-                <h4 className="text-sm font-medium text-gray-700 mb-3">Kategori</h4>
+                <h4 className="text-sm font-medium text-gray-700 mb-3">Category</h4>
                 <div className="space-y-2">
                   {categories.map(cat => (
                     <button
@@ -224,9 +224,9 @@ export default function TalentPage() {
                 </div>
               </div>
 
-              {/* Beceriler */}
+              {/* Skills */}
               <div className="mb-6">
-                <h4 className="text-sm font-medium text-gray-700 mb-3">Beceriler</h4>
+                <h4 className="text-sm font-medium text-gray-700 mb-3">Skills</h4>
                 <div className="flex flex-wrap gap-2">
                   {skills.map(skill => (
                     <button
@@ -250,9 +250,9 @@ export default function TalentPage() {
                 </div>
               </div>
 
-              {/* Fiyat Aralığı */}
+              {/* Price Range */}
               <div>
-                <h4 className="text-sm font-medium text-gray-700 mb-3">Saatlik Ücret</h4>
+                <h4 className="text-sm font-medium text-gray-700 mb-3">Hourly Rate</h4>
                 <div className="flex items-center gap-2">
                   <input
                     type="number"
@@ -269,23 +269,23 @@ export default function TalentPage() {
                     className="w-20 border border-gray-300 rounded px-2 py-1 text-sm"
                     placeholder="Max"
                   />
-                  <span className="text-gray-500 text-sm">$/saat</span>
+                  <span className="text-gray-500 text-sm">$/hr</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Freelancer Listesi */}
+          {/* Freelancer List */}
           <div className="flex-1">
             <div className="flex items-center justify-between mb-4">
               <p className="text-gray-600">
-                <span className="font-semibold text-gray-900">{filteredFreelancers.length}</span> freelancer bulundu
+                <span className="font-semibold text-gray-900">{filteredFreelancers.length}</span> freelancers found
               </p>
               <select className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500">
-                <option>En Yüksek Puan</option>
-                <option>En Düşük Fiyat</option>
-                <option>En Yüksek Fiyat</option>
-                <option>En Çok İş Tamamlayan</option>
+                <option>Highest Rated</option>
+                <option>Lowest Price</option>
+                <option>Highest Price</option>
+                <option>Most Jobs Completed</option>
               </select>
             </div>
 
@@ -310,7 +310,7 @@ export default function TalentPage() {
                         </div>
                         <div className="text-right">
                           <p className="text-2xl font-bold text-gray-900">${freelancer.hourlyRate}</p>
-                          <p className="text-sm text-gray-500">/saat</p>
+                          <p className="text-sm text-gray-500">/hour</p>
                         </div>
                       </div>
                       
@@ -342,11 +342,11 @@ export default function TalentPage() {
                           </span>
                           <span className="flex items-center gap-1">
                             <Briefcase className="w-4 h-4" />
-                            {freelancer.completedJobs} iş tamamlandı
+                            {freelancer.completedJobs} jobs completed
                           </span>
                         </div>
                         <Button className="bg-primary-500 hover:bg-primary-600 text-white">
-                          Profili Görüntüle
+                          View Profile
                         </Button>
                       </div>
                     </div>

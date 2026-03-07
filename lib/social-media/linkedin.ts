@@ -27,14 +27,17 @@ export class LinkedInClient {
   constructor() {
     this.clientId = process.env.LINKEDIN_CLIENT_ID || "";
     this.clientSecret = process.env.LINKEDIN_CLIENT_SECRET || "";
-    this.redirectUri = `${process.env.NEXTAUTH_URL}/api/social/linkedin/callback`;
+    this.redirectUri = `${process.env.NEXTAUTH_URL || ""}/api/social/linkedin/callback`;
+  }
 
+  private validateCredentials(): void {
     if (!this.clientId || !this.clientSecret) {
       throw new Error("LinkedIn credentials are required");
     }
   }
 
   getAuthorizationUrl(state: string): string {
+    this.validateCredentials();
     const scopes = [
       "openid",
       "profile",
@@ -283,4 +286,13 @@ export class LinkedInClient {
   }
 }
 
-export const linkedin = new LinkedInClient();
+let _linkedin: LinkedInClient | null = null;
+
+export function getLinkedInClient(): LinkedInClient {
+  if (!_linkedin) {
+    _linkedin = new LinkedInClient();
+  }
+  return _linkedin;
+}
+
+export { _linkedin as linkedin };

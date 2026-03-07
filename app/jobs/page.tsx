@@ -23,12 +23,12 @@ const mockJobs: Job[] = [
     id: "1",
     title: "Senior React Developer",
     company: "TechCorp",
-    location: "İstanbul, Türkiye",
+    location: "New York, USA",
     type: "full-time",
-    salary: { min: 25000, max: 40000 },
-    description: "React ve TypeScript konusunda deneyimli, modern web uygulamaları geliştirebilecek senior developer arıyoruz.",
+    salary: { min: 85000, max: 120000 },
+    description: "We are looking for a senior developer experienced in React and TypeScript who can develop modern web applications.",
     skills: ["React", "TypeScript", "Node.js", "GraphQL"],
-    postedAt: "2 gün önce",
+    postedAt: "2 days ago",
     applicants: 23
   },
   {
@@ -37,34 +37,34 @@ const mockJobs: Job[] = [
     company: "DesignHub",
     location: "Remote",
     type: "remote",
-    salary: { min: 15000, max: 25000 },
-    description: "Kullanıcı deneyimi odaklı, modern tasarımlar yapabilecek UI/UX designer arıyoruz.",
+    salary: { min: 65000, max: 95000 },
+    description: "We are looking for a UI/UX designer who can create user-focused, modern designs.",
     skills: ["Figma", "Adobe XD", "Prototyping", "User Research"],
-    postedAt: "1 hafta önce",
+    postedAt: "1 week ago",
     applicants: 45
   },
   {
     id: "3",
     title: "Backend Developer",
     company: "DataFlow",
-    location: "Ankara, Türkiye",
+    location: "San Francisco, USA",
     type: "full-time",
-    salary: { min: 20000, max: 35000 },
-    description: "Python ve Django ile ölçeklenebilir backend sistemleri geliştirebilecek developer arıyoruz.",
+    salary: { min: 90000, max: 130000 },
+    description: "We are looking for a developer who can build scalable backend systems with Python and Django.",
     skills: ["Python", "Django", "PostgreSQL", "Redis"],
-    postedAt: "3 gün önce",
+    postedAt: "3 days ago",
     applicants: 18
   },
   {
     id: "4",
     title: "DevOps Engineer",
     company: "CloudScale",
-    location: "İzmir, Türkiye",
+    location: "Austin, USA",
     type: "contract",
-    salary: { min: 30000, max: 50000 },
-    description: "AWS ve Kubernetes deneyimli DevOps engineer arıyoruz.",
+    salary: { min: 100000, max: 150000 },
+    description: "We are looking for a DevOps engineer experienced with AWS and Kubernetes.",
     skills: ["AWS", "Kubernetes", "Docker", "Terraform"],
-    postedAt: "5 gün önce",
+    postedAt: "5 days ago",
     applicants: 12
   },
 ]
@@ -89,10 +89,10 @@ export default function JobsPage() {
       "remote": "bg-purple-100 text-purple-700"
     }
     const labels = {
-      "full-time": "Tam Zamanlı",
-      "part-time": "Yarı Zamanlı",
-      "contract": "Sözleşmeli",
-      "remote": "Uzaktan"
+      "full-time": "Full Time",
+      "part-time": "Part Time",
+      "contract": "Contract",
+      "remote": "Remote"
     }
     return <span className={`px-2 py-1 rounded-full text-xs font-medium ${styles[type]}`}>{labels[type]}</span>
   }
@@ -104,22 +104,22 @@ export default function JobsPage() {
       {/* Hero */}
       <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12">
         <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-4 text-center">İş İlanları</h1>
-          <p className="text-primary-100 text-center mb-8">Hayalinizdeki işi bulun</p>
+          <h1 className="text-3xl font-bold mb-4 text-center">Job Listings</h1>
+          <p className="text-primary-100 text-center mb-8">Find your dream job</p>
           
           <div className="max-w-3xl mx-auto flex gap-2">
             <div className="flex-1 relative">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="text"
-                placeholder="İş, şirket veya beceri ara..."
+                placeholder="Search jobs, companies, or skills..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-12 pr-4 py-3 rounded-lg text-gray-900"
               />
             </div>
             <Button className="bg-white text-primary-600 hover:bg-primary-50">
-              Ara
+              Search
             </Button>
           </div>
         </div>
@@ -129,11 +129,11 @@ export default function JobsPage() {
         {/* Filters */}
         <div className="flex gap-2 mb-6 flex-wrap">
           {[
-            { value: "all", label: "Tümü" },
-            { value: "full-time", label: "Tam Zamanlı" },
-            { value: "part-time", label: "Yarı Zamanlı" },
-            { value: "contract", label: "Sözleşmeli" },
-            { value: "remote", label: "Uzaktan" },
+            { value: "all", label: "All" },
+            { value: "full-time", label: "Full Time" },
+            { value: "part-time", label: "Part Time" },
+            { value: "contract", label: "Contract" },
+            { value: "remote", label: "Remote" },
           ].map(f => (
             <button
               key={f.value}
@@ -150,7 +150,7 @@ export default function JobsPage() {
         </div>
 
         <p className="text-gray-600 mb-4">
-          <span className="font-semibold">{filteredJobs.length}</span> iş ilanı bulundu
+          <span className="font-semibold">{filteredJobs.length}</span> jobs found
         </p>
 
         {/* Job List */}
@@ -181,9 +181,9 @@ export default function JobsPage() {
                 <div className="text-right">
                   <div className="flex items-center gap-1 text-lg font-semibold text-gray-900">
                     <DollarSign className="w-5 h-5" />
-                    {job.salary.min.toLocaleString()} - {job.salary.max.toLocaleString()} ₺
+                    ${job.salary.min.toLocaleString()} - ${job.salary.max.toLocaleString()}
                   </div>
-                  <span className="text-sm text-gray-500">{job.applicants} başvuru</span>
+                  <span className="text-sm text-gray-500">{job.applicants} applicants</span>
                 </div>
               </div>
               
@@ -198,7 +198,7 @@ export default function JobsPage() {
                   ))}
                 </div>
                 <Button className="bg-primary-500 hover:bg-primary-600 text-white">
-                  Başvur
+                  Apply
                 </Button>
               </div>
             </div>

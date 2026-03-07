@@ -17,7 +17,6 @@ export default function ContactPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setSubmitted(true)
-    // TODO: Form submission logic
   }
 
   return (
@@ -27,9 +26,9 @@ export default function ContactPage() {
       {/* Hero */}
       <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold mb-4">İletişim</h1>
+          <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
           <p className="text-primary-100 text-lg">
-            Sorularınız için bize ulaşın, en kısa sürede yanıt verelim.
+            Reach out to us with your questions, we'll respond as soon as possible.
           </p>
         </div>
       </div>
@@ -44,7 +43,7 @@ export default function ContactPage() {
                   <Mail className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">E-posta</h3>
+                  <h3 className="font-semibold text-gray-900">Email</h3>
                   <a href="mailto:info@hirenup.com" className="text-primary-600 hover:underline">
                     info@hirenup.com
                   </a>
@@ -58,9 +57,9 @@ export default function ContactPage() {
                   <Phone className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">Telefon</h3>
-                  <a href="tel:+902121234567" className="text-primary-600 hover:underline">
-                    +90 212 123 45 67
+                  <h3 className="font-semibold text-gray-900">Phone</h3>
+                  <a href="tel:+18001234567" className="text-primary-600 hover:underline">
+                    +1 (800) 123-4567
                   </a>
                 </div>
               </div>
@@ -72,10 +71,10 @@ export default function ContactPage() {
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">Adres</h3>
+                  <h3 className="font-semibold text-gray-900">Address</h3>
                   <p className="text-gray-600">
-                    Maslak, İstanbul<br />
-                    Türkiye
+                    123 Business Ave<br />
+                    New York, NY 10001
                   </p>
                 </div>
               </div>
@@ -87,10 +86,10 @@ export default function ContactPage() {
                   <Clock className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">Çalışma Saatleri</h3>
+                  <h3 className="font-semibold text-gray-900">Business Hours</h3>
                   <p className="text-gray-600">
-                    Pazartesi - Cuma<br />
-                    09:00 - 18:00
+                    Monday - Friday<br />
+                    9:00 AM - 6:00 PM EST
                   </p>
                 </div>
               </div>
@@ -100,32 +99,32 @@ export default function ContactPage() {
           {/* Contact Form */}
           <div className="md:col-span-2">
             <div className="bg-white rounded-xl p-8 border border-gray-200">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Bize Mesaj Gönderin</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
               
               {submitted ? (
                 <div className="text-center py-12">
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Send className="w-8 h-8 text-green-600" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Mesajınız Gönderildi!</h3>
-                  <p className="text-gray-600">En kısa sürede size geri dönüş yapacağız.</p>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Message Sent!</h3>
+                  <p className="text-gray-600">We'll get back to you as soon as possible.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Ad Soyad</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
                       <input
                         type="text"
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({...formData, name: e.target.value})}
                         className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary-500"
-                        placeholder="Adınız Soyadınız"
+                        placeholder="Your Name"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">E-posta</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
                       <input
                         type="email"
                         required
@@ -138,32 +137,32 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Konu</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
                     <input
                       type="text"
                       required
                       value={formData.subject}
                       onChange={(e) => setFormData({...formData, subject: e.target.value})}
                       className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary-500"
-                      placeholder="Mesajınızın konusu"
+                      placeholder="Subject of your message"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Mesaj</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
                     <textarea
                       required
                       rows={5}
                       value={formData.message}
                       onChange={(e) => setFormData({...formData, message: e.target.value})}
                       className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary-500"
-                      placeholder="Mesajınızı yazın..."
+                      placeholder="Write your message..."
                     />
                   </div>
 
                   <Button type="submit" className="w-full bg-primary-500 hover:bg-primary-600 text-white py-3">
                     <Send className="w-4 h-4 mr-2" />
-                    Gönder
+                    Send
                   </Button>
                 </form>
               )}
