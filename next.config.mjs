@@ -8,10 +8,6 @@ const nextConfig = {
       allowedOrigins: ["*"],
     },
   },
-  // Disable build cache to prevent stale server actions
-  generateBuildId: async () => {
-    return `build-${Date.now()}`;
-  },
   // Production domain configuration
   async headers() {
     return [
