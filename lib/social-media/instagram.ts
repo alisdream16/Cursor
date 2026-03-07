@@ -29,17 +29,26 @@ export class InstagramClient {
   private instagramAccountId: string;
 
   constructor(accessToken?: string, instagramAccountId?: string) {
-    this.accessToken = accessToken || process.env.FACEBOOK_PAGE_ACCESS_TOKEN || "";
-    this.instagramAccountId = instagramAccountId || process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID || "";
+    this.accessToken = accessToken || "";
+    this.instagramAccountId = instagramAccountId || "";
+  }
+
+  configure(accessToken: string, instagramAccountId: string): void {
+    this.accessToken = accessToken;
+    this.instagramAccountId = instagramAccountId;
   }
 
   private validateCredentials(): void {
     if (!this.accessToken) {
-      throw new Error("Facebook Page Access Token is required");
+      throw new Error("Facebook Page Access Token is required. Call configure() first.");
     }
     if (!this.instagramAccountId) {
-      throw new Error("Instagram Business Account ID is required");
+      throw new Error("Instagram Business Account ID is required. Call configure() first.");
     }
+  }
+
+  isConfigured(): boolean {
+    return !!this.accessToken && !!this.instagramAccountId;
   }
 
   async getUserProfile(): Promise<InstagramUser> {
@@ -57,6 +66,7 @@ export class InstagramClient {
   }
 
   async getMedia(limit: number = 10): Promise<InstagramMedia[]> {
+    this.validateCredentials();
     const response = await fetch(
       `${FACEBOOK_GRAPH_URL}/${this.instagramAccountId}/media?fields=id,caption,media_type,media_url,timestamp,permalink&limit=${limit}&access_token=${this.accessToken}`
     );
@@ -71,6 +81,7 @@ export class InstagramClient {
   }
 
   async createMediaContainer(imageUrl: string, caption: string): Promise<string> {
+    this.validateCredentials();
     const response = await fetch(
       `${FACEBOOK_GRAPH_URL}/${this.instagramAccountId}/media`,
       {
@@ -127,6 +138,7 @@ export class InstagramClient {
   }
 
   async publishMedia(containerId: string): Promise<PublishResult> {
+    this.validateCredentials();
     const response = await fetch(
       `${FACEBOOK_GRAPH_URL}/${this.instagramAccountId}/media_publish`,
       {
@@ -181,6 +193,7 @@ export class InstagramClient {
     mediaUrls: string[],
     caption: string
   ): Promise<string> {
+    this.validateCredentials();
     const childContainerIds: string[] = [];
     
     for (const url of mediaUrls) {
@@ -246,4 +259,3 @@ export class InstagramClient {
     }
   }
 }
-

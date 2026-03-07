@@ -7,11 +7,6 @@ interface LinkedInProfile {
   localizedLastName: string;
 }
 
-interface LinkedInOrganization {
-  id: string;
-  localizedName: string;
-}
-
 interface PublishResult {
   success: boolean;
   id?: string;
@@ -24,15 +19,25 @@ export class LinkedInClient {
   private accessToken: string | null = null;
   private redirectUri: string;
 
-  constructor() {
-    this.clientId = process.env.LINKEDIN_CLIENT_ID || "";
-    this.clientSecret = process.env.LINKEDIN_CLIENT_SECRET || "";
-    this.redirectUri = `${process.env.NEXTAUTH_URL || ""}/api/social/linkedin/callback`;
+  constructor(clientId?: string, clientSecret?: string, redirectUri?: string) {
+    this.clientId = clientId || "";
+    this.clientSecret = clientSecret || "";
+    this.redirectUri = redirectUri || "";
+  }
+
+  configure(clientId: string, clientSecret: string, redirectUri: string): void {
+    this.clientId = clientId;
+    this.clientSecret = clientSecret;
+    this.redirectUri = redirectUri;
+  }
+
+  isConfigured(): boolean {
+    return !!this.clientId && !!this.clientSecret;
   }
 
   private validateCredentials(): void {
     if (!this.clientId || !this.clientSecret) {
-      throw new Error("LinkedIn credentials are required");
+      throw new Error("LinkedIn credentials are required. Call configure() first.");
     }
   }
 
@@ -56,6 +61,7 @@ export class LinkedInClient {
   }
 
   async exchangeCodeForToken(code: string): Promise<string> {
+    this.validateCredentials();
     const params = new URLSearchParams({
       grant_type: "authorization_code",
       code: code,
@@ -233,7 +239,7 @@ export class LinkedInClient {
     try {
       const authorUrn = `urn:li:organization:${organizationId}`;
 
-      const postData: any = {
+      const postData: Record<string, unknown> = {
         author: authorUrn,
         lifecycleState: "PUBLISHED",
         specificContent: {
@@ -250,12 +256,15 @@ export class LinkedInClient {
       };
 
       if (imageUrl) {
-        postData.specificContent["com.linkedin.ugc.ShareContent"].media = [
-          {
-            status: "READY",
-            originalUrl: imageUrl,
-          },
-        ];
+        (postData.specificContent as Record<string, unknown>)["com.linkedin.ugc.ShareContent"] = {
+          ...((postData.specificContent as Record<string, unknown>)["com.linkedin.ugc.ShareContent"] as object),
+          media: [
+            {
+              status: "READY",
+              originalUrl: imageUrl,
+            },
+          ],
+        };
       }
 
       const response = await fetch(`${LINKEDIN_API_URL}/ugcPosts`, {
@@ -285,4 +294,3 @@ export class LinkedInClient {
     }
   }
 }
-

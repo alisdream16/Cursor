@@ -1,9 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
 import { InstagramClient } from "@/lib/social-media/instagram";
 
-export async function GET(request: NextRequest) {
+function getConfiguredClient(): InstagramClient {
+  const client = new InstagramClient();
+  const accessToken = process.env.FACEBOOK_PAGE_ACCESS_TOKEN;
+  const accountId = process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID;
+  
+  if (accessToken && accountId) {
+    client.configure(accessToken, accountId);
+  }
+  
+  return client;
+}
+
+export async function GET() {
   try {
-    const client = new InstagramClient();
+    const client = getConfiguredClient();
+    
+    if (!client.isConfigured()) {
+      return NextResponse.json({
+        success: false,
+        error: "Instagram not configured. Set FACEBOOK_PAGE_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID environment variables.",
+      }, { status: 503 });
+    }
+    
     const profile = await client.getUserProfile();
     const media = await client.getMedia(5);
 
@@ -35,7 +55,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const client = new InstagramClient();
+    const client = getConfiguredClient();
+    
+    if (!client.isConfigured()) {
+      return NextResponse.json({
+        success: false,
+        error: "Instagram not configured",
+      }, { status: 503 });
+    }
+    
     const result = await client.postImage(imageUrl, caption);
 
     return NextResponse.json(result);

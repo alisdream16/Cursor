@@ -1,34 +1,38 @@
 import { NextRequest, NextResponse } from "next/server";
+import { LinkedInClient } from "@/lib/social-media/linkedin";
 
-export async function GET(request: NextRequest) {
+function getConfiguredClient(): LinkedInClient | null {
+  const clientId = process.env.LINKEDIN_CLIENT_ID;
+  const clientSecret = process.env.LINKEDIN_CLIENT_SECRET;
+  const redirectUri = `${process.env.NEXTAUTH_URL || ""}/api/social/linkedin/callback`;
+  
+  if (!clientId || !clientSecret) {
+    return null;
+  }
+  
+  const client = new LinkedInClient();
+  client.configure(clientId, clientSecret, redirectUri);
+  return client;
+}
+
+export async function GET() {
   try {
-    const clientId = process.env.LINKEDIN_CLIENT_ID;
-    const redirectUri = `${process.env.NEXTAUTH_URL}/api/social/linkedin/callback`;
-
-    if (!clientId) {
+    const client = getConfiguredClient();
+    
+    if (!client) {
       return NextResponse.json({
         success: false,
-        error: "LINKEDIN_CLIENT_ID not configured",
+        error: "LinkedIn not configured. Set LINKEDIN_CLIENT_ID and LINKEDIN_CLIENT_SECRET environment variables.",
         env_check: {
           LINKEDIN_CLIENT_ID: !!process.env.LINKEDIN_CLIENT_ID,
           LINKEDIN_CLIENT_SECRET: !!process.env.LINKEDIN_CLIENT_SECRET,
-          NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+          NEXTAUTH_URL: process.env.NEXTAUTH_URL || "not set",
         }
-      }, { status: 500 });
+      }, { status: 503 });
     }
 
-    const scopes = ["openid", "profile", "w_member_social"].join(" ");
     const state = Math.random().toString(36).substring(7);
-
-    const params = new URLSearchParams({
-      response_type: "code",
-      client_id: clientId,
-      redirect_uri: redirectUri,
-      state: state,
-      scope: scopes,
-    });
-
-    const authUrl = `https://www.linkedin.com/oauth/v2/authorization?${params.toString()}`;
+    const authUrl = client.getAuthorizationUrl(state);
 
     return NextResponse.redirect(authUrl);
   } catch (error) {
