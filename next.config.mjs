@@ -1,12 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['lh3.googleusercontent.com', 'graph.facebook.com', 'www.hirenup.com', 'hirenup.com'],
+    domains: ['lh3.googleusercontent.com', 'graph.facebook.com', 'www.hirenup.com', 'hirenup.com', 'images.unsplash.com'],
   },
   experimental: {
     serverActions: {
       allowedOrigins: ["*"],
     },
+  },
+  // Disable build cache to prevent stale server actions
+  generateBuildId: async () => {
+    return `build-${Date.now()}`;
   },
   // Production domain configuration
   async headers() {
