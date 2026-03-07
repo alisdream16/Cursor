@@ -247,13 +247,3 @@ export class InstagramClient {
   }
 }
 
-let _instagram: InstagramClient | null = null;
-
-export function getInstagramClient(): InstagramClient {
-  if (!_instagram) {
-    _instagram = new InstagramClient();
-  }
-  return _instagram;
-}
-
-export { _instagram as instagram };

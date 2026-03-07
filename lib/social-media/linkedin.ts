@@ -286,13 +286,3 @@ export class LinkedInClient {
   }
 }
 
-let _linkedin: LinkedInClient | null = null;
-
-export function getLinkedInClient(): LinkedInClient {
-  if (!_linkedin) {
-    _linkedin = new LinkedInClient();
-  }
-  return _linkedin;
-}
-
-export { _linkedin as linkedin };
