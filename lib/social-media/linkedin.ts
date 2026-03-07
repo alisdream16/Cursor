@@ -1,4 +1,4 @@
-const LINKEDIN_API_URL = "https://api.linkedin.com/v2";
+const LINKEDIN_API_URL = "https://api.linkedin.com";
 const LINKEDIN_OAUTH_URL = "https://www.linkedin.com/oauth/v2";
 
 interface LinkedInProfile {
@@ -106,25 +106,26 @@ export class LinkedInClient {
   }
 
   async getProfile(): Promise<LinkedInProfile> {
-    const response = await fetch(`${LINKEDIN_API_URL}/userinfo`, {
+    const response = await fetch(`${LINKEDIN_API_URL}/v2/userinfo`, {
       headers: this.getHeaders(),
     });
 
     if (!response.ok) {
-      const error = await response.json();
-      throw new Error(`LinkedIn API Error: ${error.message || "Unknown error"}`);
+      const errorText = await response.text();
+      throw new Error(`LinkedIn API Error: ${errorText}`);
     }
 
     return await response.json();
   }
 
   async getPersonUrn(): Promise<string> {
-    const response = await fetch(`${LINKEDIN_API_URL}/userinfo`, {
+    const response = await fetch(`${LINKEDIN_API_URL}/v2/userinfo`, {
       headers: this.getHeaders(),
     });
 
     if (!response.ok) {
-      throw new Error("Failed to get user info");
+      const errorText = await response.text();
+      throw new Error(`Failed to get user info: ${errorText}`);
     }
 
     const data = await response.json();
@@ -137,38 +138,35 @@ export class LinkedInClient {
 
       const postData = {
         author: authorUrn,
+        commentary: text,
+        visibility: "PUBLIC",
+        distribution: {
+          feedDistribution: "MAIN_FEED",
+          targetEntities: [],
+          thirdPartyDistributionChannels: [],
+        },
         lifecycleState: "PUBLISHED",
-        specificContent: {
-          "com.linkedin.ugc.ShareContent": {
-            shareCommentary: {
-              text: text,
-            },
-            shareMediaCategory: "NONE",
-          },
-        },
-        visibility: {
-          "com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC",
-        },
+        isReshareDisabledByAuthor: false,
       };
 
-      const response = await fetch(`${LINKEDIN_API_URL}/ugcPosts`, {
+      const response = await fetch(`${LINKEDIN_API_URL}/rest/posts`, {
         method: "POST",
         headers: this.getHeaders(),
         body: JSON.stringify(postData),
       });
 
       if (!response.ok) {
-        const error = await response.json();
+        const errorText = await response.text();
         return {
           success: false,
-          error: error.message || "Failed to post",
+          error: `LinkedIn API Error (${response.status}): ${errorText}`,
         };
       }
 
-      const data = await response.json();
+      const postId = response.headers.get("x-restli-id") || "unknown";
       return {
         success: true,
-        id: data.id,
+        id: postId,
       };
     } catch (error) {
       return {
@@ -184,44 +182,41 @@ export class LinkedInClient {
 
       const postData = {
         author: authorUrn,
-        lifecycleState: "PUBLISHED",
-        specificContent: {
-          "com.linkedin.ugc.ShareContent": {
-            shareCommentary: {
-              text: text,
-            },
-            shareMediaCategory: "ARTICLE",
-            media: [
-              {
-                status: "READY",
-                originalUrl: imageUrl,
-              },
-            ],
+        commentary: text,
+        visibility: "PUBLIC",
+        distribution: {
+          feedDistribution: "MAIN_FEED",
+          targetEntities: [],
+          thirdPartyDistributionChannels: [],
+        },
+        content: {
+          article: {
+            source: imageUrl,
+            title: "HireNUp",
           },
         },
-        visibility: {
-          "com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC",
-        },
+        lifecycleState: "PUBLISHED",
+        isReshareDisabledByAuthor: false,
       };
 
-      const response = await fetch(`${LINKEDIN_API_URL}/ugcPosts`, {
+      const response = await fetch(`${LINKEDIN_API_URL}/rest/posts`, {
         method: "POST",
         headers: this.getHeaders(),
         body: JSON.stringify(postData),
       });
 
       if (!response.ok) {
-        const error = await response.json();
+        const errorText = await response.text();
         return {
           success: false,
-          error: error.message || "Failed to post",
+          error: `LinkedIn API Error (${response.status}): ${errorText}`,
         };
       }
 
-      const data = await response.json();
+      const postId = response.headers.get("x-restli-id") || "unknown";
       return {
         success: true,
-        id: data.id,
+        id: postId,
       };
     } catch (error) {
       return {
@@ -241,50 +236,44 @@ export class LinkedInClient {
 
       const postData: Record<string, unknown> = {
         author: authorUrn,
+        commentary: text,
+        visibility: "PUBLIC",
+        distribution: {
+          feedDistribution: "MAIN_FEED",
+          targetEntities: [],
+          thirdPartyDistributionChannels: [],
+        },
         lifecycleState: "PUBLISHED",
-        specificContent: {
-          "com.linkedin.ugc.ShareContent": {
-            shareCommentary: {
-              text: text,
-            },
-            shareMediaCategory: imageUrl ? "ARTICLE" : "NONE",
-          },
-        },
-        visibility: {
-          "com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC",
-        },
+        isReshareDisabledByAuthor: false,
       };
 
       if (imageUrl) {
-        (postData.specificContent as Record<string, unknown>)["com.linkedin.ugc.ShareContent"] = {
-          ...((postData.specificContent as Record<string, unknown>)["com.linkedin.ugc.ShareContent"] as object),
-          media: [
-            {
-              status: "READY",
-              originalUrl: imageUrl,
-            },
-          ],
+        postData.content = {
+          article: {
+            source: imageUrl,
+            title: "HireNUp",
+          },
         };
       }
 
-      const response = await fetch(`${LINKEDIN_API_URL}/ugcPosts`, {
+      const response = await fetch(`${LINKEDIN_API_URL}/rest/posts`, {
         method: "POST",
         headers: this.getHeaders(),
         body: JSON.stringify(postData),
       });
 
       if (!response.ok) {
-        const error = await response.json();
+        const errorText = await response.text();
         return {
           success: false,
-          error: error.message || "Failed to post",
+          error: `LinkedIn API Error (${response.status}): ${errorText}`,
         };
       }
 
-      const data = await response.json();
+      const postId = response.headers.get("x-restli-id") || "unknown";
       return {
         success: true,
-        id: data.id,
+        id: postId,
       };
     } catch (error) {
       return {
