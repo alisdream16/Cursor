@@ -16,6 +16,8 @@ function getConfiguredClient(): LinkedInClient | null {
 }
 
 export async function GET(request: NextRequest) {
+  const baseUrl = process.env.NEXTAUTH_URL || "https://www.hirenup.com";
+  
   try {
     const searchParams = request.nextUrl.searchParams;
     const code = searchParams.get("code");
@@ -24,16 +26,13 @@ export async function GET(request: NextRequest) {
 
     if (error) {
       return NextResponse.redirect(
-        new URL(
-          `/dashboard/social-media?error=${encodeURIComponent(errorDescription || error)}`,
-          request.url
-        )
+        `${baseUrl}/dashboard/social-media?error=${encodeURIComponent(errorDescription || error)}`
       );
     }
 
     if (!code) {
       return NextResponse.redirect(
-        new URL("/dashboard/social-media?error=No authorization code received", request.url)
+        `${baseUrl}/dashboard/social-media?error=No authorization code received`
       );
     }
 
@@ -41,25 +40,19 @@ export async function GET(request: NextRequest) {
     
     if (!client) {
       return NextResponse.redirect(
-        new URL("/dashboard/social-media?error=LinkedIn not configured", request.url)
+        `${baseUrl}/dashboard/social-media?error=LinkedIn not configured`
       );
     }
     
     const accessToken = await client.exchangeCodeForToken(code);
 
     return NextResponse.redirect(
-      new URL(
-        `/dashboard/social-media?linkedin_connected=true&access_token=${accessToken}`,
-        request.url
-      )
+      `${baseUrl}/dashboard/social-media?linkedin_connected=true&access_token=${accessToken}`
     );
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.redirect(
-      new URL(
-        `/dashboard/social-media?error=${encodeURIComponent(errorMessage)}`,
-        request.url
-      )
+      `${baseUrl}/dashboard/social-media?error=${encodeURIComponent(errorMessage)}`
     );
   }
 }
