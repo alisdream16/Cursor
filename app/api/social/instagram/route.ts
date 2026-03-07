@@ -3,10 +3,8 @@ import { InstagramClient } from "@/lib/social-media/instagram";
 
 function getConfiguredClient(): InstagramClient {
   const client = new InstagramClient();
-  const tokenKey = "FACEBOOK_PAGE" + "_ACCESS_TOKEN";
-  const accountKey = "INSTAGRAM_BUSINESS" + "_ACCOUNT_ID";
-  const accessToken = process.env[tokenKey];
-  const accountId = process.env[accountKey];
+  const accessToken = process.env.FACEBOOK_PAGE_ACCESS_TOKEN;
+  const accountId = process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID;
   
   if (accessToken && accountId) {
     client.configure(accessToken, accountId);

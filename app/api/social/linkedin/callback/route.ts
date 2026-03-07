@@ -2,11 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { LinkedInClient } from "@/lib/social-media/linkedin";
 
 function getConfiguredClient(): LinkedInClient | null {
-  const clientIdKey = "LINKEDIN" + "_CLIENT_ID";
-  const clientSecretKey = "LINKEDIN" + "_CLIENT_SECRET";
-  
-  const clientId = process.env[clientIdKey];
-  const clientSecret = process.env[clientSecretKey];
+  const clientId = process.env.LINKEDIN_CLIENT_ID;
+  const clientSecret = process.env.LINKEDIN_CLIENT_SECRET;
   const redirectUri = `${process.env.NEXTAUTH_URL || ""}/api/social/linkedin/callback`;
   
   if (!clientId || !clientSecret) {
