@@ -66,8 +66,10 @@ export async function POST(request: NextRequest) {
       case "process": {
         const result = await processScheduledPosts();
         return NextResponse.json({
-          success: true,
-          ...result,
+          ok: true,
+          processed: result.processed,
+          successCount: result.success,
+          failedCount: result.failed,
           message: `Processed ${result.processed} posts`,
         });
       }

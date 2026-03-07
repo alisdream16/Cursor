@@ -11,12 +11,12 @@ export default function AboutPage() {
       <Header />
       
       {/* Hero */}
-      <div className="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white py-20">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+      <div className="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white py-16 md:py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
             The Platform That Connects Professionals
           </h1>
-          <p className="text-xl text-primary-100 mb-8">
+          <p className="text-lg md:text-xl text-primary-100 mb-8 max-w-3xl mx-auto">
             HireNUp is an innovative platform where freelancers, companies, and employees 
             come together, collaborate, and grow together.
           </p>
@@ -24,7 +24,7 @@ export default function AboutPage() {
       </div>
 
       {/* Mission */}
-      <div className="max-w-6xl mx-auto px-4 py-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Mission</h2>
@@ -62,8 +62,8 @@ export default function AboutPage() {
       </div>
 
       {/* Values */}
-      <div className="bg-white py-16">
-        <div className="max-w-6xl mx-auto px-4">
+      <div className="bg-white py-12 md:py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">Our Values</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[

@@ -110,28 +110,30 @@ export default function FreelancersPage() {
       <Header />
       
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12">
-        <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-4xl font-bold mb-4">Discover Freelancers</h1>
-          <p className="text-primary-100 text-lg mb-8">
+      <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12 md:py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-center md:text-left">Discover Freelancers</h1>
+          <p className="text-primary-100 text-lg mb-8 text-center md:text-left">
             Find the most talented freelancers and bring your projects to life.
           </p>
           
           {/* Search */}
-          <div className="relative max-w-2xl">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-            <input
-              type="text"
-              placeholder="Search by name, skill, or expertise..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-300"
-            />
+          <div className="max-w-2xl mx-auto md:mx-0">
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Search by name, skill, or expertise..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-12 pr-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-300"
+              />
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Categories */}
         <div className="flex flex-wrap gap-2 mb-8">
           {categories.map((category) => (

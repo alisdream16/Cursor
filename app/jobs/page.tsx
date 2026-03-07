@@ -102,12 +102,12 @@ export default function JobsPage() {
       <Header />
       
       {/* Hero */}
-      <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12">
-        <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-4 text-center">Job Listings</h1>
-          <p className="text-primary-100 text-center mb-8">Find your dream job</p>
+      <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12 md:py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-center">Job Listings</h1>
+          <p className="text-primary-100 text-center text-lg mb-8">Find your dream job</p>
           
-          <div className="max-w-3xl mx-auto flex gap-2">
+          <div className="max-w-2xl mx-auto flex flex-col sm:flex-row gap-3">
             <div className="flex-1 relative">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
@@ -115,17 +115,17 @@ export default function JobsPage() {
                 placeholder="Search jobs, companies, or skills..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 rounded-lg text-gray-900"
+                className="w-full pl-12 pr-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-300"
               />
             </div>
-            <Button className="bg-white text-primary-600 hover:bg-primary-50">
+            <Button className="bg-white text-primary-600 hover:bg-primary-50 w-full sm:w-auto">
               Search
             </Button>
           </div>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Filters */}
         <div className="flex gap-2 mb-6 flex-wrap">
           {[

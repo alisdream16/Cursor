@@ -105,10 +105,10 @@ export default function CompaniesPage() {
       <Header />
       
       {/* Hero */}
-      <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12">
-        <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-4 text-center">Discover Companies</h1>
-          <p className="text-primary-100 text-center mb-8">Find opportunities at the best companies</p>
+      <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12 md:py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-center">Discover Companies</h1>
+          <p className="text-primary-100 text-center text-lg mb-8">Find opportunities at the best companies</p>
           
           <div className="max-w-2xl mx-auto">
             <div className="relative">
@@ -118,14 +118,14 @@ export default function CompaniesPage() {
                 placeholder="Search companies or industries..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 rounded-lg text-gray-900"
+                className="w-full pl-12 pr-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-300"
               />
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Filters */}
         <div className="flex gap-2 mb-6 flex-wrap">
           {industries.map(industry => (

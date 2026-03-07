@@ -15,140 +15,139 @@ export default function Home() {
       <Header />
 
       {/* Hero Section */}
-      <main className="max-w-6xl mx-auto px-4 py-12">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-            Connect, Collaborate, and Grow
-          </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            The all-in-one platform for professionals, companies, and freelancers to connect and achieve their goals.
-          </p>
-        </div>
+      <main>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+          <div className="text-center mb-12">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+              Connect, Collaborate, and Grow
+            </h1>
+            <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+              The all-in-one platform for professionals, companies, and freelancers to connect and achieve their goals.
+            </p>
+          </div>
 
-        {/* Search and Filter Section */}
-        <div className="mb-12">
-          <SearchBar
-            onSearch={(query) => {
-              // Handle search
-              console.log("Search:", query)
-            }}
-            onFilterChange={(filter, value) => {
-              // Handle filter change
-              console.log("Filter:", filter, value)
-            }}
-          />
-        </div>
+          {/* Search and Filter Section */}
+          <div className="mb-12 max-w-3xl mx-auto">
+            <SearchBar
+              onSearch={(query) => {
+                console.log("Search:", query)
+              }}
+              onFilterChange={(filter, value) => {
+                console.log("Filter:", filter, value)
+              }}
+            />
+          </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-          <Link href={session ? "/dashboard" : "/auth/signup"}>
-            <Button size="lg" className="bg-primary-500 hover:bg-primary-600 text-white px-8">
-              {session ? "Go to Dashboard" : "Get Started"}
-            </Button>
-          </Link>
-          <Link href="/freelancers">
-            <Button size="lg" variant="outline" className="px-8">
-              Find Talent
-            </Button>
-          </Link>
-        </div>
-
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          {[
-            { 
-              title: "For Freelancers", 
-              desc: "Find projects, build your portfolio, and grow your career",
-              icon: "💼",
-              link: "/freelancers"
-            },
-            { 
-              title: "For Companies", 
-              desc: "Manage your team, find talent, and scale your business",
-              icon: "🏢",
-              link: "/companies"
-            },
-            { 
-              title: "For Entrepreneurs", 
-              desc: "Launch projects, build teams, and attract investors",
-              icon: "🚀",
-              link: "/projects"
-            },
-          ].map((feature, i) => (
-            <Link key={i} href={feature.link}>
-              <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-200">
-                <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold mb-2 text-gray-900">{feature.title}</h3>
-                <p className="text-gray-600">{feature.desc}</p>
-              </div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+            <Link href={session ? "/dashboard" : "/auth/signup"}>
+              <Button size="lg" className="bg-primary-500 hover:bg-primary-600 text-white px-8 w-full sm:w-auto">
+                {session ? "Go to Dashboard" : "Get Started"}
+              </Button>
             </Link>
-          ))}
-        </div>
+            <Link href="/freelancers">
+              <Button size="lg" variant="outline" className="px-8 w-full sm:w-auto">
+                Find Talent
+              </Button>
+            </Link>
+          </div>
 
-        {/* Account Types - MVP: Only 3 active types */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold text-center mb-8 text-gray-900">Choose Your Path</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          {/* Features Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {[
               { 
-                name: "Freelancer", 
-                desc: "Work independently, take on projects, build your career",
-                color: "bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100",
+                title: "For Freelancers", 
+                desc: "Find projects, build your portfolio, and grow your career",
                 icon: "💼",
-                active: true
+                link: "/freelancers"
               },
               { 
-                name: "Company", 
-                desc: "Manage your team, find talent, and grow",
-                color: "bg-orange-50 border-orange-200 text-orange-700 hover:bg-orange-100",
+                title: "For Companies", 
+                desc: "Manage your team, find talent, and scale your business",
                 icon: "🏢",
-                active: true
+                link: "/companies"
               },
               { 
-                name: "Employee", 
-                desc: "Join a team and complete tasks",
-                color: "bg-green-50 border-green-200 text-green-700 hover:bg-green-100",
-                icon: "👷",
-                active: true
+                title: "For Entrepreneurs", 
+                desc: "Launch projects, build teams, and attract investors",
+                icon: "🚀",
+                link: "/projects"
               },
-            ].map((type, i) => (
-              <Link key={i} href="/auth/signup" className="group">
-                <div className={`bg-white rounded-xl p-6 border-2 ${type.color} transition-all cursor-pointer text-center group-hover:scale-105 group-hover:shadow-lg`}>
-                  <div className="text-4xl mb-4">{type.icon}</div>
-                  <h3 className="font-bold text-lg mb-2">{type.name}</h3>
-                  <p className="text-sm opacity-80">{type.desc}</p>
+            ].map((feature, i) => (
+              <Link key={i} href={feature.link}>
+                <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all border border-gray-200 h-full">
+                  <div className="text-4xl mb-4">{feature.icon}</div>
+                  <h3 className="text-xl font-semibold mb-2 text-gray-900">{feature.title}</h3>
+                  <p className="text-gray-600">{feature.desc}</p>
                 </div>
               </Link>
             ))}
           </div>
-          
-        </div>
 
-        {/* Stats Section */}
-        <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200 mb-16">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-3xl font-bold text-primary-600 mb-2">10K+</div>
-              <div className="text-gray-600">Active Users</div>
+          {/* Account Types - MVP: Only 3 active types */}
+          <div className="mb-16">
+            <h2 className="text-2xl font-bold text-center mb-8 text-gray-900">Choose Your Path</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              {[
+                { 
+                  name: "Freelancer", 
+                  desc: "Work independently, take on projects, build your career",
+                  color: "bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100",
+                  icon: "💼",
+                  active: true
+                },
+                { 
+                  name: "Company", 
+                  desc: "Manage your team, find talent, and grow",
+                  color: "bg-orange-50 border-orange-200 text-orange-700 hover:bg-orange-100",
+                  icon: "🏢",
+                  active: true
+                },
+                { 
+                  name: "Employee", 
+                  desc: "Join a team and complete tasks",
+                  color: "bg-green-50 border-green-200 text-green-700 hover:bg-green-100",
+                  icon: "👷",
+                  active: true
+                },
+              ].map((type, i) => (
+                <Link key={i} href="/auth/signup" className="group">
+                  <div className={`bg-white rounded-xl p-6 border-2 ${type.color} transition-all cursor-pointer text-center group-hover:scale-105 group-hover:shadow-lg h-full`}>
+                    <div className="text-4xl mb-4">{type.icon}</div>
+                    <h3 className="font-bold text-lg mb-2">{type.name}</h3>
+                    <p className="text-sm opacity-80">{type.desc}</p>
+                  </div>
+                </Link>
+              ))}
             </div>
-            <div>
-              <div className="text-3xl font-bold text-primary-600 mb-2">5K+</div>
-              <div className="text-gray-600">Projects</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-primary-600 mb-2">2K+</div>
-              <div className="text-gray-600">Companies</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-primary-600 mb-2">500+</div>
-              <div className="text-gray-600">Jobs Posted</div>
+          </div>
+
+          {/* Stats Section */}
+          <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-200">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
+              <div>
+                <div className="text-2xl md:text-3xl font-bold text-primary-600 mb-2">10K+</div>
+                <div className="text-sm md:text-base text-gray-600">Active Users</div>
+              </div>
+              <div>
+                <div className="text-2xl md:text-3xl font-bold text-primary-600 mb-2">5K+</div>
+                <div className="text-sm md:text-base text-gray-600">Projects</div>
+              </div>
+              <div>
+                <div className="text-2xl md:text-3xl font-bold text-primary-600 mb-2">2K+</div>
+                <div className="text-sm md:text-base text-gray-600">Companies</div>
+              </div>
+              <div>
+                <div className="text-2xl md:text-3xl font-bold text-primary-600 mb-2">500+</div>
+                <div className="text-sm md:text-base text-gray-600">Jobs Posted</div>
+              </div>
             </div>
           </div>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 bg-white mt-20">
-        <div className="max-w-6xl mx-auto px-4 py-12">
+      <footer className="border-t border-gray-200 bg-white mt-16 md:mt-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             {/* General */}
             <div>
