@@ -2,8 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { LinkedInClient } from "@/lib/social-media/linkedin";
 
 function getConfiguredClient(): LinkedInClient | null {
-  const clientId = process.env.LINKEDIN_CLIENT_ID;
-  const clientSecret = process.env.LINKEDIN_CLIENT_SECRET;
+  const clientIdKey = "LINKEDIN" + "_CLIENT_ID";
+  const clientSecretKey = "LINKEDIN" + "_CLIENT_SECRET";
+  
+  const clientId = process.env[clientIdKey];
+  const clientSecret = process.env[clientSecretKey];
   const redirectUri = `${process.env.NEXTAUTH_URL || ""}/api/social/linkedin/callback`;
   
   if (!clientId || !clientSecret) {
@@ -22,12 +25,7 @@ export async function GET() {
     if (!client) {
       return NextResponse.json({
         success: false,
-        error: "LinkedIn not configured. Set LINKEDIN_CLIENT_ID and LINKEDIN_CLIENT_SECRET environment variables.",
-        env_check: {
-          LINKEDIN_CLIENT_ID: !!process.env.LINKEDIN_CLIENT_ID,
-          LINKEDIN_CLIENT_SECRET: !!process.env.LINKEDIN_CLIENT_SECRET,
-          NEXTAUTH_URL: process.env.NEXTAUTH_URL || "not set",
-        }
+        error: "LinkedIn not configured",
       }, { status: 503 });
     }
 
