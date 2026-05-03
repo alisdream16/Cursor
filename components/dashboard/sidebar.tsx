@@ -24,15 +24,19 @@ import {
   Clock,
   PieChart,
   CreditCard,
-  Share2
+  Share2,
+  Link2,
 } from "lucide-react"
 import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
+
+const ZIRVE_APP_URL = process.env.NEXT_PUBLIC_ZIRVE_APP_URL ?? "http://localhost:3001"
 
 interface MenuItem {
   label: string
   href: string
   icon: React.ReactNode
+  external?: boolean
   requiresPermission?: string
   children?: MenuItem[]
 }
@@ -98,6 +102,12 @@ export function DashboardSidebar() {
         label: "Messages",
         href: "/dashboard/messages",
         icon: <MessageCircle className="w-5 h-5" />,
+      },
+      {
+        label: "ZIRVE (WhatsApp / Meta)",
+        href: ZIRVE_APP_URL,
+        external: true,
+        icon: <Link2 className="w-5 h-5" />,
       },
       {
         label: "Notifications",
@@ -337,7 +347,8 @@ export function DashboardSidebar() {
 
   const menuItems = getMenuItems()
 
-  const isActive = (href: string) => {
+  const isActive = (href: string, external?: boolean) => {
+    if (external) return false
     return pathname === href || pathname?.startsWith(href + "/")
   }
 
@@ -352,14 +363,14 @@ export function DashboardSidebar() {
 
         <nav className="space-y-1">
           {menuItems.map((item) => (
-            <div key={item.href}>
+            <div key={`${item.label}-${item.href}`}>
               {item.children ? (
                 <div>
                   <button
                     onClick={() => toggleExpand(item.href)}
                     className={cn(
                       "w-full flex items-center justify-between px-3 py-2 rounded-lg transition",
-                      isActive(item.href)
+                      isActive(item.href, item.external)
                         ? "bg-primary-50 text-primary-700 font-medium"
                         : "text-gray-700 hover:bg-gray-50"
                     )}
@@ -383,7 +394,7 @@ export function DashboardSidebar() {
                           href={child.href}
                           className={cn(
                             "flex items-center gap-3 px-3 py-2 rounded-lg transition text-sm",
-                            isActive(child.href)
+                            isActive(child.href, child.external)
                               ? "bg-primary-50 text-primary-700 font-medium"
                               : "text-gray-600 hover:bg-gray-50"
                           )}
@@ -395,12 +406,22 @@ export function DashboardSidebar() {
                     </div>
                   )}
                 </div>
+              ) : item.external ? (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-3 py-2 rounded-lg transition text-gray-700 hover:bg-gray-50"
+                >
+                  {item.icon}
+                  <span className="text-sm">{item.label}</span>
+                </a>
               ) : (
                 <Link
                   href={item.href}
                   className={cn(
                     "flex items-center gap-3 px-3 py-2 rounded-lg transition",
-                    isActive(item.href)
+                    isActive(item.href, item.external)
                       ? "bg-primary-50 text-primary-700 font-medium"
                       : "text-gray-700 hover:bg-gray-50"
                   )}

@@ -1,0 +1,134 @@
+// Prisma schema - ZIRVE Platform veritabanı
+// SQLite (geliştirme için), production'da PostgreSQL kullanılabilir
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ─── Kullanıcı (Platform müşterisi - ZIRVE hesabı olan işletme) ───
+model User {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  name        String?
+  company     String?
+  plan        String   @default("free") // free | pro | enterprise
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  integrations  Integration[]
+  contacts      Contact[]
+  conversations Conversation[]
+  aiAgents      AiAgent[]
+  appointments  Appointment[]
+}
+
+// ─── Entegrasyon (Kullanıcının bağladığı hesaplar) ───
+model Integration {
+  id          String   @id @default(cuid())
+  userId      String
+  platform    String   // whatsapp | instagram | facebook | shopify | trendyol
+  accountId   String?  // Platform tarafındaki hesap ID
+  accountName String?  // Görünen isim
+  accessToken String   // Şifreli saklanmalı production'da
+  expiresAt   DateTime?
+  isActive    Boolean  @default(true)
+  metadata    String?  // JSON: ek bilgiler (WABA ID, page ID vs)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, platform, accountId])
+}
+
+// ─── Müşteri/Contact (CRM) ───
+model Contact {
+  id          String   @id @default(cuid())
+  userId      String
+  name        String
+  phone       String?
+  email       String?
+  source      String?  // whatsapp | instagram | facebook | manual | import
+  tags        String?  // JSON array
+  notes       String?
+  status      String   @default("lead") // lead | prospect | customer | churned
+  score       Int      @default(0)      // Lead score 0-100
+  metadata    String?  // JSON: özel alanlar
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  conversations Conversation[]
+  appointments  Appointment[]
+
+  @@index([userId, phone])
+}
+
+// ─── Konuşma (Mesaj thread'i) ───
+model Conversation {
+  id          String   @id @default(cuid())
+  userId      String
+  contactId   String?
+  channel     String   // whatsapp | instagram | facebook
+  externalId  String?  // WhatsApp/IG thread ID
+  status      String   @default("open") // open | resolved | pending
+  assignedTo  String?
+  lastMessage String?
+  lastAt      DateTime @default(now())
+  createdAt   DateTime @default(now())
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  contact  Contact?  @relation(fields: [contactId], references: [id])
+  messages Message[]
+}
+
+// ─── Mesaj ───
+model Message {
+  id             String   @id @default(cuid())
+  conversationId String
+  direction      String   // inbound | outbound
+  type           String   @default("text") // text | image | audio | video | document
+  content        String
+  mediaUrl       String?
+  status         String   @default("sent") // sent | delivered | read | failed
+  isAiGenerated  Boolean  @default(false)
+  metadata       String?  // JSON: whatsapp message ID vs
+  createdAt      DateTime @default(now())
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+}
+
+// ─── AI Ajan ───
+model AiAgent {
+  id            String   @id @default(cuid())
+  userId        String
+  name          String
+  channel       String   // whatsapp | instagram | all
+  systemPrompt  String
+  isActive      Boolean  @default(true)
+  totalReplies  Int      @default(0)
+  createdAt     DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ─── Randevu ───
+model Appointment {
+  id          String   @id @default(cuid())
+  userId      String
+  contactId   String?
+  title       String
+  startTime   DateTime
+  endTime     DateTime
+  status      String   @default("scheduled") // scheduled | completed | cancelled
+  notes       String?
+  meetingUrl  String?
+  createdAt   DateTime @default(now())
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  contact Contact? @relation(fields: [contactId], references: [id])
+}

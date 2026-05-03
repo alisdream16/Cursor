@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:zirve": "npm run dev --prefix zirve-platform",
+    "dev:full": "concurrently -n hirenup,zirve -c blue,magenta \"npm run dev\" \"npm run dev:zirve\"",
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
@@ -36,6 +38,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "concurrently": "^9.1.2",
     "@types/node": "^20.11.0",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",

@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 
-
 const VERIFY_TOKEN =
   process.env.INSTAGRAM_WEBHOOK_VERIFY_TOKEN || "alisdream16@gmail.com";
 
