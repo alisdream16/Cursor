@@ -30,8 +30,6 @@ import {
 import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
 
-const ZIRVE_APP_URL = process.env.NEXT_PUBLIC_ZIRVE_APP_URL ?? "http://localhost:3001"
-
 interface MenuItem {
   label: string
   href: string
@@ -105,8 +103,7 @@ export function DashboardSidebar() {
       },
       {
         label: "ZIRVE (WhatsApp / Meta)",
-        href: ZIRVE_APP_URL,
-        external: true,
+        href: "/dashboard/zirve",
         icon: <Link2 className="w-5 h-5" />,
       },
       {
