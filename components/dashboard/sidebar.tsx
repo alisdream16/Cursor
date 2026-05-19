@@ -102,7 +102,7 @@ export function DashboardSidebar() {
         icon: <MessageCircle className="w-5 h-5" />,
       },
       {
-        label: "ZIRVE (WhatsApp / Meta)",
+        label: "Zirve CRM",
         href: "/dashboard/zirve",
         icon: <Link2 className="w-5 h-5" />,
       },
