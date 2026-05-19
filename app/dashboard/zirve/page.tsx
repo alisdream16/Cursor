@@ -13,6 +13,19 @@ export default function ZirveEmbedPage() {
   return (
     <DashboardLayout>
       <div className="-m-6 flex flex-col" style={{ height: "calc(100vh - 5.5rem)" }}>
+        <div className="flex items-center justify-between gap-2 px-4 py-2 bg-slate-50 border-b shrink-0">
+          <p className="text-xs text-slate-600">
+            &quot;Server error&quot; → Railway&apos;de AUTH_SECRET + DATABASE_URL ekle, redeploy.
+          </p>
+          <a
+            href={ZIRVE_BASE}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-medium text-primary-600 hover:underline shrink-0"
+          >
+            Yeni sekmede aç →
+          </a>
+        </motion>
         <iframe
           src={src}
           title="Zirve CRM"
