@@ -1,10 +1,9 @@
 "use client";
 
 import { DashboardLayout } from "@/components/dashboard/dashboard-layout";
+import { getZirveAppUrl } from "@/lib/zirve-url";
 
-const ZIRVE_BASE =
-  process.env.NEXT_PUBLIC_ZIRVE_APP_URL?.replace(/\/+$/, "") ||
-  "https://zirve2-production.up.railway.app";
+const ZIRVE_BASE = getZirveAppUrl();
 
 /** Hirenup dashboard içinde ZIRVE sekmesi — site dışına çıkmadan panel */
 export default function ZirveEmbedPage() {
@@ -15,7 +14,11 @@ export default function ZirveEmbedPage() {
       <div className="-m-6 flex flex-col" style={{ height: "calc(100vh - 5.5rem)" }}>
         <div className="flex items-center justify-between gap-2 px-4 py-2 bg-slate-50 border-b shrink-0">
           <p className="text-xs text-slate-600">
-            &quot;Server error&quot; → Railway&apos;de AUTH_SECRET + DATABASE_URL ekle, redeploy.
+            Sorun olursa{" "}
+            <a href={src} target="_blank" rel="noopener noreferrer" className="underline">
+              {ZIRVE_BASE}/giris
+            </a>{" "}
+            adresini doğrudan açın (app.hirenup.com Zirve değildir).
           </p>
           <a
             href={ZIRVE_BASE}
@@ -25,7 +28,7 @@ export default function ZirveEmbedPage() {
           >
             Yeni sekmede aç →
           </a>
-        </motion>
+        </div>
         <iframe
           src={src}
           title="Zirve CRM"
