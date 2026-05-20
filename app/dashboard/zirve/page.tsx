@@ -21,12 +21,12 @@ export default function ZirveEmbedPage() {
             adresini doğrudan açın (app.hirenup.com Zirve değildir).
           </p>
           <a
-            href={ZIRVE_BASE}
+            href={`${ZIRVE_BASE}/giris`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium text-primary-600 hover:underline shrink-0"
+            className="text-sm font-semibold text-primary-600 hover:underline shrink-0"
           >
-            Yeni sekmede aç →
+            Giriş için yeni sekmede aç →
           </a>
         </div>
         <iframe
